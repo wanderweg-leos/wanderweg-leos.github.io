@@ -4,6 +4,20 @@
   is set in _config.yml (web3forms_access_key).
   The questions themselves are in _data/questionnaire.yml, so this
   file normally never needs editing.
+
+  How it works (details in DEVELOPING.md):
+    1. questionnaire.html builds the form. Every answer field (or group of
+       radio buttons / checkboxes) has data-label="<the question>".
+    2. On submit, validate() highlights unanswered required questions.
+    3. collect() reads every [data-label] element in page order, and the
+       answers are posted to Web3Forms as "question: answer" pairs, with a
+       "── Section ──" line before each section.
+    4. On success the visitor is sent to the thank-you page.
+
+  Settings come from attributes on the <form>:
+    data-access-key     Web3Forms key (from _config.yml)
+    data-thanks         thank-you page address
+    data-contact-email  shown in error messages (from _config.yml)
 */
 (function () {
   var form = document.getElementById('q');
@@ -13,7 +27,8 @@
   var errBox = document.getElementById('q-err');
   var thanksUrl = form.getAttribute('data-thanks');
   var submitBtn = document.getElementById('q-submit');
-  var contactEmail = (document.querySelector('.email-big a') || {}).textContent || 'us';
+  var contactEmail = form.getAttribute('data-contact-email') || 'us';
+  var submitLabel = submitBtn.textContent;
 
   function mark(el, bad) { el.classList.toggle('invalid', bad); }
 
@@ -147,7 +162,7 @@
         if (window.console) console.warn('Questionnaire not sent:', err && err.message);
         showError('Sorry, your answers could not be sent. Please try again in a minute, or email ' + contactEmail + '.');
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit questionnaire';
+        submitBtn.textContent = submitLabel;
       });
   });
 })();

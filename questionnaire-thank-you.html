@@ -10,7 +10,7 @@ noindex: true
 {% assign t = site.data.questionnaire.thank_you %}
 <section class="pagehead">
   <div class="wrap">
-    <span class="eyebrow">Questionnaire sent</span>
+    <span class="eyebrow">{{ t.eyebrow }}</span>
     <h1>{{ t.title }}</h1>
     {% for p in t.paragraphs %}<p>{{ p }}</p>
     {% endfor %}
@@ -26,8 +26,7 @@ noindex: true
       {% for p in t.next %}<p>{{ p }}</p>
       {% endfor %}
       <p class="links">
-        {% if site.instagram %}<a href="{{ site.instagram }}">Instagram</a>{% endif %}
-        {% if site.facebook %}<a href="{{ site.facebook }}">Facebook</a>{% endif %}
+        {% include social-links.html %}
         <a href="mailto:{{ site.email }}">{{ site.email }}</a>
       </p>
       <div class="btns">

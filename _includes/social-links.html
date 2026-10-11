@@ -1,0 +1,7 @@
+{% comment %}
+  Links to the Facebook and Instagram pages set in _config.yml.
+  A link is left out if its address is empty.
+  Usage: {% include social-links.html %}
+{% endcomment %}
+{% if site.facebook %}<a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif %}
+{% if site.instagram %}<a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}

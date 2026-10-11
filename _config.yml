@@ -5,6 +5,8 @@
 # ─────────────────────────────────────────────────────────────
 
 title: Wanderweg Leonbergers
+# The top-left of every page shows short_title in large type, then tagline.
+short_title: Wanderweg
 tagline: Leonbergers
 description: >-
   Family-raised, CKC-registered Leonberger puppies in Halifax, Nova Scotia.
@@ -12,6 +14,7 @@ description: >-
 location: Halifax, Nova Scotia
 email: hello@wanderweg.ca
 
+# Leave a link empty ("") to remove it from the site.
 facebook: https://www.facebook.com/wanderwegleos/
 instagram: https://instagram.com/wanderwegleos
 
@@ -47,8 +50,11 @@ plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
 
+# Files that are for editors and developers, not for the website.
 exclude:
   - README.md
+  - DEVELOPING.md
+  - scripts
   - Gemfile
   - Gemfile.lock
   - vendor

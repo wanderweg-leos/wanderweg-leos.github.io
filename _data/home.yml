@@ -12,6 +12,8 @@ hero:
   text: "We are a small family kennel breeding CKC-registered Leonbergers for health, temperament, type and soundness. Every puppy grows up in the house with us before going to a family who will cherish them."
   photo: gallop.jpg
   photo_alt: "Leonberger in full gallop across the lawn"
+  button: "About our puppies"              # jumps to the Puppies section
+  questionnaire_button: "Start the questionnaire"
 
 about:
   eyebrow: "About us"
@@ -56,3 +58,6 @@ contact:
   eyebrow: "Contact"
   title: "Say hello"
   text: "Interested in a puppy? Email us, and please fill out the puppy questionnaire too."
+  email_label: "Email"
+  follow_label: "Follow along"
+  questionnaire_link: "Puppy questionnaire"

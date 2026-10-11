@@ -1,15 +1,15 @@
-{% assign home = '/' | relative_url %}
+{% comment %}
+  Site header: brand name and main menu.
+  The menu links are listed in _data/navigation.yml.
+{% endcomment %}
 <header class="site">
   <div class="wrap">
-    <a class="brand" href="{{ home }}"><b>Wanderweg</b><span>{{ site.tagline }}</span></a>
+    <a class="brand" href="{{ '/' | relative_url }}"><b>{{ site.short_title }}</b><span>{{ site.tagline }}</span></a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="{{ home }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
-        {% if site.show_our_leos %}<li><a href="{{ '/our-leos/' | relative_url }}"{% if page.url == '/our-leos/' %} aria-current="page"{% endif %}>Our Leos</a></li>{% endif %}
-        <li><a href="{{ home }}#puppies">Puppies</a></li>
-        <li><a href="{{ home }}#photos">Photos</a></li>
-        <li><a href="{{ home }}#contact">Contact</a></li>
-        <li><a class="cta" href="{{ '/questionnaire/' | relative_url }}"{% if page.url == '/questionnaire/' %} aria-current="page"{% endif %}>Puppy questionnaire</a></li>
+        {% for item in site.data.navigation %}{% if item.setting == nil or site[item.setting] %}
+        <li><a{% if item.highlight %} class="cta"{% endif %} href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {% endif %}{% endfor %}
       </ul>
     </nav>
   </div>

@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────
+#  Menu at the top of every page
+#
+#  Links appear in the order listed here.
+#
+#  label:      the words shown in the menu
+#  url:        where it goes. "/#puppies" jumps to a section of
+#              the home page; "/questionnaire/" is a separate page.
+#  highlight:  optional. true shows the link in the accent colour
+#              (used for the questionnaire)
+#  setting:    optional. Only show the link when this setting in
+#              _config.yml is true (e.g. show_our_leos)
+# ─────────────────────────────────────────────────────────────
+
+- label: "Home"
+  url: "/"
+
+- label: "Our Leos"
+  url: "/our-leos/"
+  setting: show_our_leos
+
+- label: "Puppies"
+  url: "/#puppies"
+
+- label: "Photos"
+  url: "/#photos"
+
+- label: "Contact"
+  url: "/#contact"
+
+- label: "Puppy questionnaire"
+  url: "/questionnaire/"
+  highlight: true

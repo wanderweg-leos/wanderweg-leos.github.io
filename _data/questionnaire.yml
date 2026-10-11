@@ -32,6 +32,11 @@
 #  "name" question. The email subject and "Reply" use them.
 # ─────────────────────────────────────────────────────────────
 
+# Top of the questionnaire page
+eyebrow: "Puppy questionnaire"
+title: "Tell us about your family"
+submit_button: "Submit questionnaire"
+
 intro:
   - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, please take some time to answer these questions about your family and what you are looking for in your new puppy."
   - "We read every questionnaire and will be in touch by email. Please ask us as many questions as you like in return."
@@ -39,6 +44,7 @@ intro:
 # The thank-you page people see after they submit
 # (wanderweg.ca/questionnaire/thank-you/).
 thank_you:
+  eyebrow: "Questionnaire sent"
   title: "Thank you!"
   paragraphs:
     - "Your questionnaire is on its way to us. We read every one ourselves and will be in touch by email."

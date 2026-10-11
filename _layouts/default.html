@@ -1,4 +1,8 @@
-<!doctype html>
+{% comment %}
+  The frame shared by every page: <head>, header, main content, footer.
+  A page can list extra JavaScript files in its front matter under
+  "scripts:" (see questionnaire.html) and they are loaded at the end.
+{% endcomment %}<!doctype html>
 <html lang="{{ site.lang | default: 'en' }}">
 <head>
   {% include head.html %}
