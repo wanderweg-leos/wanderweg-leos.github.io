@@ -12,7 +12,7 @@
 # ─────────────────────────────────────────────────────────────
 
 # planning, current, or off (off hides the panel completely)
-show: current
+show: planning
 
 
 # ── Planning version ─────────────────────────────────────────
