@@ -48,6 +48,15 @@ defaults:
       path: ""
     values:
       image: /assets/img/gallop.jpg
+  # Old blog posts in _posts/ use the post layout.
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+# Old blog posts keep their Wix addresses: /post/<name>/
+permalink: /post/:title/
 
 plugins:
   - jekyll-seo-tag

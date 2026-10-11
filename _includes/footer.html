@@ -1,6 +1,7 @@
 <footer>
   <div class="wrap">
     <span>{{ site.title }} · {{ site.location }} · {{ site.email }}</span>
+    <a href="{{ '/blog_archive/' | relative_url }}">{{ site.data.blog.footer_link }}</a>
     <span>{% for m in site.memberships %}{{ m.short }}{% unless forloop.last %} · {% endunless %}{% endfor %} member</span>
   </div>
 </footer>
