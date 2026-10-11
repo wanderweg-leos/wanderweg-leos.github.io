@@ -94,6 +94,8 @@ This is the only part with real logic.
 4. **Sending** (`collect()` + submit handler). Reads every `[data-label]` in page order and posts JSON to `https://api.web3forms.com/submit`: one `"label": "answer"` pair per question, with a `"── Section ──"` key before each section so the email is grouped. `subject` uses the applicant's name, and `replyto` uses the field named `email`. On success, the browser goes to `data-thanks`.
 5. **Configuration** is passed through attributes on the `<form>`: `data-access-key`, `data-thanks` and `data-contact-email`. The script has no hard-coded settings.
 
+**Spam trap:** the form has a hidden `botcheck` field (class `.trap`, moved off screen). People never fill it in; if it has a value, the script skips sending and goes straight to the thank-you page. It has no `data-label`, so it never appears in the email.
+
 **About the access key:** a Web3Forms key is public by design. It's in the page source, and it can only send email to the address it was created for. Spam is filtered by Web3Forms.
 
 ### Adding a new question type

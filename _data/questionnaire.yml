@@ -37,6 +37,9 @@ eyebrow: "Puppy questionnaire"
 title: "Tell us about your family"
 submit_button: "Submit questionnaire"
 
+# Shown just above the submit button. Keep it true to how you handle answers.
+privacy: "We use your answers only to get to know you and to match our puppies with the right families. We never sell or share them. Email us any time if you’d like us to delete yours."
+
 intro:
   - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, please take some time to answer these questions about your family and what you are looking for in your new puppy."
   - "We read every questionnaire and will be in touch by email. Please ask us as many questions as you like in return."

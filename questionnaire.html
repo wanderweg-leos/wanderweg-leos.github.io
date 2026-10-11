@@ -87,6 +87,10 @@ scripts:
       </fieldset>
       {% endfor %}
 
+      {% comment %} Spam trap: hidden from people, but bots fill it in. See questionnaire.js. {% endcomment %}
+      <div class="trap" aria-hidden="true"><label for="f-botcheck">Leave this empty<input id="f-botcheck" name="botcheck" tabindex="-1" autocomplete="off"></label></div>
+
+      {% if qd.privacy %}<p class="privacy muted small">{{ qd.privacy }}</p>{% endif %}
       <div class="err" id="q-err" role="alert" hidden></div>
       <button type="submit" id="q-submit">{{ qd.submit_button }}</button>
     </form>

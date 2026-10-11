@@ -12,6 +12,8 @@
     3. collect() reads every [data-label] element in page order, and the
        answers are posted to Web3Forms as "question: answer" pairs, with a
        "── Section ──" line before each section.
+       A hidden "botcheck" box catches spam bots (it has no data-label,
+       so it is never sent).
     4. On success the visitor is sent to the thank-you page.
 
   Settings come from attributes on the <form>:
@@ -112,6 +114,13 @@
       first.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
       var focusable = first.matches('input, select, textarea') ? first : first.querySelector('input');
       if (focusable) focusable.focus({ preventScroll: true });
+      return;
+    }
+
+    // Spam trap: people never see the hidden "botcheck" box, so if it has
+    // anything in it a bot filled in the form. Pretend it worked, send nothing.
+    if (form.elements.botcheck && form.elements.botcheck.value) {
+      location.href = thanksUrl;
       return;
     }
 

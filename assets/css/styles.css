@@ -194,6 +194,9 @@ textarea{min-height:5.5rem;resize:vertical}
 input.invalid,select.invalid,textarea.invalid{outline-offset:0;border-color:var(--rust)}
 .err{background:var(--rust-soft);border-left:3px solid var(--rust);border-radius:6px;padding:.75rem 1rem;font-size:.95rem}
 form > button{justify-self:start}
+.privacy{max-width:none}
+/* spam trap: moved off screen rather than display:none, so bots still see it */
+.trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
 /* ── Footer ───────────────────────────────────────────────── */
 footer{background:var(--brand);color:var(--on-brand);margin-top:clamp(3rem,7vw,5rem)}
@@ -201,10 +204,16 @@ footer .wrap{padding-block:2rem;display:flex;justify-content:space-between;gap:1
 
 /* ── Smaller screens ──────────────────────────────────────── */
 @media (max-width:860px){
+  html{scroll-padding-top:7.5rem}  /* the menu can wrap onto two lines here */
   .hero .wrap,.about,.qa,.pup-intro,.season,.thanks,.leos{grid-template-columns:1fr}
+  .hero{padding-top:1.25rem}
+  .hero .photo{order:-1}  /* photo above the headline, so a Leo is on the first screen */
   .leos{gap:2.5rem}
 }
 @media (max-width:560px){
+  /* on phones the menu takes several lines, so let it scroll away */
+  header.site{position:static}
+  html{scroll-padding-top:1rem}
   .fit,.row,.row3,.choices.grid3,fieldset{grid-template-columns:1fr}
   fieldset > .half{grid-column:1/-1}
   .choices.grid3 label.other{grid-column:auto}
