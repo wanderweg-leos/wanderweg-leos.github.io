@@ -139,9 +139,6 @@ section.block + section.block{border-top:1px solid var(--line)}
 .leo{display:grid;gap:.8rem;min-width:0}
 .leo .photo{width:100%}
 .leo h3{font-size:1.5rem}
-.leo summary{cursor:pointer;font-weight:600;color:var(--rust);width:max-content;max-width:100%}
-.leo details[open] summary{margin-bottom:.8rem}
-.leo details p + p{margin-top:.8rem}
 .clearances{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
 
 /* Is a Leonberger right for you? */

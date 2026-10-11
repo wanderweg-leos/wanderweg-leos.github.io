@@ -72,18 +72,11 @@ redirect_from:
           <h3>{{ d.name }}</h3>
           {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
         </div>
-        <p>{{ d.paragraphs.first }}</p>
+        <p>{{ d.text }}</p>
         {% if d.clearances %}
         <ul class="clearances" aria-label="{{ d.name }}’s health clearances">
           {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
         </ul>
-        {% endif %}
-        {% if d.paragraphs.size > 1 %}
-        <details>
-          <summary>More about {{ d.name }}</summary>
-          {% for p in d.paragraphs offset:1 %}<p>{{ p }}</p>
-          {% endfor %}
-        </details>
         {% endif %}
       </article>
       {% endfor %}
