@@ -1,6 +1,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-{% seo %}
+{% comment %}
+  Browser-tab title: just the site title on the home page, otherwise
+  "Page title | Wanderweg Leonbergers". (jekyll-seo-tag would add the tagline
+  to the home page title, so it is told not to write the <title> itself.)
+{% endcomment %}
+<title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+{% seo title=false %}
 {% if page.noindex %}<meta name="robots" content="noindex">{% endif %}
 <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">

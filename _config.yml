@@ -41,6 +41,14 @@ baseurl: ""
 lang: en-CA
 logo: /assets/img/gallop.jpg
 
+# The photo shown when a page is shared on Facebook, in a text message, etc.
+# A page can use a different one by adding "image: /assets/img/…" to its front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/gallop.jpg
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
