@@ -18,7 +18,7 @@ layout: default
   <article class="post">
     {{ content }}
     {% if page.missing_photos == 1 %}<p class="post-note">{{ b.missing_photo }}</p>
-    {% elsif page.missing_photos %}<p class="post-note">{{ b.missing_photos | replace: '{n}', page.missing_photos }}</p>{% endif %}
+    {% elsif page.missing_photos %}{% assign n_token = '{n}' %}<p class="post-note">{{ b.missing_photos | replace: n_token, page.missing_photos }}</p>{% endif %}
     {% if page.lost_video %}<p class="post-note">{{ b.lost_video }}</p>{% endif %}
   </article>
   <nav class="post-nav" aria-label="More posts">
