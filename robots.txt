@@ -1,0 +1,12 @@
+---
+layout: null
+sitemap: false
+# Controlled by hide_from_search in _config.yml. No need to edit this file.
+---
+{% if site.hide_from_search %}User-agent: *
+Disallow: /
+{% else %}User-agent: *
+Allow: /
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}
+{% endif %}

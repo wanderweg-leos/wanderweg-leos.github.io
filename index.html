@@ -1,0 +1,151 @@
+---
+layout: default
+# The words on this page live in _data/home.yml,
+# the litter panel in _data/litter.yml and the photos in _data/gallery.yml.
+# Old Wix addresses that should land on this page:
+redirect_from:
+  - /home/
+  - /about/
+  - /puppies/
+  - /our-leos/
+  - /photos/
+  - /contact/
+  - /blog/
+  - /riley/
+  - /lexi-copy/
+  - /p-riya-copy/
+---
+{% assign h = site.data.home %}
+{% assign litter = site.data.litter %}
+{% assign questionnaire = '/questionnaire/' | relative_url %}
+
+<section class="hero">
+  <div class="wrap">
+    <div class="copy">
+      <span class="eyebrow">{{ h.hero.eyebrow }}</span>
+      <h1>{{ h.hero.title }}</h1>
+      <p class="lede">{{ h.hero.text }}</p>
+      <div class="btns">
+        <a class="btn primary" href="#puppies">About our puppies</a>
+        <a class="btn" href="{{ questionnaire }}">Start the questionnaire</a>
+      </div>
+    </div>
+    {% assign src = '/assets/img/' | append: h.hero.photo %}
+    {% include photo.html src=src alt=h.hero.photo_alt %}
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="wrap about">
+    <div class="text">
+      <span class="eyebrow">{{ h.about.eyebrow }}</span>
+      <h2>{{ h.about.title }}</h2>
+      {% for p in h.about.paragraphs %}<p>{{ p }}</p>
+      {% endfor %}
+      <div class="clubs" aria-label="Memberships">
+        {% for m in site.memberships %}<span>{{ m.name }}</span>{% endfor %}
+      </div>
+      {% assign src = '/assets/img/' | append: h.about.photo %}
+      {% include photo.html src=src alt=h.about.photo_alt lazy=true %}
+    </div>
+    <aside class="health" aria-labelledby="health-h">
+      <h3 id="health-h">{{ h.health.title }}</h3>
+      <table>
+        <tbody>
+          {% for t in h.health.tests %}
+          <tr><td>{{ t.name }}<br><span class="mono muted">{{ t.detail }}</span></td><td><span class="pill">{{ t.result }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <p class="mono muted">{{ h.health.footnote }}</p>
+    </aside>
+  </div>
+</section>
+
+<section class="block" id="puppies">
+  <div class="wrap">
+    <div class="pup-intro">
+      <div class="head">
+        <span class="eyebrow">{{ h.puppies.eyebrow }}</span>
+        <h2>{{ h.puppies.title }}</h2>
+        <p>{{ h.puppies.text }}</p>
+      </div>
+      {% assign src = '/assets/img/' | append: h.puppies.photo %}
+      {% include photo.html src=src alt=h.puppies.photo_alt lazy=true %}
+    </div>
+    {% if litter.show %}
+    <div class="season">
+      <div class="when"><small>{{ litter.label }}</small>{{ litter.when }}</div>
+      <div class="txt">
+        <h2>{{ litter.title }}</h2>
+        {% for p in litter.paragraphs %}<p>{{ p }}</p>
+        {% endfor %}
+        <div class="btns">
+          <a class="btn primary" href="{{ questionnaire }}">Fill out the questionnaire</a>
+          <a class="btn" href="#contact">Contact us</a>
+        </div>
+        <p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="block" id="fit">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">{{ h.fit.eyebrow }}</span>
+      <h2>{{ h.fit.title }}</h2>
+      <p>{{ h.fit.text }}</p>
+    </div>
+    <div class="fit">
+      <div class="yes">
+        <h3>{{ h.fit.thrive_title }}</h3>
+        <ul>{% for item in h.fit.thrive %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      <div class="heads">
+        <h3>{{ h.fit.expect_title }}</h3>
+        <ul>{% for item in h.fit.expect %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="photos">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">{{ h.photos.eyebrow }}</span>
+      <h2>{{ h.photos.title }}</h2>
+    </div>
+    <div class="gallery">
+      {% for g in site.data.gallery %}
+      {% assign src = '/assets/img/gallery/' | append: g.file %}
+      {% include photo.html src=src alt=g.alt position=g.position lazy=true %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">{{ h.contact.eyebrow }}</span>
+      <h2>{{ h.contact.title }}</h2>
+      <p>{{ h.contact.text }}</p>
+    </div>
+    <div class="contact">
+      <div class="card">
+        <span class="eyebrow muted">Email</span>
+        {% include email.html %}
+      </div>
+      <div class="card">
+        <span class="eyebrow muted">Follow along</span>
+        <div class="links">
+          <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>
+          <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>
+          <a href="{{ questionnaire }}">Puppy questionnaire</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

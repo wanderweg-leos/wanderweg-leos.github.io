@@ -1,0 +1,96 @@
+---
+layout: default
+title: Puppy Questionnaire
+description: Tell us about your family. The first step toward a Wanderweg Leonberger puppy.
+permalink: /questionnaire/
+scripts:
+  - /assets/js/questionnaire.js
+# The questions live in _data/questionnaire.yml
+---
+{% assign qd = site.data.questionnaire %}
+{% capture star %} <span class="req" aria-hidden="true">*</span>{% endcapture %}
+
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">Puppy questionnaire</span>
+    <h1>Tell us about your family</h1>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap qa">
+    <div class="side">
+      {% for p in qd.intro %}<p>{{ p }}</p>
+      {% endfor %}
+      {% include email.html %}
+      <p class="muted small"><span class="req" aria-hidden="true">*</span> Required question</p>
+    </div>
+
+    <form id="q" novalidate data-endpoint="{{ site.questionnaire_endpoint }}">
+      {% for section in qd.sections %}
+      <fieldset>
+        <legend>{{ section.title }}</legend>
+        {% for q in section.questions %}
+        {% assign w = '' %}{% if q.half %}{% assign w = ' half' %}{% endif %}
+        {% assign req = '' %}{% if q.required %}{% assign req = ' required' %}{% endif %}
+
+        {% case q.type %}
+
+        {% when 'name' %}
+        <div class="field{{ w }}">
+          <span class="q">{{ q.label }}{% if q.required %}{{ star }}{% endif %}</span>
+          <div class="row">
+            <label class="sub" for="f-first_name">First<input id="f-first_name" name="first_name" data-label="First name" autocomplete="given-name"{{ req }}></label>
+            <label class="sub" for="f-last_name">Last<input id="f-last_name" name="last_name" data-label="Last name" autocomplete="family-name"{{ req }}></label>
+          </div>
+        </div>
+
+        {% when 'address' %}
+        <div class="field{{ w }}">
+          <span class="q">{{ q.label }}{% if q.required %}{{ star }}{% endif %}</span>
+          <label class="sub" for="f-address_1">Address line 1<input id="f-address_1" name="address_1" data-label="Address line 1" autocomplete="address-line1"{{ req }}></label>
+          <label class="sub" for="f-address_2">Address line 2<input id="f-address_2" name="address_2" data-label="Address line 2" autocomplete="address-line2"></label>
+          <div class="row3">
+            <label class="sub" for="f-city">City<input id="f-city" name="city" data-label="City" autocomplete="address-level2"{{ req }}></label>
+            <label class="sub" for="f-province">Province / state<input id="f-province" name="province" data-label="Province / state" autocomplete="address-level1"{{ req }}></label>
+            <label class="sub" for="f-postal_code">Postal / zip code<input id="f-postal_code" name="postal_code" data-label="Postal / zip code" autocomplete="postal-code"{{ req }}></label>
+          </div>
+          <label class="sub" for="f-country">Country<select id="f-country" name="country" data-label="Country" autocomplete="country-name"{{ req }}><option value="">Choose…</option><option>Canada</option><option>United States</option><option>Other</option></select></label>
+        </div>
+
+        {% when 'textarea' %}
+        <label class="field{{ w }}" for="f-{{ q.id }}">{{ q.label }}{% if q.required %}{{ star }}{% endif %}<textarea id="f-{{ q.id }}" name="{{ q.id }}" data-label="{{ q.label | escape }}"{{ req }}></textarea></label>
+
+        {% when 'select' %}
+        <label class="field{{ w }}" for="f-{{ q.id }}">{{ q.label }}{% if q.required %}{{ star }}{% endif %}<select id="f-{{ q.id }}" name="{{ q.id }}" data-label="{{ q.label | escape }}"{{ req }}><option value="">Choose…</option>{% for o in q.options %}<option>{{ o }}</option>{% endfor %}</select></label>
+
+        {% when 'radio' or 'checkbox' %}
+        <div class="field choices{{ w }}{% if q.columns %} grid3{% endif %}" role="{% if q.type == 'radio' %}radiogroup{% else %}group{% endif %}" aria-labelledby="l-{{ q.id }}" data-group="{{ q.id }}" data-label="{{ q.label | escape }}"{% if q.required %} data-required{% endif %}>
+          <span class="q" id="l-{{ q.id }}">{{ q.label }}{% if q.required %}{{ star }}{% endif %}</span>
+          {% for o in q.options %}<label for="f-{{ q.id }}-{{ forloop.index }}"><input id="f-{{ q.id }}-{{ forloop.index }}" type="{{ q.type }}" name="{{ q.id }}" value="{{ o | escape }}"> {{ o }}</label>
+          {% endfor %}
+          {% if q.other %}<label class="other" for="f-{{ q.id }}-other"><input id="f-{{ q.id }}-other" type="{{ q.type }}" name="{{ q.id }}" value="Other"> Other <input class="other-text" id="f-{{ q.id }}-other-text" name="{{ q.id }}_other" aria-label="Other: please describe" placeholder="Please describe"></label>{% endif %}
+        </div>
+
+        {% else %}
+        <label class="field{{ w }}" for="f-{{ q.id }}">{{ q.label }}{% if q.required %}{{ star }}{% endif %}<input id="f-{{ q.id }}" name="{{ q.id }}" type="{{ q.type | default: 'text' }}" data-label="{{ q.label | escape }}"{% if q.type == 'email' %} autocomplete="email"{% elsif q.type == 'tel' %} autocomplete="tel"{% endif %}{{ req }}></label>
+
+        {% endcase %}
+        {% endfor %}
+      </fieldset>
+      {% endfor %}
+
+      {% comment %} Hidden from people; bots tend to fill it in, which lets the script ignore them. {% endcomment %}
+      <div class="hp" aria-hidden="true"><label for="f-website">Website<input id="f-website" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="err" id="q-err" role="alert" hidden></div>
+      <button type="submit" id="q-submit">Submit questionnaire</button>
+    </form>
+
+    <div class="sent" id="q-sent" role="status" tabindex="-1" hidden>
+      <h2>Thank you!</h2>
+      <p>{{ qd.thank_you }}</p>
+      <p><a href="{{ '/' | relative_url }}">Back to the home page</a></p>
+    </div>
+  </div>
+</section>

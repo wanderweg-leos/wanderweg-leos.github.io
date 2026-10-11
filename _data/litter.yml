@@ -1,0 +1,21 @@
+# ─────────────────────────────────────────────────────────────
+#  Litter announcement (the dark panel in the Puppies section)
+#  Update this whenever your plans change.
+# ─────────────────────────────────────────────────────────────
+
+# Set to false to hide the panel completely.
+show: true
+
+label: "Next litter"        # small text above the big date
+when: "Spring 2027"         # the big highlighted text
+title: "We are currently planning our next litter"
+paragraphs:
+  - "We expect our next Leonberger litter in spring 2027. Both parents will be fully health tested before breeding, and we’ll share details here once the breeding is confirmed."
+  - "If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can start getting to know you."
+
+# Example for later, when puppies arrive:
+#   label: "Puppies born"
+#   when: "May 2027"
+#   title: "Riley and Atlas had 8 puppies!"
+#   paragraphs:
+#     - "Four girls and four boys, all healthy and growing fast."

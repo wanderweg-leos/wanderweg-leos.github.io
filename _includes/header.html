@@ -1,0 +1,15 @@
+{% assign home = '/' | relative_url %}
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="{{ home }}"><b>Wanderweg</b><span>{{ site.tagline }}</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="{{ home }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="{{ home }}#puppies">Puppies</a></li>
+        <li><a href="{{ home }}#photos">Photos</a></li>
+        <li><a href="{{ home }}#contact">Contact</a></li>
+        <li><a class="cta" href="{{ '/questionnaire/' | relative_url }}"{% if page.url == '/questionnaire/' %} aria-current="page"{% endif %}>Puppy questionnaire</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>

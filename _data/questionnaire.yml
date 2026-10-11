@@ -1,0 +1,223 @@
+# ─────────────────────────────────────────────────────────────
+#  Puppy questionnaire
+#
+#  The form on the website is built from this file, and the
+#  emails you receive list the answers in the same order, so you
+#  can add, remove, reword or reorder questions here without
+#  touching any code or the Google script.
+#
+#  Each question has:
+#    id:        a unique short name with no spaces (e.g. own_rent).
+#               Don't use the same id twice.
+#    label:     the question as people see it. If you reword a
+#               question, the Google Sheet starts a new column for
+#               it (older answers stay in the old column).
+#    type:      one of
+#                 text      one line of text
+#                 textarea  a bigger box for longer answers
+#                 email     an email address
+#                 tel       a phone number
+#                 select    a drop-down list (needs options)
+#                 radio     pick one (needs options)
+#                 checkbox  pick any number (needs options)
+#                 name      first + last name boxes (use once)
+#                 address   full address boxes (use once)
+#    required:  true if it must be answered
+#    options:   the choices, for select / radio / checkbox
+#    other:     true adds an "Other" choice with a text box
+#    half:      true makes the question half width on computers,
+#               so two "half" questions sit side by side
+#    columns:   true lays a long list of choices out in columns
+#
+#  Important: keep the "email" question with id "email" and the
+#  "name" question. The thank-you email uses them.
+# ─────────────────────────────────────────────────────────────
+
+intro:
+  - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, please take some time to answer these questions about your family and what you are looking for in your new puppy."
+  - "We read every questionnaire and will be in touch by email. Please ask us as many questions as you like in return."
+
+# Shown after someone submits.
+thank_you: "Thank you! We read every questionnaire and will be in touch by email. A copy of your answers is on its way to your inbox."
+
+sections:
+
+  - title: "About you"
+    questions:
+      - type: name
+        label: "Name"
+        required: true
+      - id: phone
+        type: tel
+        label: "Phone"
+        required: true
+        half: true
+      - id: email
+        type: email
+        label: "Email"
+        required: true
+        half: true
+      - type: address
+        label: "Address"
+        required: true
+      - id: relationship
+        type: radio
+        label: "Relationship status"
+        required: true
+        options: ["Married", "Long term relationship", "Single"]
+      - id: occupation
+        type: text
+        label: "Occupation"
+        required: true
+      - id: children
+        type: radio
+        label: "Do you have any children?"
+        required: true
+        options: ["Yes", "No"]
+
+  - title: "Costs"
+    questions:
+      - id: monthly_costs
+        type: radio
+        label: "Are you prepared for the financial costs involved with dog ownership, which typically will be between $200 and $300 monthly?"
+        required: true
+        options: ["Yes", "No"]
+      - id: vet_bills
+        type: radio
+        label: "Do you have the means to pay for any unexpected vet bills?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
+      - id: pet_insurance
+        type: radio
+        label: "Are you planning on getting pet insurance?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
+
+  - title: "Your home"
+    questions:
+      - id: own_rent
+        type: radio
+        label: "Do you own or rent your home?"
+        required: true
+        options: ["Own", "Rent"]
+      - id: fenced_yard
+        type: radio
+        label: "Do you have a kennel, dog run or fenced yard?"
+        required: true
+        options: ["Yes", "No"]
+      - id: home_description
+        type: textarea
+        label: "Please describe your home and property."
+        required: true
+      - id: other_dogs
+        type: radio
+        label: "Are there any other dogs in your home?"
+        required: true
+        options: ["Yes", "No"]
+
+  - title: "Why a Leonberger"
+    questions:
+      - id: interest
+        type: checkbox
+        label: "Why are you interested in obtaining a Leonberger puppy? Select all that apply."
+        required: true
+        columns: true
+        other: true
+        options: ["Companion", "Obedience", "Agility", "Conformation", "Therapy work", "Tracking", "Breeding", "Drafting"]
+      - id: gender
+        type: radio
+        label: "Do you have any preference in the gender?"
+        required: true
+        options: ["Male", "Female", "No preference"]
+      - id: research
+        type: textarea
+        label: "Have you researched Leonbergers, and why do you think this is the breed of dog that is best suited for your family? Please explain."
+        required: true
+
+  - title: "Daily life with your puppy"
+    questions:
+      - id: daily_time
+        type: select
+        label: "What amount of time will you spend daily with your new puppy?"
+        required: true
+        half: true
+        options: ["Less than 2 hours", "2 to 4 hours", "4 to 8 hours", "Most of the day"]
+      - id: activity_level
+        type: select
+        label: "What activity level would you consider yourself and your family?"
+        required: true
+        half: true
+        options: ["Relaxed", "Moderately active", "Very active"]
+      - id: work_plan
+        type: textarea
+        label: "If you work full time, how will you provide for your young puppy during the day?"
+        required: true
+      - id: training_plan
+        type: textarea
+        label: "Describe your plans for training your Leonberger puppy."
+        required: true
+      - id: obedience_classes
+        type: radio
+        label: "Will you attend obedience classes with your dog?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
+      - id: car
+        type: radio
+        label: "Will you be taking your dog in the car with you?"
+        required: true
+        options: ["Yes", "No"]
+      - id: travel
+        type: radio
+        label: "Are you willing to travel to pick up your new puppy?"
+        required: true
+        options: ["Yes", "No"]
+
+  - title: "Pet history"
+    questions:
+      - id: rehomed
+        type: radio
+        label: "Have you ever had to rehome a pet?"
+        required: true
+        options: ["Yes", "No"]
+      - id: euthanized
+        type: radio
+        label: "Have you ever had to euthanize (put to sleep) a pet?"
+        required: true
+        options: ["Yes", "No"]
+      - id: spay_neuter
+        type: radio
+        label: "Are you planning to spay or neuter your dog at the appropriate age?"
+        required: true
+        options: ["Yes", "No"]
+      - id: bred_before
+        type: radio
+        label: "Have you ever bred a litter of puppies?"
+        required: true
+        options: ["Yes", "No"]
+      - id: want_to_breed
+        type: radio
+        label: "Would you like to breed your dog?"
+        required: true
+        options: ["Yes", "No"]
+
+  - title: "Final questions"
+    questions:
+      - id: vet_reference
+        type: radio
+        label: "May we call your veterinarian for a reference?"
+        required: true
+        options: ["Yes", "No"]
+      - id: wait
+        type: radio
+        label: "Are you willing to wait for a Wanderweg Leo puppy?"
+        required: true
+        other: true
+        options: ["No", "3 months", "6 months", "1 year"]
+      - id: contract
+        type: radio
+        label: "Are you willing to abide by a sales contract that includes such things as registration, health, breeding, and general care requirements?"
+        required: true
+        options: ["Yes", "No"]
+      - id: further_info
+        type: textarea
+        label: "Please give us any further information you wish us to consider in placing one of our Leonberger puppies with you and your family."
