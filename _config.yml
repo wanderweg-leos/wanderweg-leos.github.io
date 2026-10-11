@@ -27,9 +27,10 @@ memberships:
 # when you switch wanderweg.ca over (see README.md, "Point wanderweg.ca at the new site").
 hide_from_search: true
 
-# Paste the Google Apps Script web app URL here (see apps-script/SETUP.md).
+# Paste your Web3Forms access key here (see README.md, "Connect the questionnaire").
+# Responses are emailed to the address you used to get the key.
 # While this is empty, the questionnaire shows a "not connected yet" message.
-questionnaire_endpoint: ""
+web3forms_access_key: "f46be6b4-bd42-49f2-826a-2e2ceb548c4a"
 
 # ── Technical settings: you normally don't need to change these ──
 url: "https://wanderweg-leos.github.io"   # change to "https://wanderweg.ca" when the domain is switched over
@@ -44,7 +45,6 @@ plugins:
 
 exclude:
   - README.md
-  - apps-script
   - Gemfile
   - Gemfile.lock
   - vendor

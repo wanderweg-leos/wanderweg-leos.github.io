@@ -1,0 +1,39 @@
+---
+layout: default
+title: Thank you
+description: Your puppy questionnaire has been sent to Wanderweg Leonbergers.
+permalink: /questionnaire/thank-you/
+sitemap: false
+noindex: true
+# The wording lives in _data/questionnaire.yml (thank_you)
+---
+{% assign t = site.data.questionnaire.thank_you %}
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">Questionnaire sent</span>
+    <h1>{{ t.title }}</h1>
+    {% for p in t.paragraphs %}<p>{{ p }}</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap thanks">
+    {% assign src = '/assets/img/' | append: t.photo %}
+    {% include photo.html src=src alt=t.photo_alt %}
+    <div class="sent">
+      <h2>{{ t.next_title }}</h2>
+      {% for p in t.next %}<p>{{ p }}</p>
+      {% endfor %}
+      <p class="links">
+        {% if site.instagram %}<a href="{{ site.instagram }}">Instagram</a>{% endif %}
+        {% if site.facebook %}<a href="{{ site.facebook }}">Facebook</a>{% endif %}
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+      </p>
+      <div class="btns">
+        <a class="btn primary" href="{{ '/' | relative_url }}">Back to the home page</a>
+        <a class="btn" href="{{ '/#photos' | relative_url }}">See more photos</a>
+      </div>
+    </div>
+  </div>
+</section>

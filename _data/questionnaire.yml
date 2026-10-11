@@ -4,14 +4,13 @@
 #  The form on the website is built from this file, and the
 #  emails you receive list the answers in the same order, so you
 #  can add, remove, reword or reorder questions here without
-#  touching any code or the Google script.
+#  touching any code.
 #
 #  Each question has:
 #    id:        a unique short name with no spaces (e.g. own_rent).
 #               Don't use the same id twice.
-#    label:     the question as people see it. If you reword a
-#               question, the Google Sheet starts a new column for
-#               it (older answers stay in the old column).
+#    label:     the question as people see it, and as it appears
+#               in the emails you receive.
 #    type:      one of
 #                 text      one line of text
 #                 textarea  a bigger box for longer answers
@@ -30,15 +29,25 @@
 #    columns:   true lays a long list of choices out in columns
 #
 #  Important: keep the "email" question with id "email" and the
-#  "name" question. The thank-you email uses them.
+#  "name" question. The email subject and "Reply" use them.
 # ─────────────────────────────────────────────────────────────
 
 intro:
   - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, please take some time to answer these questions about your family and what you are looking for in your new puppy."
   - "We read every questionnaire and will be in touch by email. Please ask us as many questions as you like in return."
 
-# Shown after someone submits.
-thank_you: "Thank you! We read every questionnaire and will be in touch by email. A copy of your answers is on its way to your inbox."
+# The thank-you page people see after they submit
+# (wanderweg.ca/questionnaire/thank-you/).
+thank_you:
+  title: "Thank you!"
+  paragraphs:
+    - "Your questionnaire is on its way to us. We read every one ourselves and will be in touch by email."
+  photo: puppy-lifejacket.jpg
+  photo_alt: "Puppy in an orange life jacket wading in the lake"
+  next_title: "While you wait"
+  next:
+    - "Keep an eye on your inbox, and your spam folder, for an email from us."
+    - "Have a question in the meantime? Just email us. You can also follow along with our Leos on Instagram and Facebook."
 
 sections:
 
