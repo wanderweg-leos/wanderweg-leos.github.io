@@ -5,6 +5,7 @@
     <nav aria-label="Main">
       <ul>
         <li><a href="{{ home }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Home</a></li>
+        {% if site.show_our_leos %}<li><a href="{{ '/our-leos/' | relative_url }}"{% if page.url == '/our-leos/' %} aria-current="page"{% endif %}>Our Leos</a></li>{% endif %}
         <li><a href="{{ home }}#puppies">Puppies</a></li>
         <li><a href="{{ home }}#photos">Photos</a></li>
         <li><a href="{{ home }}#contact">Contact</a></li>

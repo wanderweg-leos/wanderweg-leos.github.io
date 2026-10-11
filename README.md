@@ -11,6 +11,8 @@ The website for [wanderweg.ca](https://wanderweg.ca). It is built with Jekyll an
 | To change… | Edit this file |
 |---|---|
 | The litter announcement (e.g. "Spring 2027") | `_data/litter.yml` |
+| The dogs on the Our Leos page | `_data/leos.yml`, and upload photos to `assets/img/leos/` |
+| Show or hide the Our Leos page | `show_our_leos` in `_config.yml` |
 | Gallery photos | `_data/gallery.yml`, and upload photos to `assets/img/gallery/` |
 | Any wording on the home page | `_data/home.yml` |
 | The questionnaire questions | `_data/questionnaire.yml` |

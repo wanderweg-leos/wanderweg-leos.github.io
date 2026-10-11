@@ -7,13 +7,9 @@ redirect_from:
   - /home/
   - /about/
   - /puppies/
-  - /our-leos/
   - /photos/
   - /contact/
   - /blog/
-  - /riley/
-  - /lexi-copy/
-  - /p-riya-copy/
 ---
 {% assign h = site.data.home %}
 {% assign litter = site.data.litter %}
@@ -64,12 +60,14 @@ redirect_from:
       {% assign src = '/assets/img/' | append: h.puppies.photo %}
       {% include photo.html src=src alt=h.puppies.photo_alt lazy=true %}
     </div>
-    {% if litter.show %}
-    <div class="season">
-      <div class="when"><small>{{ litter.label }}</small>{{ litter.when }}</div>
+    {% if litter.show == 'planning' or litter.show == 'current' %}
+    {% assign l = litter[litter.show] %}
+    <div class="season{% if litter.show == 'current' %} current{% endif %}">
+      <div class="when"><small>{{ l.label }}</small>{{ l.when }}</div>
       <div class="txt">
-        <h2>{{ litter.title }}</h2>
-        {% for p in litter.paragraphs %}<p>{{ p }}</p>
+        <h2>{{ l.title }}</h2>
+        {% if l.text %}<p>{{ l.text }}</p>{% endif %}
+        {% for p in l.paragraphs %}<p>{{ p }}</p>
         {% endfor %}
         <div class="btns">
           <a class="btn primary" href="{{ questionnaire }}">Fill out the questionnaire</a>
@@ -77,6 +75,18 @@ redirect_from:
         </div>
         <p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>
       </div>
+      {% if litter.show == 'current' %}
+      <div class="parents">
+        {% assign roles = 'mother,father' | split: ',' %}
+        {% for role in roles %}{% assign d = l[role] %}{% if d %}
+        <figure class="parent">
+          {% assign src = '/assets/img/litter/' | append: d.photo %}
+          {% include photo.html src=src alt=d.photo_alt lazy=true %}
+          <figcaption><small>{% if role == 'mother' %}Mother{% else %}Father{% endif %}</small><b>{{ d.name }}</b><span>{{ d.registered_name }}</span></figcaption>
+        </figure>
+        {% endif %}{% endfor %}
+      </div>
+      {% endif %}
     </div>
     {% endif %}
   </div>
