@@ -16,6 +16,13 @@
      --ok         accent for positive marks (Slate)
    The second block is the dark-mode version, for visitors whose
    phone or computer is set to dark mode.
+
+   SECTIONS in this file, in order:
+     Base · Header · Photos · Buttons · Hero · Sections (About,
+     Puppies + litter panel, Our Leos, Is a Leonberger right for you?,
+     Gallery, Contact) · Questionnaire · Footer · Smaller screens
+   Layouts switch to one column below 860px wide, and simplify
+   further below 560px (see "Smaller screens" at the bottom).
    ───────────────────────────────────────────────────────────── */
 :root{
   --bg:#F2EFEA; --surface:#faf8f4; --ink:#0D0D0D; --muted:#46566b; --line:#dcd6cc;
@@ -103,7 +110,8 @@ section.block + section.block{border-top:1px solid var(--line)}
 .about-photo{align-self:start;min-width:0}
 .about-photo .photo{width:100%}
 .clubs{display:flex;gap:.5rem;flex-wrap:wrap}
-.clubs span{font-family:var(--mono);font-size:.78rem;padding:.25rem .6rem;border-radius:6px;background:var(--rust-soft)}
+/* small mono "tags": club memberships here, health clearances on Our Leos */
+.clubs span,.clearances li{font-family:var(--mono);font-size:.78rem;padding:.25rem .6rem;border-radius:6px;background:var(--rust-soft)}
 
 /* Puppies + litter panel */
 .pup-intro{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:center;margin-bottom:2rem}
@@ -133,7 +141,6 @@ section.block + section.block{border-top:1px solid var(--line)}
 .leo:nth-child(even) .photo{order:2}
 .leo .txt{display:grid;gap:1rem;min-width:0}
 .clearances{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
-.clearances li{font-family:var(--mono);font-size:.78rem;padding:.25rem .6rem;border-radius:6px;background:var(--rust-soft)}
 
 /* Is a Leonberger right for you? */
 .fit{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}

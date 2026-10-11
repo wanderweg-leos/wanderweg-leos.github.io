@@ -14,6 +14,10 @@
 # planning, current, or off (off hides the panel completely)
 show: planning
 
+# Buttons shown on the panel (both versions)
+questionnaire_button: "Fill out the questionnaire"
+contact_button: "Contact us"
+
 
 # ── Planning version ─────────────────────────────────────────
 planning:

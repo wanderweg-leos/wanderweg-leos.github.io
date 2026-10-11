@@ -11,6 +11,7 @@ redirect_from:
   - /contact/
   - /blog/
 ---
+{% comment %} Short names for the data files this page reads. {% endcomment %}
 {% assign h = site.data.home %}
 {% assign litter = site.data.litter %}
 {% assign questionnaire = '/questionnaire/' | relative_url %}
@@ -22,8 +23,8 @@ redirect_from:
       <h1>{{ h.hero.title }}</h1>
       <p class="lede">{{ h.hero.text }}</p>
       <div class="btns">
-        <a class="btn primary" href="#puppies">About our puppies</a>
-        <a class="btn" href="{{ questionnaire }}">Start the questionnaire</a>
+        <a class="btn primary" href="#puppies">{{ h.hero.button }}</a>
+        <a class="btn" href="{{ questionnaire }}">{{ h.hero.questionnaire_button }}</a>
       </div>
     </div>
     {% assign src = '/assets/img/' | append: h.hero.photo %}
@@ -70,10 +71,10 @@ redirect_from:
         {% for p in l.paragraphs %}<p>{{ p }}</p>
         {% endfor %}
         <div class="btns">
-          <a class="btn primary" href="{{ questionnaire }}">Fill out the questionnaire</a>
-          <a class="btn" href="#contact">Contact us</a>
+          <a class="btn primary" href="{{ questionnaire }}">{{ litter.questionnaire_button }}</a>
+          <a class="btn" href="#contact">{{ litter.contact_button }}</a>
         </div>
-        <p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>
+        {% if site.facebook and site.instagram %}<p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>{% endif %}
       </div>
       {% if litter.show == 'current' %}
       <div class="parents">
@@ -136,15 +137,14 @@ redirect_from:
     </div>
     <div class="contact">
       <div class="card">
-        <span class="eyebrow muted">Email</span>
+        <span class="eyebrow muted">{{ h.contact.email_label }}</span>
         {% include email.html %}
       </div>
       <div class="card">
-        <span class="eyebrow muted">Follow along</span>
+        <span class="eyebrow muted">{{ h.contact.follow_label }}</span>
         <div class="links">
-          <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>
-          <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>
-          <a href="{{ questionnaire }}">Puppy questionnaire</a>
+          {% include social-links.html %}
+          <a href="{{ questionnaire }}">{{ h.contact.questionnaire_link }}</a>
         </div>
       </div>
     </div>
