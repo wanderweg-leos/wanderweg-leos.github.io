@@ -2,8 +2,7 @@
 
 The website for [wanderweg.ca](https://wanderweg.ca): a small family Leonberger kennel in Halifax, Nova Scotia.
 
-- **Home page**: about us, puppies, the litter announcement, "Is a Leonberger right for you?", photos and contact
-- **Our Leos**: the breeding dogs and their health clearances
+- **Home page**: about us, our Leos (the breeding dogs and their health clearances), puppies, the litter announcement, "Is a Leonberger right for you?", photos and contact
 - **Puppy questionnaire**: emails each response to the kennel
 
 It's built with [Jekyll](https://jekyllrb.com) and hosted free on [GitHub Pages](https://pages.github.com). There is no database, no server to maintain and nothing to pay for.
@@ -33,7 +32,7 @@ Everything you'll want to change is in a few plain text files. Edit them right o
 3. Make your change.
 4. Click **Commit changes**, then **Commit changes** again in the box that appears.
 
-The live site updates by itself within a minute or two. GitHub also runs an automatic check on your change: see [If something goes wrong](#if-something-goes-wrong).
+The live site updates by itself within a minute or two.
 
 ### Rules for editing `.yml` files
 
@@ -54,11 +53,10 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 | Any wording or big photo on the home page | `_data/home.yml` |
 | The litter announcement (e.g. "Spring 2027") | `_data/litter.yml` |
 | Gallery photos | `_data/gallery.yml`, and upload photos to `assets/img/gallery/` |
-| The dogs on the Our Leos page | `_data/leos.yml`, and upload photos to `assets/img/leos/` |
+| The dogs in the Our Leos section | `_data/leos.yml`, and upload photos to `assets/img/leos/` |
 | The questionnaire questions, its intro and the thank-you page | `_data/questionnaire.yml` |
 | The menu at the top of every page | `_data/navigation.yml` |
 | Email address, Facebook, Instagram, club memberships | `_config.yml` |
-| Show or hide the Our Leos page | `show_our_leos` in `_config.yml` |
 | Hide the site from Google, or show it again | `hide_from_search` in `_config.yml` |
 | Colours | the top of `assets/css/styles.css` |
 | The "page not found" page | `404.html` (the words are near the top) |
@@ -71,7 +69,7 @@ You can leave every other file alone. They make the pages work; [DEVELOPING.md](
 |---|---|
 | `assets/img/` | the big photos on the home page and thank-you page |
 | `assets/img/gallery/` | the "Life with Leos" gallery |
-| `assets/img/leos/` | one photo per dog on the Our Leos page |
+| `assets/img/leos/` | one photo per dog in the Our Leos section |
 | `assets/img/litter/` | the mother and father of the current litter |
 
 **Before uploading any photo:** resize it to about 1400 pixels wide (phone photos are far bigger than needed and make the page slow), and give it a simple name with no spaces, like `riley-beach.jpg`. To upload, open the folder on GitHub and click **Add file → Upload files**.
@@ -105,8 +103,10 @@ Delete an entry's lines, or move them up or down. You can also delete the photo 
 ### Change a big photo (top of page, About, Puppies)
 Upload the new photo to `assets/img/`. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
 
-### Add, change or remove a dog on Our Leos
-Upload a photo to `assets/img/leos/`, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed. To hide the whole page, set `show_our_leos: false` in `_config.yml` (the menu link disappears too).
+### Add, change or remove a dog in Our Leos
+Each dog has a card in the Our Leos section of the home page. Upload a photo to `assets/img/leos/`, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers.
+
+On each card, the **first paragraph** is always shown, so keep it to a sentence or two. Any further paragraphs go under a "More about…" link that opens in place.
 
 ### Add or change a questionnaire question
 Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. The emails pick up new questions automatically.
@@ -123,20 +123,17 @@ Edit `email`, `facebook` or `instagram` in `_config.yml`. They update everywhere
 
 ## If something goes wrong
 
-After every change, GitHub does two things, shown in the repository's **Actions** tab:
+After every change, GitHub rebuilds the site. You can watch this in the repository's **Actions** tab, under **pages build and deployment**:
 
-| In the Actions tab | What it means |
-|---|---|
-| **Check site** ✅ | Your change looks fine. |
-| **Check site** ❌ | The checker found a mistake, such as a photo listed but not uploaded, a missing description, or two questions with the same `id`. Click it, then click **check**, to read a plain-English message naming the file and the problem. |
-| **pages build and deployment** ❌ | The site couldn't be published, usually because of a typo in a `.yml` file. The live site keeps showing the last working version until it's fixed. |
+- ✅ means the change is live.
+- ❌ means the site couldn't be published, usually because of a typo in a `.yml` file. Click it to see the file and line number. The live site keeps showing the last working version until it's fixed.
 
 **To undo a change**, open the file on GitHub, click **History**, open the last good version, and copy its text back in. Or ask whoever set up the site: every change is saved, so nothing is ever truly lost.
 
 Common causes:
 - **Wrong indentation** in a `.yml` file, or a tab instead of spaces.
 - **A missing closing quote** `"` at the end of a line.
-- **A photo name that doesn't match exactly.** `Riley.JPG` and `riley.jpg` are different names.
+- **A photo name that doesn't match exactly.** `Riley.JPG` and `riley.jpg` are different names. The page builds fine but shows an empty grey box where the photo should be.
 - **The change hasn't appeared yet.** Wait two minutes, then refresh the page. On a phone, you may need to close and reopen the browser.
 
 ---
@@ -202,6 +199,6 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Then open http://localhost:4000. To run the automatic checks yourself: `ruby scripts/check-site.rb`.
+Then open http://localhost:4000.
 
 More detail for developers is in [DEVELOPING.md](DEVELOPING.md).

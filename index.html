@@ -10,6 +10,10 @@ redirect_from:
   - /photos/
   - /contact/
   - /blog/
+  - /our-leos/        # the old separate Our Leos page
+  - /riley/           # old Wix pages for individual dogs
+  - /lexi-copy/
+  - /p-riya-copy/
 ---
 {% comment %} Short names for the data files this page reads. {% endcomment %}
 {% assign h = site.data.home %}
@@ -49,6 +53,44 @@ redirect_from:
     </div>
   </div>
 </section>
+
+{% assign leos = site.data.leos %}
+{% if leos.dogs.size > 0 %}
+<section class="block" id="our-leos">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">{{ leos.eyebrow }}</span>
+      <h2>{{ leos.title }}</h2>
+      <p>{{ leos.intro }}</p>
+    </div>
+    <div class="leos">
+      {% for d in leos.dogs %}
+      <article class="leo">
+        {% assign src = '/assets/img/leos/' | append: d.photo %}
+        {% include photo.html src=src alt=d.photo_alt lazy=true %}
+        <div>
+          <h3>{{ d.name }}</h3>
+          {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
+        </div>
+        <p>{{ d.paragraphs.first }}</p>
+        {% if d.clearances %}
+        <ul class="clearances" aria-label="{{ d.name }}’s health clearances">
+          {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        {% if d.paragraphs.size > 1 %}
+        <details>
+          <summary>More about {{ d.name }}</summary>
+          {% for p in d.paragraphs offset:1 %}<p>{{ p }}</p>
+          {% endfor %}
+        </details>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 <section class="block" id="puppies">
   <div class="wrap">

@@ -110,7 +110,7 @@ section.block + section.block{border-top:1px solid var(--line)}
 .about-photo{align-self:start;min-width:0}
 .about-photo .photo{width:100%}
 .clubs{display:flex;gap:.5rem;flex-wrap:wrap}
-/* small mono "tags": club memberships here, health clearances on Our Leos */
+/* small mono "tags": club memberships here, health clearances under Our Leos */
 .clubs span,.clearances li{font-family:var(--mono);font-size:.78rem;padding:.25rem .6rem;border-radius:6px;background:var(--rust-soft)}
 
 /* Puppies + litter panel */
@@ -134,12 +134,14 @@ section.block + section.block{border-top:1px solid var(--line)}
 .social-line{font-size:.95rem;opacity:.9}
 .social-line a{color:var(--honey);font-weight:600}
 
-/* Our Leos page */
-.leos{display:grid;gap:clamp(2.5rem,6vw,4rem)}
-.leo{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:center}
+/* Our Leos (one card per dog) */
+.leos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.5rem,3vw,2rem);align-items:start}
+.leo{display:grid;gap:.8rem;min-width:0}
 .leo .photo{width:100%}
-.leo:nth-child(even) .photo{order:2}
-.leo .txt{display:grid;gap:1rem;min-width:0}
+.leo h3{font-size:1.5rem}
+.leo summary{cursor:pointer;font-weight:600;color:var(--rust);width:max-content;max-width:100%}
+.leo details[open] summary{margin-bottom:.8rem}
+.leo details p + p{margin-top:.8rem}
 .clearances{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
 
 /* Is a Leonberger right for you? */
@@ -202,8 +204,8 @@ footer .wrap{padding-block:2rem;display:flex;justify-content:space-between;gap:1
 
 /* ── Smaller screens ──────────────────────────────────────── */
 @media (max-width:860px){
-  .hero .wrap,.about,.qa,.pup-intro,.season,.thanks,.leo{grid-template-columns:1fr}
-  .leo:nth-child(even) .photo{order:0}
+  .hero .wrap,.about,.qa,.pup-intro,.season,.thanks,.leos{grid-template-columns:1fr}
+  .leos{gap:2.5rem}
 }
 @media (max-width:560px){
   .fit,.row,.row3,.choices.grid3,fieldset{grid-template-columns:1fr}
