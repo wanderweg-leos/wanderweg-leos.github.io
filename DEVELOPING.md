@@ -29,6 +29,7 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── header.html           Brand + menu (from navigation.yml)
 │   ├── footer.html
 │   ├── photo.html            Cropped photo frame (see below)
+│   ├── video.html            Video player for the old blog posts
 │   ├── email.html            The large email link
 │   └── social-links.html     Facebook / Instagram links, skipped when empty
 ├── index.html                Home page (also catches old addresses, incl. /our-leos/)
@@ -93,6 +94,7 @@ The old Wix blog was copied into `_posts/` in October 2026. It's an archive: new
 - **Posts** are `_posts/YYYY-MM-DD-<slug>.html`. Their front matter has `title`, `date`, `description`, `image` (for sharing), `thumb` (archive thumbnail), and optionally `missing_photos: <n>` and `lost_video: true` for photos and videos that were already broken on Wix. The body is plain HTML with `<figure class="post-photo">` for each photo.
 - **Addresses:** `permalink: /post/:title/` in `_config.yml` keeps the old Wix addresses (`/post/<slug>/`). The `posts` default there sets `layout: post`. The old `/blog/` address redirects to `/blog_archive/` (via `redirect_from` on that page).
 - **Photos** are in `assets/img/blog/<slug>/`, at their natural shape. They're deliberately not passed through `photo.html`, because cropping to 3:2 would cut off portrait shots.
+- **Videos** (six old home videos) are `assets/video/blog/<name>.mp4`, each with a `<name>.jpg` still, shown with `{% include video.html file="<name>" %}`.
 - **Wording** is in `_data/blog.yml`. Styles are under "Blog archive" in `styles.css`.
 
 ## The questionnaire

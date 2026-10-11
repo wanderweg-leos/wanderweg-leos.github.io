@@ -221,8 +221,8 @@ form > button{justify-self:start}
 .post-photo{margin:.75rem 0;display:grid;gap:.5rem;justify-items:center}
 .post-photo img{display:block;max-width:100%;height:auto;border-radius:14px;background:var(--line)}
 .post-photo figcaption{font-size:.9rem;color:var(--muted);text-align:center}
-.post-video{position:relative;aspect-ratio:16/9;margin:.75rem 0;border-radius:14px;overflow:hidden;background:var(--line)}
-.post-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.post-clip{margin:.75rem 0}
+.post-clip video{display:block;width:100%;height:auto;max-height:80vh;border-radius:14px;background:var(--brand)}
 .post-note{background:var(--rust-soft);border-left:3px solid var(--rust);border-radius:6px;padding:.75rem 1rem;font-size:.95rem}
 .post-nav{max-width:44rem;display:flex;justify-content:space-between;gap:1rem;margin-top:2.5rem;padding-top:1.25rem;border-top:1px solid var(--line)}
 .post-nav a{display:grid;gap:.15rem;max-width:48%;text-decoration:none;font-weight:600;font-size:1rem;line-height:1.35;color:var(--ink)}

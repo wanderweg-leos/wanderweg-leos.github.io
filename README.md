@@ -74,6 +74,7 @@ You can leave every other file alone. They make the pages work; [DEVELOPING.md](
 | `assets/img/leos/` | one photo per dog in the Our Leos section |
 | `assets/img/litter/` | the mother and father of the current litter |
 | `assets/img/blog/` | photos for the old blog posts, one folder per post |
+| `assets/video/blog/` | the six old blog videos (each `.mp4` has a matching `.jpg` still). |
 
 **Before uploading any photo:** resize it to about 1400 pixels wide (phone photos are far bigger than needed and make the page slow), and give it a simple name with no spaces, like `riley-beach.jpg`. To upload, open the folder on GitHub and click **Add file → Upload files**.
 

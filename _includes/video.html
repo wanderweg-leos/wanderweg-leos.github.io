@@ -1,0 +1,7 @@
+{% comment %}
+  A video in an old blog post.
+  Each video is two files in assets/video/blog/ with the same name:
+  name.mp4 (the video) and name.jpg (the still shown before it plays).
+  Usage: {% include video.html file="talia-and-her-bones" title="Talia and her bones" %}
+{% endcomment %}{% assign vbase = '/assets/video/blog' | relative_url %}
+<figure class="post-clip"><video controls playsinline preload="none" poster="{{ vbase }}/{{ include.file }}.jpg" aria-label="{{ include.title | escape }}"><source src="{{ vbase }}/{{ include.file }}.mp4" type="video/mp4"></video></figure>
