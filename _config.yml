@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────
+#  Wanderweg Leonbergers: site settings
+#  Edit the values below. After saving, the site rebuilds itself
+#  on GitHub in about a minute.
+# ─────────────────────────────────────────────────────────────
+
+title: Wanderweg Leonbergers
+tagline: Leonbergers
+description: >-
+  Family-raised, CKC-registered Leonberger puppies in Halifax, Nova Scotia.
+  Fully health tested parents, puppies raised in our home.
+location: Halifax, Nova Scotia
+email: hello@wanderweg.ca
+
+facebook: https://www.facebook.com/wanderwegleos/
+instagram: https://instagram.com/wanderwegleos
+
+# Shown as tags in the About section and in the footer.
+memberships:
+  - name: Canadian Kennel Club
+    short: CKC
+  - name: Leonberger Club of Canada
+    short: LCC
+
+# Hide the whole site from Google and other search engines.
+# Keep this true while the site is being prepared. Change it to false
+# when you switch wanderweg.ca over (see README.md, "Point wanderweg.ca at the new site").
+hide_from_search: true
+
+# Paste the Google Apps Script web app URL here (see apps-script/SETUP.md).
+# While this is empty, the questionnaire shows a "not connected yet" message.
+questionnaire_endpoint: ""
+
+# ── Technical settings: you normally don't need to change these ──
+url: "https://wanderweg-leos.github.io"   # change to "https://wanderweg.ca" when the domain is switched over
+baseurl: ""
+lang: en-CA
+logo: /assets/img/gallop.jpg
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-redirect-from
+
+exclude:
+  - README.md
+  - apps-script
+  - Gemfile
+  - Gemfile.lock
+  - vendor

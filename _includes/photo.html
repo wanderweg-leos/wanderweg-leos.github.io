@@ -1,0 +1,5 @@
+{% comment %}
+  A cropped photo frame.
+  Usage: {% include photo.html src="/assets/img/gallop.jpg" alt="…" position="50% 30%" lazy=true class="wide" %}
+{% endcomment %}
+<figure class="photo{% if include.class %} {{ include.class }}{% endif %}"><img src="{{ include.src | relative_url }}" alt="{{ include.alt | escape }}"{% if include.lazy %} loading="lazy"{% endif %}{% if include.position %} style="object-position:{{ include.position }}"{% endif %}></figure>

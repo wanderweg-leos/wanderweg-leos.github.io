@@ -1,0 +1,75 @@
+# ─────────────────────────────────────────────────────────────
+#  Home page text and photos
+#  Change the words between the quotes. Keep the indentation.
+#  Photos live in assets/img/. To swap one, upload the new photo
+#  there and change the file name here.
+# ─────────────────────────────────────────────────────────────
+
+hero:
+  eyebrow: "Halifax, Nova Scotia"
+  # Words inside <em> … </em> appear in the accent colour.
+  title: "Gentle giants, raised <em>in our home</em> for yours."
+  text: "We are a small family kennel breeding CKC-registered Leonbergers for health, temperament, type and soundness. Every puppy grows up in the house with us before going to a family who will cherish them."
+  photo: gallop.jpg
+  photo_alt: "Leonberger in full gallop across the lawn"
+
+about:
+  eyebrow: "About us"
+  title: "Our dogs are family first"
+  paragraphs:
+    - "We’ve been raising Leonbergers in Halifax for over 15 years."
+    - "Our Leonbergers are the loves of our lives. Puppies are raised in our home, handled every day and well socialized before they leave. We take time to match each puppy with a family that will include them in everything they do."
+    - "We breed for health, temperament, type and soundness. Every breeding dog is fully health tested before a litter is planned, and every puppy is health checked before going home."
+  photo: four-leos.jpg
+  photo_alt: "Four Leonbergers sitting side by side on the grass"
+
+health:
+  title: "Health testing on every breeding dog"
+  tests:
+    - name: "Hips & elbows"
+      detail: "X-ray for dysplasia"
+      result: "screened"
+    - name: "Eyes"
+      detail: "exam before breeding"
+      result: "checked"
+    - name: "LPN1, LPN2, LPN3"
+      detail: "Leonberger polyneuropathy"
+      result: "clear"
+    - name: "LEMP"
+      detail: "leukoencephalomyelopathy"
+      result: "clear"
+  footnote: "Tested clear, or clear by pedigree."
+
+puppies:
+  eyebrow: "Puppies"
+  title: "Raised in our house to live in yours"
+  text: "We place every puppy in a home where they will be a full member of the family. Our puppies are well socialized, handled every day and given lots of love and attention while they are with us. Every puppy goes home vet checked, vaccinated, microchipped and with a written contract."
+  photo: puppy-lifejacket.jpg
+  photo_alt: "Puppy in an orange life jacket wading in the lake"
+
+fit:
+  eyebrow: "Before you apply"
+  title: "Is a Leonberger right for you?"
+  text: "Leos are exceptional companions, but they are not for everyone. We would rather you know now."
+  thrive_title: "They thrive with"
+  thrive:
+    - "Families who want a dog with them for everything"
+    - "A fully fenced, secure yard, and a place inside the house"
+    - "Lots of time, especially in the first year"
+    - "Puppy and obedience classes from early on"
+  expect_title: "Expect"
+  expect:
+    - "A very large dog with a full coat that sheds all year"
+    - "Digging in the garden and jumping up to say hello"
+    - "A friendly guardian who needs calm guidance from you"
+    - "Fur on everything, and a lot of love"
+
+photos:
+  eyebrow: "Photos"
+  title: "Life with Leos"
+  # The photos themselves are listed in _data/gallery.yml
+
+contact:
+  eyebrow: "Contact"
+  title: "Say hello"
+  text: "Interested in a puppy? Email us, and please fill out the puppy questionnaire too."

@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────
+#  Photo gallery ("Life with Leos")
+#
+#  To ADD a photo:   upload it to assets/img/gallery/, then add a
+#                    new "- file:" entry below.
+#  To REMOVE one:    delete its three lines below.
+#  To REORDER:       move the entries up or down.
+#
+#  file:      the photo's file name in assets/img/gallery/
+#  alt:       a short description (read aloud to blind visitors
+#             and shown if the photo can't load)
+#  position:  optional. Which part of the photo to keep when it is
+#             cropped, as "left-right top-bottom". "50% 30%" keeps
+#             the upper middle, which is handy for close-ups of faces.
+#
+#  Tip: the grid looks tidiest with a multiple of 3 photos (12, 15…).
+#  Photos about 1400 pixels wide load quickly and look sharp.
+# ─────────────────────────────────────────────────────────────
+
+- file: running-pair.jpg
+  alt: "Two Leonbergers running across the lawn"
+
+- file: puppy-splash.jpg
+  alt: "Puppy in a life jacket splashing through the water"
+
+- file: adult-portrait.jpg
+  alt: "Close-up of an adult Leonberger"
+  position: "50% 30%"
+
+- file: lying-grass.jpg
+  alt: "Young Leonberger lying in the grass with a stick"
+
+- file: boardwalk.jpg
+  alt: "Leonberger bounding along a wooden boardwalk"
+
+- file: beach-run.jpg
+  alt: "Leonberger running toward the camera on a sandy beach"
+
+- file: beach-trot.jpg
+  alt: "Leonberger trotting along the beach by the ocean"
+
+- file: snow.jpg
+  alt: "Leonberger leaping through deep snow in the woods"
+
+- file: lake-walk.jpg
+  alt: "Leonberger trotting through the fenced yard by the lake"
+
+- file: riley-rocks.jpg
+  alt: "Leonberger standing on the rocks at the water’s edge"
+
+- file: grey-puppy.jpg
+  alt: "Fluffy Leonberger puppy sitting in the grass"
+  position: "50% 40%"
+
+- file: puppy-rock.jpg
+  alt: "Leonberger puppy sitting on a big rock in the yard"
+  position: "50% 65%"
