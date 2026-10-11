@@ -7,9 +7,9 @@
     <a class="brand" href="{{ '/' | relative_url }}"><b>{{ site.short_title }}</b><span>{{ site.tagline }}</span></a>
     <nav aria-label="Main">
       <ul>
-        {% for item in site.data.navigation %}{% if item.setting == nil or site[item.setting] %}
+        {% for item in site.data.navigation %}
         <li><a{% if item.highlight %} class="cta"{% endif %} href="{{ item.url | relative_url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
-        {% endif %}{% endfor %}
+        {% endfor %}
       </ul>
     </nav>
   </div>

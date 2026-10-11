@@ -25,10 +25,6 @@ memberships:
   - name: Leonberger Club of Canada
     short: LCC
 
-# Show the "Our Leos" page and its menu link. Change to false to hide it.
-# The dogs themselves are listed in _data/leos.yml.
-show_our_leos: true
-
 # Hide the whole site from Google and other search engines.
 # Keep this true while the site is being prepared. Change it to false
 # when you switch wanderweg.ca over (see README.md, "Point wanderweg.ca at the new site").
@@ -54,7 +50,6 @@ plugins:
 exclude:
   - README.md
   - DEVELOPING.md
-  - scripts
   - Gemfile
   - Gemfile.lock
   - vendor

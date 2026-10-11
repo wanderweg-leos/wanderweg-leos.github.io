@@ -8,7 +8,6 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 - **Content lives in `_data/*.yml` and `_config.yml`. Templates contain no visitor-facing wording** (with the few exceptions listed under [Conventions](#conventions)). The people who update the site aren't developers, so keep it that way.
 - **One stylesheet** (`assets/css/styles.css`) driven by CSS custom properties, with automatic dark mode.
 - **One script** (`assets/js/questionnaire.js`), plain ES5 with no dependencies, which validates the questionnaire and posts it to Web3Forms.
-- **A content checker** (`scripts/check-site.rb`) runs on every push via GitHub Actions.
 
 ## Project structure
 
@@ -19,7 +18,7 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── home.yml              Home page wording and big photos
 │   ├── litter.yml            Litter panel: "planning" and "current" versions
 │   ├── gallery.yml           Gallery photo list
-│   ├── leos.yml              Our Leos page
+│   ├── leos.yml              Our Leos section (dog cards)
 │   ├── questionnaire.yml     Questionnaire: questions, intro, thank-you page
 │   └── navigation.yml        Main menu
 ├── _layouts/default.html     The page frame used by every page
@@ -30,8 +29,7 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── photo.html            Cropped photo frame (see below)
 │   ├── email.html            The large email link
 │   └── social-links.html     Facebook / Instagram links, skipped when empty
-├── index.html                Home page
-├── our-leos.html             /our-leos/
+├── index.html                Home page (also catches old addresses, incl. /our-leos/)
 ├── questionnaire.html        /questionnaire/ (form generated from questionnaire.yml)
 ├── questionnaire-thank-you.html  /questionnaire/thank-you/
 ├── 404.html
@@ -40,8 +38,6 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── css/styles.css
 │   ├── js/questionnaire.js
 │   └── img/                  Photos (subfolders: gallery/, leos/, litter/) and favicon.svg
-├── scripts/check-site.rb     Content checker (not published)
-├── .github/workflows/check-site.yml   Runs the checker on every push
 ├── Gemfile                   Only for local previews
 └── .editorconfig             Spaces not tabs, LF line endings
 ```
@@ -57,14 +53,7 @@ bundle install
 bundle exec jekyll serve --livereload
 ```
 
-Open http://localhost:4000. The `github-pages` gem pins the same Jekyll and plugin versions GitHub uses, so what you see locally matches production. `_config.yml` changes need a server restart; everything else reloads automatically.
-
-Run the checks before pushing:
-
-```sh
-ruby scripts/check-site.rb
-node --check assets/js/questionnaire.js
-```
+Open http://localhost:4000. The `github-pages` gem in the `Gemfile` pins the same Jekyll and plugin versions GitHub uses, so what you see locally matches production. `_config.yml` changes need a server restart; everything else reloads automatically. GitHub ignores the `Gemfile` when it builds the site.
 
 ## How the pieces fit together
 
@@ -81,14 +70,16 @@ Always render photos through the include, never with a bare `<img>`:
 It wraps the image in a fixed 3:2 frame (`.photo`) with `object-fit: cover`, so photos of any shape line up. `position` controls the crop and `lazy` adds `loading="lazy"` (use it for anything below the fold). Data files store only the file name; the template adds the folder.
 
 ### Menu
-`header.html` loops over `_data/navigation.yml`. An item with `setting: show_our_leos` only appears when that key in `_config.yml` is true, and `aria-current="page"` is set when the item's `url` matches the current page.
+`header.html` loops over `_data/navigation.yml` and sets `aria-current="page"` when an item's `url` matches the current page.
 
 ### Litter panel
 `litter.yml` keeps both versions side by side; `show` picks one (`planning`, `current`, or `off`). `index.html` reads `litter[litter.show]`, and the `current` version also renders `mother` and `father`. Note that YAML reads `off` as `false`, which works because the template only matches the two strings.
 
-### Feature switches
-- `show_our_leos`: hides the menu link. The page itself becomes an instant redirect to the home page, so old links keep working.
-- `hide_from_search`: makes `robots.txt` disallow everything. Turn it off at launch.
+### Our Leos section
+Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card per dog. The card always shows `paragraphs.first`; any remaining paragraphs go in a native `<details>` element ("More about …"), so no JavaScript is involved. The whole section is skipped when `dogs` is empty. There used to be a separate `/our-leos/` page; that address and the old Wix dog pages now redirect to the home page.
+
+### Search engines
+`hide_from_search` in `_config.yml` makes `robots.txt` disallow everything. Turn it off at launch.
 
 ### Old Wix addresses
 `jekyll-redirect-from` creates redirect pages from each page's `redirect_from` list. Add old URLs there instead of creating stub pages.
@@ -108,8 +99,7 @@ This is the only part with real logic.
 ### Adding a new question type
 1. Add a `{% when 'yourtype' %}` block in `questionnaire.html` following the `data-label` contract above.
 2. If the value needs special reading, handle it in `collect()` in `questionnaire.js`.
-3. Add the type to `TYPES` (and `NEEDS_OPTIONS` if it uses options) in `scripts/check-site.rb`.
-4. Document it in the notes at the top of `_data/questionnaire.yml`.
+3. Document it in the notes at the top of `_data/questionnaire.yml`.
 
 ## Styling
 
@@ -119,16 +109,15 @@ This is the only part with real logic.
 - **Fonts**: `--display` (Young Serif) for headings, `--body` (Figtree), `--mono` (IBM Plex Mono) for small labels and tags. They're loaded from Google Fonts in `_includes/head.html`. Update that URL if you change weights.
 - **Layout**: content sits in `.wrap` (max `--wrap` wide). Sections are `section.block`; two-column layouts are CSS grid and collapse to one column at 860px, with further simplification at 560px.
 - **Class names** are short and scoped by section (`.season`, `.leo`, `.fit`, `.qa`). There's no framework or naming scheme beyond that, so match what's nearby.
-- **Accessibility features to keep**: the skip link, visible `:focus-visible` outlines, `prefers-reduced-motion` handling, labels on every input, and alt text on every photo (the checker enforces it).
+- **Accessibility features to keep**: the skip link, visible `:focus-visible` outlines, `prefers-reduced-motion` handling, labels on every input, and alt text on every photo.
 
 ## Conventions
 
-- **No visitor-facing wording in templates.** Put it in the matching `_data` file, with a comment explaining it. The current exceptions are small structural labels: "Mother"/"Father" on the litter panel, the social-links sentence on the litter panel, the sub-labels of the name and address fields, "Skip to content", and the 404 page (which owners can edit directly).
+- **No visitor-facing wording in templates.** Put it in the matching `_data` file, with a comment explaining it. The current exceptions are small structural labels: "Mother"/"Father" on the litter panel, "More about <name>" on the dog cards, the social-links sentence on the litter panel, the sub-labels of the name and address fields, "Skip to content", and the 404 page (which owners can edit directly).
 - **Every `_data` file starts with a comment block** explaining each key in plain English. Update it when you add a key, since it's the owners' documentation.
 - **Settings used in more than one place belong in `_config.yml`** (email, social links, memberships) and are always read from `site.*`, never repeated.
 - **Use `relative_url`** for every internal link and asset, so the site works at any `baseurl`.
 - **Only GitHub Pages' supported plugins** can be used, since GitHub builds the site in safe mode. Custom Ruby plugins in `_plugins/` will be ignored.
-- **Teach the checker** about new data files or rules in `scripts/check-site.rb`, so mistakes surface in the Actions tab instead of on the live site.
 - **Formatting**: 2-space indentation and LF line endings (see `.editorconfig`). Keep the "boxed" comment style at the top of files.
 
 ## Adding things
@@ -141,7 +130,7 @@ This is the only part with real logic.
 
 ## Deployment
 
-Pushing to `main` deploys. GitHub Pages builds the site ("pages build and deployment" in Actions), and the separate "Check site" workflow runs the checker. The checker doesn't block deployment; it reports. If a build fails, the previous version stays live.
+Pushing to `main` deploys. GitHub Pages builds the site ("pages build and deployment" in Actions). If a build fails, the previous version stays live.
 
 The domain setup (DNS records, `CNAME`, `url`, `hide_from_search`) is covered in the README under [First-time setup and launch](README.md#first-time-setup-and-launch).
 

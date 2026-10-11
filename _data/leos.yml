@@ -1,11 +1,17 @@
 # ─────────────────────────────────────────────────────────────
-#  Our Leos page (wanderweg.ca/our-leos/)
-#  To hide the whole page, set show_our_leos: false in _config.yml.
+#  "Our Leos" section of the home page: one card per dog.
+#
+#  On each card, the FIRST paragraph is always shown. Any further
+#  paragraphs are tucked under a "More about <name>" link that
+#  opens in place, so keep the first one short (a sentence or two).
 #
 #  To add a dog: upload a photo to assets/img/leos/ (about 1200
 #  pixels wide, no spaces in the file name), then copy one of the
 #  dogs below and change the details. To remove a dog, delete
-#  its lines. Dogs appear in the order listed here.
+#  its lines. Dogs appear in the order listed here; the cards sit
+#  three across on computers, so 3 or 6 dogs look tidiest.
+#  To hide the whole section, delete every dog (keep "dogs:")
+#  and remove "Our Leos" from _data/navigation.yml.
 # ─────────────────────────────────────────────────────────────
 
 eyebrow: "Our Leos"

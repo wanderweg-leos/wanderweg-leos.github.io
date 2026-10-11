@@ -8,16 +8,13 @@
 #              the home page; "/questionnaire/" is a separate page.
 #  highlight:  optional. true shows the link in the accent colour
 #              (used for the questionnaire)
-#  setting:    optional. Only show the link when this setting in
-#              _config.yml is true (e.g. show_our_leos)
 # ─────────────────────────────────────────────────────────────
 
 - label: "Home"
   url: "/"
 
 - label: "Our Leos"
-  url: "/our-leos/"
-  setting: show_our_leos
+  url: "/#our-leos"
 
 - label: "Puppies"
   url: "/#puppies"
