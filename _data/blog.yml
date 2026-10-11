@@ -19,6 +19,7 @@
 #                  note on posts whose photos were already lost on
 #                  the old website. {n} is replaced with the number.
 #  lost_video:     note on posts whose video no longer plays
+#  title_only:     note on posts that were only a title on the old blog
 #  older / newer:  labels on the links to the previous and next post
 # ─────────────────────────────────────────────────────────────
 
@@ -32,5 +33,6 @@ footer_link: "Blog archive"
 missing_photo: "1 photo from this post was lost on the old website and could not be recovered."
 missing_photos: "{n} photos from this post were lost on the old website and could not be recovered."
 lost_video: "This post had a video that no longer plays on the old website."
+title_only: "This post was only a title on the old blog; its text and photos were never saved."
 older: "Older post"
 newer: "Newer post"

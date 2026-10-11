@@ -5,7 +5,8 @@ layout: default
   One old blog post (the files in _posts/). Wording comes from
   _data/blog.yml. Front matter on each post:
     title, date, description, image (sharing photo), thumb (archive
-    thumbnail), missing_photos (count of lost photos), lost_video.
+    thumbnail), missing_photos (count of lost photos), lost_video,
+    title_only (post had no text or photos on the old blog).
 {% endcomment %}{% assign b = site.data.blog %}
 <section class="pagehead">
   <div class="wrap">
@@ -20,6 +21,7 @@ layout: default
     {% if page.missing_photos == 1 %}<p class="post-note">{{ b.missing_photo }}</p>
     {% elsif page.missing_photos %}{% assign n_token = '{n}' %}<p class="post-note">{{ b.missing_photos | replace: n_token, page.missing_photos }}</p>{% endif %}
     {% if page.lost_video %}<p class="post-note">{{ b.lost_video }}</p>{% endif %}
+    {% if page.title_only %}<p class="post-note">{{ b.title_only }}</p>{% endif %}
   </article>
   <nav class="post-nav" aria-label="More posts">
     {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>{{ b.older }}</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
