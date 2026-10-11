@@ -1,9 +1,8 @@
 # ─────────────────────────────────────────────────────────────
 #  "Our Leos" section of the home page: one card per dog.
 #
-#  On each card, the FIRST paragraph is always shown. Any further
-#  paragraphs are tucked under a "More about <name>" link that
-#  opens in place, so keep the first one short (a sentence or two).
+#  text: a short description shown on the card (a sentence or
+#        two works best, so the cards stay a similar height).
 #
 #  To add a dog: upload a photo to assets/img/leos/ (about 1200
 #  pixels wide, no spaces in the file name), then copy one of the
@@ -23,9 +22,7 @@ dogs:
     registered_name: "Wanderweg's Sugar and Spice"
     photo: riley.jpg
     photo_alt: "Riley standing on a log at the edge of the lake"
-    paragraphs:
-      - "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
-      - "Riley has matured into a true beauty and is an incredible looking Leonberger with her long dark coat and beautiful full black mask. She also has the sweetest softest expression and loves to say hi to all."
+    text: "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
     clearances:
       - "OFA Excellent hips"
       - "Normal elbows"
@@ -37,9 +34,7 @@ dogs:
     registered_name: "Wanderweg's Under the Moonlit Sky"
     photo: priya.jpg
     photo_alt: "Priya standing on the lawn by the lake"
-    paragraphs:
-      - "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
-      - "Priya is very sweet with a laid-back temperament; she likes to just chill with the family and is great at giving lots of kisses. We are very excited about Priya’s future puppies."
+    text: "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
     clearances:
       - "OFA Good hips"
       - "Normal elbows"
@@ -51,9 +46,7 @@ dogs:
     registered_name: "Wanderweg's the Rhythm of Life"
     photo: fiona.jpg
     photo_alt: "Fiona standing on the rocks in the woods"
-    paragraphs:
-      - "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
-      - "Fiona is truly an amazing Leonberger with her perfect looks and fun lively temperament. She has the sweetest face you can ever imagine! We are very excited about Fiona’s future puppies."
+    text: "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
     clearances:
       - "OFA Excellent hips"
       - "Normal elbows"

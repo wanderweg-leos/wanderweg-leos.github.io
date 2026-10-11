@@ -104,9 +104,7 @@ Delete an entry's lines, or move them up or down. You can also delete the photo 
 Upload the new photo to `assets/img/`. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
 
 ### Add, change or remove a dog in Our Leos
-Each dog has a card in the Our Leos section of the home page. Upload a photo to `assets/img/leos/`, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers.
-
-On each card, the **first paragraph** is always shown, so keep it to a sentence or two. Any further paragraphs go under a "More about…" link that opens in place.
+Each dog has a card in the Our Leos section of the home page. Upload a photo to `assets/img/leos/`, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
 
 ### Add or change a questionnaire question
 Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. The emails pick up new questions automatically.

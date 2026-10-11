@@ -76,7 +76,7 @@ It wraps the image in a fixed 3:2 frame (`.photo`) with `object-fit: cover`, so 
 `litter.yml` keeps both versions side by side; `show` picks one (`planning`, `current`, or `off`). `index.html` reads `litter[litter.show]`, and the `current` version also renders `mother` and `father`. Note that YAML reads `off` as `false`, which works because the template only matches the two strings.
 
 ### Our Leos section
-Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card per dog. The card always shows `paragraphs.first`; any remaining paragraphs go in a native `<details>` element ("More about …"), so no JavaScript is involved. The whole section is skipped when `dogs` is empty. There used to be a separate `/our-leos/` page; that address and the old Wix dog pages now redirect to the home page.
+Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card per dog. Each card shows the photo, names, a short `text` and the clearance tags. The whole section is skipped when `dogs` is empty. There used to be a separate `/our-leos/` page; that address and the old Wix dog pages now redirect to the home page.
 
 ### Search engines
 `hide_from_search` in `_config.yml` makes `robots.txt` disallow everything. Turn it off at launch.
@@ -113,7 +113,7 @@ This is the only part with real logic.
 
 ## Conventions
 
-- **No visitor-facing wording in templates.** Put it in the matching `_data` file, with a comment explaining it. The current exceptions are small structural labels: "Mother"/"Father" on the litter panel, "More about <name>" on the dog cards, the social-links sentence on the litter panel, the sub-labels of the name and address fields, "Skip to content", and the 404 page (which owners can edit directly).
+- **No visitor-facing wording in templates.** Put it in the matching `_data` file, with a comment explaining it. The current exceptions are small structural labels: "Mother"/"Father" on the litter panel, the social-links sentence on the litter panel, the sub-labels of the name and address fields, "Skip to content", and the 404 page (which owners can edit directly).
 - **Every `_data` file starts with a comment block** explaining each key in plain English. Update it when you add a key, since it's the owners' documentation.
 - **Settings used in more than one place belong in `_config.yml`** (email, social links, memberships) and are always read from `site.*`, never repeated.
 - **Use `relative_url`** for every internal link and asset, so the site works at any `baseurl`.
