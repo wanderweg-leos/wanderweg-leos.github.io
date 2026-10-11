@@ -26,7 +26,7 @@ scripts:
       <p class="muted small"><span class="req" aria-hidden="true">*</span> Required question</p>
     </div>
 
-    <form id="q" novalidate data-endpoint="{{ site.questionnaire_endpoint }}">
+    <form id="q" novalidate data-access-key="{{ site.web3forms_access_key }}" data-thanks="{{ '/questionnaire/thank-you/' | relative_url }}">
       {% for section in qd.sections %}
       <fieldset>
         <legend>{{ section.title }}</legend>
@@ -80,17 +80,9 @@ scripts:
       </fieldset>
       {% endfor %}
 
-      {% comment %} Hidden from people; bots tend to fill it in, which lets the script ignore them. {% endcomment %}
-      <div class="hp" aria-hidden="true"><label for="f-website">Website<input id="f-website" name="website" tabindex="-1" autocomplete="off"></label></div>
-
       <div class="err" id="q-err" role="alert" hidden></div>
       <button type="submit" id="q-submit">Submit questionnaire</button>
     </form>
 
-    <div class="sent" id="q-sent" role="status" tabindex="-1" hidden>
-      <h2>Thank you!</h2>
-      <p>{{ qd.thank_you }}</p>
-      <p><a href="{{ '/' | relative_url }}">Back to the home page</a></p>
-    </div>
   </div>
 </section>

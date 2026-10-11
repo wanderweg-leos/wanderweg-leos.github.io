@@ -1,6 +1,7 @@
 /*
-  Puppy questionnaire: checks the answers, then sends them to the
-  Google Apps Script set in _config.yml (questionnaire_endpoint).
+  Puppy questionnaire: checks the answers, then sends them to
+  Web3Forms (web3forms.com), which emails them to you. The access key
+  is set in _config.yml (web3forms_access_key).
   The questions themselves are in _data/questionnaire.yml, so this
   file normally never needs editing.
 */
@@ -8,12 +9,11 @@
   var form = document.getElementById('q');
   if (!form) return;
 
-  var endpoint = form.getAttribute('data-endpoint');
+  var accessKey = form.getAttribute('data-access-key');
   var errBox = document.getElementById('q-err');
-  var sentBox = document.getElementById('q-sent');
+  var thanksUrl = form.getAttribute('data-thanks');
   var submitBtn = document.getElementById('q-submit');
   var contactEmail = (document.querySelector('.email-big a') || {}).textContent || 'us';
-  var startedAt = Date.now();
 
   function mark(el, bad) { el.classList.toggle('invalid', bad); }
 
@@ -100,47 +100,52 @@
       return;
     }
 
-    if (!endpoint) {
+    if (!accessKey) {
       showError('The questionnaire is not connected yet. Please email ' + contactEmail + ' instead.');
       return;
     }
 
+    var email = form.elements.email ? form.elements.email.value.trim() : '';
+    var firstName = form.elements.first_name ? form.elements.first_name.value.trim() : '';
+    var lastName = form.elements.last_name ? form.elements.last_name.value.trim() : '';
+    var name = (firstName + ' ' + lastName).trim();
+
+    // The email lists the answers in this order, labelled with each question.
     var payload = {
-      answers: collect(),
-      email: form.elements.email ? form.elements.email.value.trim() : '',
-      first_name: form.elements.first_name ? form.elements.first_name.value.trim() : '',
-      last_name: form.elements.last_name ? form.elements.last_name.value.trim() : '',
-      website: form.elements.website.value,
-      started: startedAt
+      access_key: accessKey,
+      subject: 'Puppy questionnaire: ' + (name || email || 'new response'),
+      from_name: 'Wanderweg website',
+      replyto: email
     };
+    var currentSection = '';
+    collect().forEach(function (a) {
+      if (a.section !== currentSection) {
+        currentSection = a.section;
+        payload['── ' + a.section + ' ──'] = '';
+      }
+      var key = a.label, n = 2;
+      while (key in payload) key = a.label + ' (' + n++ + ')';
+      payload[key] = a.value || '—';
+    });
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    // text/plain avoids a browser pre-check that Google Apps Script can't answer.
-    fetch(endpoint, {
+    fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify(payload)
     })
       .then(function (res) { return res.json(); })
       .then(function (result) {
-        if (!result || !result.ok) {
-          // A message written by the script (e.g. "Please enter a valid email address.")
-          var err = new Error((result && result.error) || '');
-          err.fromScript = true;
-          throw err;
+        if (!result || !result.success) {
+          throw new Error((result && (result.message || (result.body && result.body.message))) || 'not sent');
         }
-        form.hidden = true;
-        sentBox.hidden = false;
-        sentBox.focus();
-        sentBox.scrollIntoView({ block: 'center' });
+        location.href = thanksUrl;
       })
       .catch(function (err) {
-        var msg = (err && err.fromScript && err.message)
-          ? err.message
-          : 'Sorry, your answers could not be sent. Please try again in a minute, or email ' + contactEmail + '.';
-        showError(msg);
+        if (window.console) console.warn('Questionnaire not sent:', err && err.message);
+        showError('Sorry, your answers could not be sent. Please try again in a minute, or email ' + contactEmail + '.');
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit questionnaire';
       });

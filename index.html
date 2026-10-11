@@ -45,20 +45,11 @@ redirect_from:
       <div class="clubs" aria-label="Memberships">
         {% for m in site.memberships %}<span>{{ m.name }}</span>{% endfor %}
       </div>
+    </div>
+    <div class="about-photo">
       {% assign src = '/assets/img/' | append: h.about.photo %}
       {% include photo.html src=src alt=h.about.photo_alt lazy=true %}
     </div>
-    <aside class="health" aria-labelledby="health-h">
-      <h3 id="health-h">{{ h.health.title }}</h3>
-      <table>
-        <tbody>
-          {% for t in h.health.tests %}
-          <tr><td>{{ t.name }}<br><span class="mono muted">{{ t.detail }}</span></td><td><span class="pill">{{ t.result }}</span></td></tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <p class="mono muted">{{ h.health.footnote }}</p>
-    </aside>
   </div>
 </section>
 

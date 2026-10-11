@@ -23,23 +23,6 @@ about:
   photo: four-leos.jpg
   photo_alt: "Four Leonbergers sitting side by side on the grass"
 
-health:
-  title: "Health testing on every breeding dog"
-  tests:
-    - name: "Hips & elbows"
-      detail: "X-ray for dysplasia"
-      result: "screened"
-    - name: "Eyes"
-      detail: "exam before breeding"
-      result: "checked"
-    - name: "LPN1, LPN2, LPN3"
-      detail: "Leonberger polyneuropathy"
-      result: "clear"
-    - name: "LEMP"
-      detail: "leukoencephalomyelopathy"
-      result: "clear"
-  footnote: "Tested clear, or clear by pedigree."
-
 puppies:
   eyebrow: "Puppies"
   title: "Raised in our house to live in yours"

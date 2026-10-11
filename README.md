@@ -23,7 +23,6 @@ The other files make the pages work, and you can leave them alone:
 - `questionnaire.html`
 - `_layouts/` and `_includes/` (page parts shared by every page)
 - `assets/js/` (the questionnaire's checks and sending)
-- `apps-script/` (the Google script that emails you responses)
 
 ### Rules for editing `.yml` files
 
@@ -56,7 +55,7 @@ Delete its lines from `_data/gallery.yml`. You can also delete the photo file it
 Upload the new photo to `assets/img/`. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
 
 ### Add or change a questionnaire question
-Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. The emails and the Google Sheet pick up new questions automatically, so the Google script never needs changing for this.
+Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. The emails pick up new questions automatically.
 
 ---
 
@@ -69,7 +68,14 @@ The site lives in the repository `wanderweg-leos/wanderweg-leos.github.io`.
 2. After a minute or two, the site is live at **https://wanderweg-leos.github.io**. Use this address to check everything before switching the real domain over.
 
 ### 2. Connect the questionnaire
-Follow [`apps-script/SETUP.md`](apps-script/SETUP.md). It takes about 15 minutes.
+The questionnaire is sent by [Web3Forms](https://web3forms.com), a free service that emails you each response.
+
+1. Go to [web3forms.com](https://web3forms.com), enter **hello@wanderweg.ca** (or whichever address should receive questionnaires) and click **Create Access Key**.
+2. Web3Forms emails you an access key (a long code like `a1b2c3d4-…`).
+3. In `_config.yml`, paste it between the quotes on the `web3forms_access_key:` line and commit.
+4. Fill in the questionnaire on the live site to test it. The first email can land in spam: mark it "not spam".
+
+Replying to a questionnaire email replies straight to the applicant. To send responses to a different address, create a new key for that address and replace the old one.
 
 ### 3. Point wanderweg.ca at the new site
 Do this last, when you're happy with the site. It replaces the Wix site.
