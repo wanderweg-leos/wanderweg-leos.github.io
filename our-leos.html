@@ -1,0 +1,51 @@
+---
+layout: default
+title: Our Leos
+description: Meet the Leonbergers of Wanderweg Leonbergers in Halifax, Nova Scotia.
+permalink: /our-leos/
+# Old Wix addresses for the individual dogs land here.
+redirect_from:
+  - /riley/
+  - /lexi-copy/
+  - /p-riya-copy/
+# The dogs are listed in _data/leos.yml.
+# To hide this page, set show_our_leos: false in _config.yml.
+---
+{% if site.show_our_leos %}
+{% assign l = site.data.leos %}
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">{{ l.eyebrow }}</span>
+    <h1>{{ l.title }}</h1>
+    <p class="muted">{{ l.intro }}</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap leos">
+    {% for d in l.dogs %}
+    <article class="leo">
+      {% assign src = '/assets/img/leos/' | append: d.photo %}
+      {% include photo.html src=src alt=d.photo_alt lazy=true %}
+      <div class="txt">
+        <div>
+          <h2>{{ d.name }}</h2>
+          {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
+        </div>
+        {% for p in d.paragraphs %}<p>{{ p }}</p>
+        {% endfor %}
+        {% if d.clearances %}
+        <ul class="clearances" aria-label="{{ d.name }}’s health clearances">
+          {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+{% comment %} Page is switched off: send visitors to the home page. {% endcomment %}
+<meta http-equiv="refresh" content="0; url={{ '/' | relative_url }}">
+<section class="pagehead"><div class="wrap"><p><a href="{{ '/' | relative_url }}">Go to the home page</a></p></div></section>
+{% endif %}

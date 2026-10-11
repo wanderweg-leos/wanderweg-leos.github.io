@@ -1,21 +1,47 @@
 # ─────────────────────────────────────────────────────────────
-#  Litter announcement (the dark panel in the Puppies section)
-#  Update this whenever your plans change.
+#  Litter panel (the dark panel in the Puppies section of the
+#  home page). It shows ONE of two versions:
+#
+#    planning   "We are planning our next litter"  (no parents yet)
+#    current    a confirmed litter, with the mother, the father,
+#               the expected date and a short paragraph
+#
+#  To switch, change the word after "show:" below.
+#  Both versions are kept here, so switching back and forth
+#  never loses your text.
 # ─────────────────────────────────────────────────────────────
 
-# Set to false to hide the panel completely.
-show: true
+# planning, current, or off (off hides the panel completely)
+show: current
 
-label: "Next litter"        # small text above the big date
-when: "Spring 2027"         # the big highlighted text
-title: "We are currently planning our next litter"
-paragraphs:
-  - "We expect our next Leonberger litter in spring 2027. Both parents will be fully health tested before breeding, and we’ll share details here once the breeding is confirmed."
-  - "If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can start getting to know you."
 
-# Example for later, when puppies arrive:
-#   label: "Puppies born"
-#   when: "May 2027"
-#   title: "Riley and Atlas had 8 puppies!"
-#   paragraphs:
-#     - "Four girls and four boys, all healthy and growing fast."
+# ── Planning version ─────────────────────────────────────────
+planning:
+  label: "Next litter"        # small text above the big date
+  when: "Spring 2027"         # the big highlighted text
+  title: "We are currently planning our next litter"
+  paragraphs:
+    - "We expect our next Leonberger litter in spring 2027. Both parents will be fully health tested before breeding, and we’ll share details here once the breeding is confirmed."
+    - "If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can start getting to know you."
+
+
+# ── Current litter version ───────────────────────────────────
+#  Parent photos go in assets/img/litter/ (about 1200 pixels wide,
+#  no spaces in the file name). Side-on standing photos look best.
+current:
+  label: "Puppies due"        # small text above the big date
+  when: "March 2, 2027"       # the expected date (or "Born May 3, 2027" once they arrive)
+  title: "Riley and Atlas are expecting!"
+  text: "We are very excited to announce our litter between Wanderweg’s Sugar and Spice (Riley) and Alvaro Grande Leonis (Atlas). Both parents are fully health tested and clear of LPN1, LPN2, LPN3 and LEMP. If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can get to know you."
+
+  mother:
+    name: "Riley"
+    registered_name: "Wanderweg’s Sugar and Spice"
+    photo: riley.jpg
+    photo_alt: "Riley standing on the lawn by the lake"
+
+  father:
+    name: "Atlas"
+    registered_name: "Alvaro Grande Leonis"
+    photo: atlas.jpg
+    photo_alt: "Atlas standing on a trail in the woods"
