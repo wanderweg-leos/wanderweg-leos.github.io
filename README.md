@@ -60,6 +60,8 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 | Hide the site from Google, or show it again | `hide_from_search` in `_config.yml` |
 | Colours | the top of `assets/css/styles.css` |
 | The "page not found" page | `404.html` (the words are near the top) |
+| The blog archive wording (the Facebook/Instagram note, the footer link) | `_data/blog.yml` |
+| The text of an old blog post | its file in `_posts/` (named by date, e.g. `2019-10-14-goldie-girl.html`) |
 
 You can leave every other file alone. They make the pages work; [DEVELOPING.md](DEVELOPING.md) explains them.
 
@@ -71,6 +73,7 @@ You can leave every other file alone. They make the pages work; [DEVELOPING.md](
 | `assets/img/gallery/` | the "Life with Leos" gallery |
 | `assets/img/leos/` | one photo per dog in the Our Leos section |
 | `assets/img/litter/` | the mother and father of the current litter |
+| `assets/img/blog/` | photos for the old blog posts, one folder per post |
 
 **Before uploading any photo:** resize it to about 1400 pixels wide (phone photos are far bigger than needed and make the page slow), and give it a simple name with no spaces, like `riley-beach.jpg`. To upload, open the folder on GitHub and click **Add file → Upload files**.
 

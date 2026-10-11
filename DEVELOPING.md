@@ -20,8 +20,10 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── gallery.yml           Gallery photo list
 │   ├── leos.yml              Our Leos section (dog cards)
 │   ├── questionnaire.yml     Questionnaire: questions, intro, thank-you page
+│   ├── blog.yml              Blog archive wording (archive page, post notes, footer link)
 │   └── navigation.yml        Main menu
 ├── _layouts/default.html     The page frame used by every page
+├── _layouts/post.html        Frame for an old blog post (inside default)
 ├── _includes/                Reusable fragments
 │   ├── head.html             <head>: SEO tags, fonts, stylesheet
 │   ├── header.html           Brand + menu (from navigation.yml)
@@ -33,11 +35,13 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 ├── questionnaire.html        /questionnaire/ (form generated from questionnaire.yml)
 ├── questionnaire-thank-you.html  /questionnaire/thank-you/
 ├── 404.html
+├── blog_archive.html         /blog_archive/ (list of old blog posts, linked from the footer)
+├── _posts/                   The 370 old Wix blog posts (2009–2023), one HTML file each
 ├── robots.txt                Generated: blocks everything while hide_from_search is true
 ├── assets/
 │   ├── css/styles.css
 │   ├── js/questionnaire.js
-│   └── img/                  Photos (subfolders: gallery/, leos/, litter/) and favicon.svg
+│   └── img/                  Photos (subfolders: gallery/, leos/, litter/, blog/) and favicon.svg
 ├── Gemfile                   Only for local previews
 └── .editorconfig             Spaces not tabs, LF line endings
 ```
@@ -83,6 +87,13 @@ Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card
 
 ### Old Wix addresses
 `jekyll-redirect-from` creates redirect pages from each page's `redirect_from` list. Add old URLs there instead of creating stub pages.
+
+### Blog archive
+The old Wix blog was copied into `_posts/` in October 2026. It's an archive: new updates go on Facebook and Instagram, and the archive is linked only from the footer.
+- **Posts** are `_posts/YYYY-MM-DD-<slug>.html`. Their front matter has `title`, `date`, `description`, `image` (for sharing), `thumb` (archive thumbnail), and optionally `missing_photos: <n>` and `lost_video: true` for photos and videos that were already broken on Wix. The body is plain HTML with `<figure class="post-photo">` for each photo.
+- **Addresses:** `permalink: /post/:title/` in `_config.yml` keeps the old Wix addresses (`/post/<slug>/`). The `posts` default there sets `layout: post`. The old `/blog/` address redirects to `/blog_archive/` (via `redirect_from` on that page).
+- **Photos** are in `assets/img/blog/<slug>/`, at their natural shape. They're deliberately not passed through `photo.html`, because cropping to 3:2 would cut off portrait shots.
+- **Wording** is in `_data/blog.yml`. Styles are under "Blog archive" in `styles.css`.
 
 ## The questionnaire
 

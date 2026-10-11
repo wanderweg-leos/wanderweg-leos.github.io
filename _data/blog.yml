@@ -1,0 +1,36 @@
+# ─────────────────────────────────────────────────────────────
+#  Blog archive: the old Wix blog posts (2009–2023)
+#
+#  The posts themselves are the files in _posts/ (one per post).
+#  The archive page is /blog_archive/ and is linked only from the
+#  footer. The wording below is used on that page, on each post
+#  page and in the footer.
+#
+#  title:          heading of the archive page, and the small label
+#                  above each post's title (links back to the archive)
+#  eyebrow:        small label above the archive heading
+#  moved_title:    first line of the dark box at the top of the archive
+#  moved_text:     the rest of that box; the Facebook and Instagram
+#                  links from _config.yml are shown after it
+#  intro:          sentence under the dark box
+#  count_text:     shown after the number of posts, e.g. "370 posts …"
+#  footer_link:    the words of the link in the footer
+#  missing_photo / missing_photos:
+#                  note on posts whose photos were already lost on
+#                  the old website. {n} is replaced with the number.
+#  lost_video:     note on posts whose video no longer plays
+#  older / newer:  labels on the links to the previous and next post
+# ─────────────────────────────────────────────────────────────
+
+title: "Blog archive"
+eyebrow: "2009 – 2023"
+moved_title: "We now post our updates on Facebook and Instagram."
+moved_text: "For the latest news on our Leos and litters, follow us there."
+intro: "Below are all of our earlier blog posts, kept here so you can look back at past litters."
+count_text: "posts about our Leonbergers and their puppies"
+footer_link: "Blog archive"
+missing_photo: "1 photo from this post was lost on the old website and could not be recovered."
+missing_photos: "{n} photos from this post were lost on the old website and could not be recovered."
+lost_video: "This post had a video that no longer plays on the old website."
+older: "Older post"
+newer: "Newer post"
