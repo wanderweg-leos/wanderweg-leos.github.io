@@ -1,12 +1,12 @@
 # ─────────────────────────────────────────────────────────────
 #  Photo gallery ("Life with Leos")
 #
-#  To ADD a photo:   upload it to assets/img/gallery/, then add a
+#  To ADD a photo:   upload it to media/img/gallery/, then add a
 #                    new "- file:" entry below.
 #  To REMOVE one:    delete its three lines below.
 #  To REORDER:       move the entries up or down.
 #
-#  file:      the photo's file name in assets/img/gallery/
+#  file:      the photo's file name in media/img/gallery/
 #  alt:       a short description (read aloud to blind visitors
 #             and shown if the photo can't load)
 #  position:  optional. Which part of the photo to keep when it is

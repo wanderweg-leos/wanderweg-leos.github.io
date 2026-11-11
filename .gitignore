@@ -5,3 +5,9 @@ _site/
 vendor/
 Gemfile.lock
 .DS_Store
+
+# Full-resolution originals from the old Blogger blog (kept locally, not published)
+blogger-originals/
+
+# Local copy of the wanderweg-leos/media repo, for previews only
+media/

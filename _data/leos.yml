@@ -4,7 +4,7 @@
 #  text: a short description shown on the card (a sentence or
 #        two works best, so the cards stay a similar height).
 #
-#  To add a dog: upload a photo to assets/img/leos/ (about 1200
+#  To add a dog: upload a photo to media/img/leos/ (about 1200
 #  pixels wide, no spaces in the file name), then copy one of the
 #  dogs below and change the details. To remove a dog, delete
 #  its lines. Dogs appear in the order listed here; the cards sit

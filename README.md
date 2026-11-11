@@ -52,8 +52,8 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 |---|---|
 | Any wording or big photo on the home page | `_data/home.yml` |
 | The litter announcement (e.g. "Spring 2027") | `_data/litter.yml` |
-| Gallery photos | `_data/gallery.yml`, and upload photos to `assets/img/gallery/` |
-| The dogs in the Our Leos section | `_data/leos.yml`, and upload photos to `assets/img/leos/` |
+| Gallery photos | `_data/gallery.yml`, and upload photos to `img/gallery/` in the **media** repository |
+| The dogs in the Our Leos section | `_data/leos.yml`, and upload photos to `img/leos/` in the **media** repository |
 | The questionnaire questions, its intro and the thank-you page | `_data/questionnaire.yml` |
 | The menu at the top of every page | `_data/navigation.yml` |
 | Email address, Facebook, Instagram, club memberships | `_config.yml` |
@@ -65,18 +65,21 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 
 You can leave every other file alone. They make the pages work; [DEVELOPING.md](DEVELOPING.md) explains them.
 
-### Photo folders
+### Photos live in a separate repository
 
-| Folder | Holds |
+All photos and videos are kept in their own GitHub repository, **`wanderweg-leos/media`**, not in this one. GitHub publishes it at `/media/` on the same site, so a photo at `img/gallery/snow.jpg` in that repository appears on the site as `/media/img/gallery/snow.jpg`. Keeping them apart keeps this repository small and quick to work with, and lets the blog keep its photos at full size.
+
+| Folder (in the media repository) | Holds |
 |---|---|
-| `assets/img/` | the big photos on the home page and thank-you page |
-| `assets/img/gallery/` | the "Life with Leos" gallery |
-| `assets/img/leos/` | one photo per dog in the Our Leos section |
-| `assets/img/litter/` | the mother and father of the current litter |
-| `assets/img/blog/` | photos for the old blog posts, one folder per post |
-| `assets/video/blog/` | the six old blog videos (each `.mp4` has a matching `.jpg` still). |
+| `img/` | the big photos on the home page and thank-you page |
+| `img/gallery/` | the "Life with Leos" gallery |
+| `img/leos/` | one photo per dog in the Our Leos section |
+| `img/litter/` | the mother and father of the current litter |
+| `img/blog/` | full-size photos for the old blog posts, one folder per post |
+| `img/blog-thumbs/` | small thumbnails for the blog archive list, one per post |
+| `video/blog/` | the six old blog videos (each `.mp4` has a matching `.jpg` still) |
 
-**Before uploading any photo:** resize it to about 1400 pixels wide (phone photos are far bigger than needed and make the page slow), and give it a simple name with no spaces, like `riley-beach.jpg`. To upload, open the folder on GitHub and click **Add file → Upload files**.
+**Before uploading a photo for the home page, gallery, Our Leos or litter:** resize it to about 1400 pixels wide (phone photos are far bigger than needed and make those pages slow), and give it a simple name with no spaces, like `riley-beach.jpg`. To upload, open the folder in the **media** repository on GitHub and click **Add file → Upload files**. Then edit the `.yml` file in this repository as usual. The photo shows up once both repositories have finished updating (a minute or two).
 
 ---
 
@@ -88,10 +91,10 @@ Open `_data/litter.yml`. The panel has two versions, and both are kept in the fi
 - `planning`: "We are planning our next litter", with no parents shown
 - `current`: a confirmed litter with the mother, father and due date
 
-Change `show:` to `planning`, `current` or `off` (hides the panel). Then edit the text in that version. For `current`, upload the parents' photos to `assets/img/litter/` first.
+Change `show:` to `planning`, `current` or `off` (hides the panel). Then edit the text in that version. For `current`, upload the parents' photos to `img/litter/` in the media repository first.
 
 ### Add a gallery photo
-1. Upload the photo to `assets/img/gallery/`.
+1. Upload the photo to `img/gallery/` in the media repository.
 2. In `_data/gallery.yml`, add:
    ```yaml
    - file: riley-beach.jpg
@@ -105,10 +108,10 @@ The grid looks tidiest with a multiple of 3 photos. If a face gets cropped, add 
 Delete an entry's lines, or move them up or down. You can also delete the photo file, but you don't have to.
 
 ### Change a big photo (top of page, About, Puppies)
-Upload the new photo to `assets/img/`. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
+Upload the new photo to `img/` in the media repository. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
 
 ### Add, change or remove a dog in Our Leos
-Each dog has a card in the Our Leos section of the home page. Upload a photo to `assets/img/leos/`, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
+Each dog has a card in the Our Leos section of the home page. Upload a photo to `img/leos/` in the media repository, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
 
 ### Add or change a questionnaire question
 Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. The emails pick up new questions automatically.
@@ -147,6 +150,7 @@ The site lives in the GitHub repository `wanderweg-leos/wanderweg-leos.github.io
 ### 1. Turn on GitHub Pages
 1. In the repository, go to **Settings → Pages**. Under "Build and deployment", choose **Deploy from a branch**, branch **main**, folder **/ (root)**, then click **Save**.
 2. After a minute or two, the site is live at **https://wanderweg-leos.github.io**. Use this address to check everything before switching the real domain over.
+3. Do the same in the **`wanderweg-leos/media`** repository (**Settings → Pages**, branch **main**, folder **/ (root)**). Its photos then appear at **https://wanderweg-leos.github.io/media/**. The media repository must be public, like the site. Once `wanderweg.ca` is connected below, the photos move to `wanderweg.ca/media/` automatically; there's nothing to change in the media repository.
 
 ### 2. Connect the questionnaire
 The questionnaire is sent by [Web3Forms](https://web3forms.com), a free service that emails you each response.
@@ -202,5 +206,7 @@ bundle exec jekyll serve
 ```
 
 Then open http://localhost:4000.
+
+To see photos in the preview, put a copy of the media repository inside this folder, named `media` (for example `git clone https://github.com/wanderweg-leos/media.git media`). Git ignores that folder here, so it won't be uploaded twice.
 
 More detail for developers is in [DEVELOPING.md](DEVELOPING.md).

@@ -39,15 +39,15 @@ web3forms_access_key: "f46be6b4-bd42-49f2-826a-2e2ceb548c4a"
 url: "https://wanderweg-leos.github.io"   # change to "https://wanderweg.ca" when the domain is switched over
 baseurl: ""
 lang: en-CA
-logo: /assets/img/gallop.jpg
+logo: /media/img/gallop.jpg
 
 # The photo shown when a page is shared on Facebook, in a text message, etc.
-# A page can use a different one by adding "image: /assets/img/…" to its front matter.
+# A page can use a different one by adding "image: /media/img/…" to its front matter.
 defaults:
   - scope:
       path: ""
     values:
-      image: /assets/img/gallop.jpg
+      image: /media/img/gallop.jpg
   # Old blog posts in _posts/ use the post layout.
   - scope:
       path: ""
@@ -70,3 +70,4 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - blogger-originals

@@ -37,15 +37,17 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 ├── questionnaire-thank-you.html  /questionnaire/thank-you/
 ├── 404.html
 ├── blog_archive.html         /blog_archive/ (list of old blog posts, linked from the footer)
-├── _posts/                   The 370 old Wix blog posts (2009–2023), one HTML file each
+├── _posts/                   The 389 old Wix blog posts (2009–2023), one HTML file each
 ├── robots.txt                Generated: blocks everything while hide_from_search is true
 ├── assets/
 │   ├── css/styles.css
 │   ├── js/questionnaire.js
-│   └── img/                  Photos (subfolders: gallery/, leos/, litter/, blog/) and favicon.svg
+│   └── img/favicon.svg       The only image kept here; every photo is in the media repo
 ├── Gemfile                   Only for local previews
 └── .editorconfig             Spaces not tabs, LF line endings
 ```
+
+Photos and videos are **not** in this repository. They live in [`wanderweg-leos/media`](https://github.com/wanderweg-leos/media), a separate repository that GitHub Pages publishes as a project site at `/media/` on the same domain (see [Media repository](#media-repository)).
 
 Each `_data` file and template starts with a comment explaining what it does, so read the top of a file before changing it.
 
@@ -69,7 +71,7 @@ Every page uses `layout: default`. A page's front matter sets its `title`, `desc
 Always render photos through the include, never with a bare `<img>`:
 
 ```liquid
-{% include photo.html src="/assets/img/gallop.jpg" alt="…" position="50% 30%" lazy=true class="wide" %}
+{% include photo.html src="/media/img/gallop.jpg" alt="…" position="50% 30%" lazy=true class="wide" %}
 ```
 
 It wraps the image in a fixed 3:2 frame (`.photo`) with `object-fit: cover`, so photos of any shape line up. `position` controls the crop and `lazy` adds `loading="lazy"` (use it for anything below the fold). Data files store only the file name; the template adds the folder.
@@ -93,9 +95,16 @@ Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card
 The old Wix blog was copied into `_posts/` in October 2026. It's an archive: new updates go on Facebook and Instagram, and the archive is linked only from the footer.
 - **Posts** are `_posts/YYYY-MM-DD-<slug>.html`. Their front matter has `title`, `date`, `description`, `image` (for sharing), `thumb` (archive thumbnail), and optionally `missing_photos: <n>` and `lost_video: true` for photos and videos that were already broken on Wix. The body is plain HTML with `<figure class="post-photo">` for each photo.
 - **Addresses:** `permalink: /post/:title/` in `_config.yml` keeps the old Wix addresses (`/post/<slug>/`). The `posts` default there sets `layout: post`. The old `/blog/` address redirects to `/blog_archive/` (via `redirect_from` on that page).
-- **Photos** are in `assets/img/blog/<slug>/`, at their natural shape. They're deliberately not passed through `photo.html`, because cropping to 3:2 would cut off portrait shots.
-- **Videos** (six old home videos) are `assets/video/blog/<name>.mp4`, each with a `<name>.jpg` still, shown with `{% include video.html file="<name>" %}`.
+- **Photos** are in `img/blog/<slug>/` in the media repo, at full size and their natural shape. Where the old Blogger blog had a larger copy than Wix, the Blogger original is used. Archive thumbnails (`thumb:`) are separate small copies in `img/blog-thumbs/<slug>.jpg`, so the archive list doesn't load hundreds of full-size photos. They're deliberately not passed through `photo.html`, because cropping to 3:2 would cut off portrait shots.
+- **Videos** (six old home videos) are `video/blog/<name>.mp4` in the media repo, each with a `<name>.jpg` still, shown with `{% include video.html file="<name>" %}`.
 - **Wording** is in `_data/blog.yml`. Styles are under "Blog archive" in `styles.css`.
+
+### Media repository
+All photos and videos are in [`wanderweg-leos/media`](https://github.com/wanderweg-leos/media), laid out as `img/…` and `video/…` with a `.nojekyll` file so GitHub serves it as-is. Because it's a project site under the same GitHub account, Pages serves it at `/media/` on whatever domain the main site uses (`wanderweg-leos.github.io/media/` now, `wanderweg.ca/media/` after launch). So templates refer to photos with ordinary site paths: `'/media/img/' | append: file | relative_url`. There's no absolute URL to update when the domain changes.
+
+- **Never add a `media/` folder or page to this repo**, or it will collide with the project site.
+- **Local preview:** clone the media repo into `media/` inside this folder. It's in `.gitignore`, and Jekyll copies it into `_site/` so the preview shows photos. The first build is slow because of the full-size blog photos.
+- Pages limits apply to each repository separately (1 GB published site). The media repo is around 750 MB, mostly full-size blog photos.
 
 ## The questionnaire
 
@@ -145,7 +154,7 @@ This is the only part with real logic.
 
 ## Deployment
 
-Pushing to `main` deploys. GitHub Pages builds the site ("pages build and deployment" in Actions). If a build fails, the previous version stays live.
+Pushing to `main` deploys. GitHub Pages builds the site ("pages build and deployment" in Actions). If a build fails, the previous version stays live. The media repo deploys the same way, independently; push new photos there before (or with) the change here that uses them.
 
 The domain setup (DNS records, `CNAME`, `url`, `hide_from_search`) is covered in the README under [First-time setup and launch](README.md#first-time-setup-and-launch).
 
@@ -153,6 +162,6 @@ The domain setup (DNS records, `CNAME`, `url`, `hide_from_search`) is covered in
 
 | Service | Used for | Where it's configured |
 |---|---|---|
-| GitHub Pages | Hosting and building | Repository **Settings → Pages** |
+| GitHub Pages | Hosting and building (site and media repos) | **Settings → Pages** in each repository |
 | Web3Forms | Emailing questionnaire responses | `web3forms_access_key` in `_config.yml` |
 | Google Fonts | Young Serif, Figtree, IBM Plex Mono | `_includes/head.html` |

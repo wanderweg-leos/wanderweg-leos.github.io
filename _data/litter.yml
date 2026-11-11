@@ -30,7 +30,7 @@ planning:
 
 
 # ── Current litter version ───────────────────────────────────
-#  Parent photos go in assets/img/litter/ (about 1200 pixels wide,
+#  Parent photos go in media/img/litter/ (about 1200 pixels wide,
 #  no spaces in the file name). Side-on standing photos look best.
 current:
   label: "Puppies due"        # small text above the big date
