@@ -1,0 +1,70 @@
+---
+layout: default
+---
+{% comment %}
+  One dog's own page (the files in our-leos/). Everything on it comes
+  from _data/leos.yml: the file only says which dog (dog: <id>).
+{% endcomment %}{% assign leos = site.data.leos %}
+{% assign d = leos.dogs | where: "id", page.dog | first %}
+{% assign name_token = '{name}' %}
+{% if d %}
+<section class="pagehead">
+  <div class="wrap">
+    <a class="eyebrow" href="{{ '/#our-leos' | relative_url }}">{{ leos.eyebrow }}</a>
+    <h1>{{ d.name }}</h1>
+    {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap dog">
+    {% assign src = '/media/img/leos/' | append: d.photo %}
+    {% include photo.html src=src alt=d.photo_alt %}
+    <div class="text">
+      {% if d.story %}{% for p in d.story %}<p>{{ p }}</p>
+      {% endfor %}{% else %}<p>{{ d.text }}</p>{% endif %}
+      {% if d.clearances %}
+      <h2 class="h3">{{ leos.clearances_title }}</h2>
+      <ul class="clearances">
+        {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+      <div class="btns">
+        <a class="btn primary" href="{{ '/questionnaire/' | relative_url }}">{{ leos.questionnaire_button }}</a>
+        <a class="btn" href="{{ '/#contact' | relative_url }}">{{ leos.contact_button }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if d.photos.size > 0 %}
+<section class="block">
+  <div class="wrap">
+    <div class="head"><h2>{{ leos.photos_title | replace: name_token, d.name }}</h2></div>
+    <div class="gallery">
+      {% for g in d.photos %}
+      {% assign src = '/media/img/leos/' | append: g.file %}
+      {% include photo.html src=src alt=g.alt position=g.position lazy=true %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if leos.dogs.size > 1 %}
+<section class="block">
+  <div class="wrap">
+    <div class="head"><h2>{{ leos.others_title }}</h2></div>
+    <div class="leos">
+      {% for o in leos.dogs %}{% if o.id != d.id %}
+      <a class="leo mini" href="{{ '/our-leos/' | append: o.id | append: '/' | relative_url }}">
+        {% assign src = '/media/img/leos/' | append: o.photo %}
+        {% include photo.html src=src alt=o.photo_alt lazy=true %}
+        <h3>{{ o.name }}</h3>
+      </a>
+      {% endif %}{% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endif %}

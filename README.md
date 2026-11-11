@@ -53,7 +53,7 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 | Any wording or big photo on the home page | `_data/home.yml` |
 | The litter announcement (e.g. "Spring 2027") | `_data/litter.yml` |
 | Gallery photos | `_data/gallery.yml`, and upload photos to `img/gallery/` in the **media** repository |
-| The dogs in the Our Leos section | `_data/leos.yml`, and upload photos to `img/leos/` in the **media** repository |
+| The dogs in the Our Leos section and their own pages | `_data/leos.yml` (and one small file per dog in `our-leos/`), and upload photos to `img/leos/` in the **media** repository |
 | The questionnaire questions, its intro and the thank-you page | `_data/questionnaire.yml` |
 | The menu at the top of every page | `_data/navigation.yml` |
 | Email address, Facebook, Instagram, club memberships | `_config.yml` |
@@ -111,7 +111,11 @@ Delete an entry's lines, or move them up or down. You can also delete the photo 
 Upload the new photo to `img/` in the media repository. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
 
 ### Add, change or remove a dog in Our Leos
-Each dog has a card in the Our Leos section of the home page. Upload a photo to `img/leos/` in the media repository, then in `_data/leos.yml` copy one of the dogs and change the details. Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
+Each dog has a card in the Our Leos section of the home page and its own page (for example `/our-leos/riley/`). Everything about a dog is in `_data/leos.yml`: the short `text` for the card, the longer `story` for the dog's page, the clearances, and optional extra `photos`. Upload photos to `img/leos/` in the media repository.
+
+To **add** a dog, copy one of the dogs in `_data/leos.yml` and change the details, including a new `id` (a short name with no spaces). Then, in the `our-leos/` folder, copy `riley.html`, name the copy after the new id (e.g. `luna.html`), and change the `dog`, `title` and `permalink` lines inside it. To **remove** a dog, delete its lines in `leos.yml` and its file in `our-leos/`.
+
+Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
 
 ### Add or change a questionnaire question
 Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. The emails pick up new questions automatically.
@@ -184,7 +188,7 @@ Do this last, when you're happy with the site. It replaces the old Wix site.
    **Don't touch any MX or TXT records.** Those control your email.
 4. DNS changes can take up to a day. When GitHub shows the domain as working, tick **Enforce HTTPS**.
 
-Old Wix links like `/puppies`, `/photos` and `/blog` automatically forward to the right place on the new home page, and `/questionnaire` keeps the same address.
+Links to the old Wix pages (like `/puppies` or `/riley`) won't work after the switch. They show the "page not found" page, which links to the home page and the questionnaire. `/questionnaire` keeps the same address.
 
 #### Launch checklist
 - [ ] Questionnaire tested on the live site, and the email arrived

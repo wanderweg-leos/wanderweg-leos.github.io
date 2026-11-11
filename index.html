@@ -2,17 +2,6 @@
 layout: default
 # The words on this page live in _data/home.yml,
 # the litter panel in _data/litter.yml and the photos in _data/gallery.yml.
-# Old Wix addresses that should land on this page:
-redirect_from:
-  - /home/
-  - /about/
-  - /puppies/
-  - /photos/
-  - /contact/
-  - /our-leos/        # the old separate Our Leos page
-  - /riley/           # old Wix pages for individual dogs
-  - /lexi-copy/
-  - /p-riya-copy/
 ---
 {% comment %} Short names for the data files this page reads. {% endcomment %}
 {% assign h = site.data.home %}
@@ -64,11 +53,12 @@ redirect_from:
     </div>
     <div class="leos">
       {% for d in leos.dogs %}
+      {% assign dog_url = '/our-leos/' | append: d.id | append: '/' | relative_url %}
       <article class="leo">
         {% assign src = '/media/img/leos/' | append: d.photo %}
         {% include photo.html src=src alt=d.photo_alt lazy=true %}
         <div>
-          <h3>{{ d.name }}</h3>
+          <h3><a href="{{ dog_url }}">{{ d.name }}</a></h3>
           {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
         </div>
         <p>{{ d.text }}</p>
@@ -77,6 +67,8 @@ redirect_from:
           {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
         </ul>
         {% endif %}
+        {% assign name_token = '{name}' %}
+        <a class="more" href="{{ dog_url }}">{{ leos.more_link | replace: name_token, d.name }} →</a>
       </article>
       {% endfor %}
     </div>

@@ -18,12 +18,14 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── home.yml              Home page wording and big photos
 │   ├── litter.yml            Litter panel: "planning" and "current" versions
 │   ├── gallery.yml           Gallery photo list
-│   ├── leos.yml              Our Leos section (dog cards)
+│   ├── leos.yml              Our Leos cards and dog pages
 │   ├── questionnaire.yml     Questionnaire: questions, intro, thank-you page
 │   ├── blog.yml              Blog archive wording (archive page, post notes, footer link)
 │   └── navigation.yml        Main menu
 ├── _layouts/default.html     The page frame used by every page
 ├── _layouts/post.html        Frame for an old blog post (inside default)
+├── _layouts/leo.html         A dog's own page (inside default)
+├── our-leos/                 One small file per dog page (data in leos.yml)
 ├── _includes/                Reusable fragments
 │   ├── head.html             <head>: SEO tags, fonts, stylesheet
 │   ├── header.html           Brand + menu (from navigation.yml)
@@ -32,7 +34,7 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── video.html            Video player for the old blog posts
 │   ├── email.html            The large email link
 │   └── social-links.html     Facebook / Instagram links, skipped when empty
-├── index.html                Home page (also catches old addresses, incl. /our-leos/)
+├── index.html                Home page
 ├── questionnaire.html        /questionnaire/ (form generated from questionnaire.yml)
 ├── questionnaire-thank-you.html  /questionnaire/thank-you/
 ├── 404.html
@@ -65,7 +67,7 @@ Open http://localhost:4000. The `github-pages` gem in the `Gemfile` pins the sam
 ## How the pieces fit together
 
 ### Pages and data
-Every page uses `layout: default`. A page's front matter sets its `title`, `description` (both used by `jekyll-seo-tag`), `permalink`, any `redirect_from` addresses, and optional `scripts:` to load at the end of the body. The page body then reads its content from `site.data.<file>`, usually assigning a short alias at the top (`{% assign h = site.data.home %}`).
+Every page uses `layout: default`. A page's front matter sets its `title`, `description` (both used by `jekyll-seo-tag`), `permalink`, and optional `scripts:` to load at the end of the body. The page body then reads its content from `site.data.<file>`, usually assigning a short alias at the top (`{% assign h = site.data.home %}`).
 
 ### Photos
 Always render photos through the include, never with a bare `<img>`:
@@ -82,19 +84,21 @@ It wraps the image in a fixed 3:2 frame (`.photo`) with `object-fit: cover`, so 
 ### Litter panel
 `litter.yml` keeps both versions side by side; `show` picks one (`planning`, `current`, or `off`). `index.html` reads `litter[litter.show]`, and the `current` version also renders `mother` and `father`. Note that YAML reads `off` as `false`, which works because the template only matches the two strings.
 
-### Our Leos section
-Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card per dog. Each card shows the photo, names, a short `text` and the clearance tags. The whole section is skipped when `dogs` is empty. There used to be a separate `/our-leos/` page; that address and the old Wix dog pages now redirect to the home page.
+### Our Leos section and dog pages
+Rendered in `index.html` from `_data/leos.yml`, one `<article class="leo">` card per dog, linking to the dog's own page. The whole section is skipped when `dogs` is empty.
+
+Each dog's page is a tiny file in `our-leos/<id>.html` whose front matter sets `dog: <id>`, `title`, `permalink` and `layout: leo`. `_layouts/leo.html` looks the dog up with `where: "id", page.dog` and renders everything from the data file (photo, `story`, clearances, optional `photos`, and links to the other dogs). GitHub Pages can't generate pages from data in safe mode, which is why each dog needs its stub file.
 
 ### Search engines
 `hide_from_search` in `_config.yml` makes `robots.txt` disallow everything. Turn it off at launch.
 
 ### Old Wix addresses
-`jekyll-redirect-from` creates redirect pages from each page's `redirect_from` list. Add old URLs there instead of creating stub pages.
+Deliberately not kept: there are no redirects and no `jekyll-redirect-from` plugin. Old Wix links such as `/puppies` or `/riley` go to the 404 page. Don't add redirects back; long-term upkeep of old links isn't worth it.
 
 ### Blog archive
 The old Wix blog was copied into `_posts/` in October 2026. It's an archive: new updates go on Facebook and Instagram, and the archive is linked only from the footer.
 - **Posts** are `_posts/YYYY-MM-DD-<slug>.html`. Their front matter has `title`, `date`, `description`, `image` (for sharing), `thumb` (archive thumbnail), and optionally `missing_photos: <n>` and `lost_video: true` for photos and videos that were already broken on Wix. The body is plain HTML with `<figure class="post-photo">` for each photo.
-- **Addresses:** `permalink: /post/:title/` in `_config.yml` keeps the old Wix addresses (`/post/<slug>/`). The `posts` default there sets `layout: post`. The old `/blog/` address redirects to `/blog_archive/` (via `redirect_from` on that page).
+- **Addresses:** `permalink: /post/:title/` in `_config.yml` gives each post the address `/post/<slug>/`. The `posts` default there sets `layout: post`.
 - **Photos** are in `img/blog/<slug>/` in the media repo, at full size and their natural shape. Where the old Blogger blog had a larger copy than Wix, the Blogger original is used. Archive thumbnails (`thumb:`) are separate small copies in `img/blog-thumbs/<slug>.jpg`, so the archive list doesn't load hundreds of full-size photos. They're deliberately not passed through `photo.html`, because cropping to 3:2 would cut off portrait shots.
 - **Videos** (six old home videos) are `video/blog/<name>.mp4` in the media repo, each with a `<name>.jpg` still, shown with `{% include video.html file="<name>" %}`.
 - **Wording** is in `_data/blog.yml`. Styles are under "Blog archive" in `styles.css`.

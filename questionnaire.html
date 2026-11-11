@@ -41,6 +41,7 @@ scripts:
         {% assign w = '' %}{% if q.half %}{% assign w = ' half' %}{% endif %}
         {% assign req = '' %}{% if q.required %}{% assign req = ' required' %}{% endif %}
 
+        {% capture field %}
         {% case q.type %}
 
         {% when 'name' %}
@@ -83,6 +84,9 @@ scripts:
         <label class="field{{ w }}" for="f-{{ q.id }}">{{ q.label }}{% if q.required %}{{ star }}{% endif %}<input id="f-{{ q.id }}" name="{{ q.id }}" type="{{ q.type | default: 'text' }}" data-label="{{ q.label | escape }}"{% if q.type == 'email' %} autocomplete="email"{% elsif q.type == 'tel' %} autocomplete="tel"{% endif %}{{ req }}></label>
 
         {% endcase %}
+        {% endcapture %}
+        {% comment %} A follow-up question (show_if in the data file) stays hidden until one of its show_when answers is chosen. {% endcomment %}
+        {% if q.show_if %}<div class="cond" data-show-if="{{ q.show_if }}" data-show-when="{{ q.show_when | join: '|' | escape }}" hidden>{{ field }}</div>{% else %}{{ field }}{% endif %}
         {% endfor %}
       </fieldset>
       {% endfor %}

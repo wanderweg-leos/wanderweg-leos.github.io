@@ -15,6 +15,10 @@
        A hidden "botcheck" box catches spam bots (it has no data-label,
        so it is never sent).
     4. On success the visitor is sent to the thank-you page.
+    Follow-up questions (show_if in the data file) are wrapped in
+    <div data-show-if="<id>" data-show-when="Yes|Maybe">. update() shows
+    one only while question <id> has one of those answers; hidden
+    questions are neither checked nor sent.
 
   Settings come from attributes on the <form>:
     data-access-key     Web3Forms key (from _config.yml)
@@ -33,6 +37,35 @@
   var submitLabel = submitBtn.textContent;
 
   function mark(el, bad) { el.classList.toggle('invalid', bad); }
+
+  // Is this element inside a follow-up question that is hidden right now?
+  function isHidden(el) {
+    var wrap = el.closest('[data-show-if]');
+    return !!(wrap && wrap.hidden);
+  }
+
+  // The current answer(s) to question <id>, or [] if it is hidden.
+  function answersTo(id) {
+    var values = [];
+    Array.prototype.forEach.call(form.querySelectorAll('[name="' + id + '"]'), function (el) {
+      if (isHidden(el)) return;
+      if (el.type === 'radio' || el.type === 'checkbox') { if (el.checked) values.push(el.value); }
+      else if (el.value) values.push(el.value);
+    });
+    return values;
+  }
+
+  // Show or hide every follow-up question. Runs in page order, so a
+  // follow-up of a follow-up also works.
+  function update() {
+    form.querySelectorAll('[data-show-if]').forEach(function (wrap) {
+      var wanted = wrap.getAttribute('data-show-when').split('|');
+      var given = answersTo(wrap.getAttribute('data-show-if'));
+      wrap.hidden = !given.some(function (v) { return wanted.indexOf(v) !== -1; });
+    });
+  }
+  form.addEventListener('change', update);
+  update();
 
   // Typing in an "Other" box ticks its choice.
   form.querySelectorAll('.other-text').forEach(function (box) {
@@ -58,12 +91,14 @@
   function validate() {
     var problems = [];
     form.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
+      if (isHidden(el)) { mark(el, false); return; }
       var v = el.value.trim();
       var bad = !v || (el.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
       mark(el, bad);
       if (bad) problems.push(el);
     });
     form.querySelectorAll('[data-group]').forEach(function (group) {
+      if (isHidden(group)) { mark(group, false); return; }
       var checked = group.querySelectorAll('input:checked');
       var otherChosen = group.querySelector('label.other input:checked');
       var bad = (group.hasAttribute('data-required') && !checked.length) ||
@@ -78,6 +113,7 @@
   function collect() {
     var answers = [];
     form.querySelectorAll('[data-label]').forEach(function (el) {
+      if (isHidden(el)) return;
       var section = el.closest('fieldset').querySelector('legend').textContent.trim();
       var value;
       if (el.hasAttribute('data-group')) {

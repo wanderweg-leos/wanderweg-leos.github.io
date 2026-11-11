@@ -30,22 +30,26 @@ planning:
 
 
 # ── Current litter version ───────────────────────────────────
+#  This is PLACEHOLDER text. Before switching "show:" to current,
+#  replace everything in [square brackets] with the real details.
 #  Parent photos go in media/img/litter/ (about 1200 pixels wide,
 #  no spaces in the file name). Side-on standing photos look best.
+#  Change mother.jpg and father.jpg below to the names of the
+#  photos you uploaded.
 current:
   label: "Puppies due"        # small text above the big date
-  when: "March 2, 2027"       # the expected date (or "Born May 3, 2027" once they arrive)
-  title: "Riley and Atlas are expecting!"
-  text: "We are very excited to announce our litter between Wanderweg’s Sugar and Spice (Riley) and Alvaro Grande Leonis (Atlas). Both parents are fully health tested and clear of LPN1, LPN2, LPN3 and LEMP. If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can get to know you."
+  when: "[Month Day, Year]"   # the expected date (or "Born May 3, 2027" once they arrive)
+  title: "[Mother] and [Father] are expecting!"
+  text: "We are very excited to announce our litter between [mother’s registered name] ([Mother]) and [father’s registered name] ([Father]). Both parents are fully health tested and clear of LPN1, LPN2, LPN3 and LEMP. If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can get to know you."
 
   mother:
-    name: "Riley"
-    registered_name: "Wanderweg’s Sugar and Spice"
-    photo: riley.jpg
-    photo_alt: "Riley standing on the lawn by the lake"
+    name: "[Mother]"
+    registered_name: "[Mother’s registered name]"
+    photo: mother.jpg
+    photo_alt: "[Mother] standing on the lawn"
 
   father:
-    name: "Atlas"
-    registered_name: "Alvaro Grande Leonis"
-    photo: atlas.jpg
-    photo_alt: "Atlas standing on a trail in the woods"
+    name: "[Father]"
+    registered_name: "[Father’s registered name]"
+    photo: father.jpg
+    photo_alt: "[Father] standing on the lawn"

@@ -27,6 +27,15 @@
 #    half:      true makes the question half width on computers,
 #               so two "half" questions sit side by side
 #    columns:   true lays a long list of choices out in columns
+#    show_if:   optional. Makes this a follow-up question that only
+#               appears after a certain answer to an earlier
+#               question. Put the earlier question's id here...
+#    show_when: ...and the answer(s) that make it appear, e.g.
+#                 show_if: rehomed
+#                 show_when: ["Yes"]
+#               The answers must match that question's options
+#               exactly. A hidden question is never required and is
+#               left out of the email.
 #
 #  Important: keep the "email" question with id "email" and the
 #  "name" question. The email subject and "Reply" use them.
@@ -86,11 +95,23 @@ sections:
         type: text
         label: "Occupation"
         required: true
+      - id: partner_occupation
+        type: text
+        label: "Partner’s occupation"
+        required: true
+        show_if: relationship
+        show_when: ["Married", "Long term relationship"]
       - id: children
         type: radio
         label: "Do you have any children?"
         required: true
         options: ["Yes", "No"]
+      - id: children_details
+        type: textarea
+        label: "Please tell us about your children, including their ages."
+        required: true
+        show_if: children
+        show_when: ["Yes"]
 
   - title: "Costs"
     questions:
@@ -122,6 +143,19 @@ sections:
         label: "Do you have a kennel, dog run or fenced yard?"
         required: true
         options: ["Yes", "No"]
+      - id: yard_description
+        type: textarea
+        label: "Please describe your kennel, dog run or fenced yard."
+        required: true
+        show_if: fenced_yard
+        show_when: ["Yes"]
+      - id: plan_to_build
+        type: radio
+        label: "Do you plan on building a kennel, dog run or fenced yard?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
+        show_if: fenced_yard
+        show_when: ["No"]
       - id: home_description
         type: textarea
         label: "Please describe your home and property."
@@ -131,6 +165,12 @@ sections:
         label: "Are there any other dogs in your home?"
         required: true
         options: ["Yes", "No"]
+      - id: other_dogs_details
+        type: textarea
+        label: "Please describe your other dogs."
+        required: true
+        show_if: other_dogs
+        show_when: ["Yes"]
 
   - title: "Why a Leonberger"
     questions:
@@ -146,6 +186,12 @@ sections:
         label: "Do you have any preference in the gender?"
         required: true
         options: ["Male", "Female", "No preference"]
+      - id: opposite_gender
+        type: textarea
+        label: "Would you accept a puppy of the opposite gender? Briefly explain."
+        required: true
+        show_if: gender
+        show_when: ["Male", "Female"]
       - id: research
         type: textarea
         label: "Have you researched Leonbergers, and why do you think this is the breed of dog that is best suited for your family? Please explain."
@@ -196,11 +242,23 @@ sections:
         label: "Have you ever had to rehome a pet?"
         required: true
         options: ["Yes", "No"]
+      - id: rehomed_details
+        type: textarea
+        label: "Please briefly describe the circumstances of rehoming your pet."
+        required: true
+        show_if: rehomed
+        show_when: ["Yes"]
       - id: euthanized
         type: radio
         label: "Have you ever had to euthanize (put to sleep) a pet?"
         required: true
         options: ["Yes", "No"]
+      - id: euthanized_details
+        type: textarea
+        label: "Please briefly describe the circumstances of euthanizing your pet."
+        required: true
+        show_if: euthanized
+        show_when: ["Yes"]
       - id: spay_neuter
         type: radio
         label: "Are you planning to spay or neuter your dog at the appropriate age?"
@@ -211,11 +269,23 @@ sections:
         label: "Have you ever bred a litter of puppies?"
         required: true
         options: ["Yes", "No"]
+      - id: litters_description
+        type: textarea
+        label: "Please describe the litter(s)."
+        required: true
+        show_if: bred_before
+        show_when: ["Yes"]
       - id: want_to_breed
         type: radio
         label: "Would you like to breed your dog?"
         required: true
         options: ["Yes", "No"]
+      - id: breeding_plans
+        type: textarea
+        label: "Please explain your breeding plans."
+        required: true
+        show_if: want_to_breed
+        show_when: ["Yes"]
 
   - title: "Final questions"
     questions:
@@ -224,6 +294,20 @@ sections:
         label: "May we call your veterinarian for a reference?"
         required: true
         options: ["Yes", "No"]
+      - id: vet_name
+        type: text
+        label: "Veterinarian’s name"
+        required: true
+        half: true
+        show_if: vet_reference
+        show_when: ["Yes"]
+      - id: vet_phone
+        type: tel
+        label: "Veterinarian’s phone number"
+        required: true
+        half: true
+        show_if: vet_reference
+        show_when: ["Yes"]
       - id: wait
         type: radio
         label: "Are you willing to wait for a Wanderweg Leo puppy?"

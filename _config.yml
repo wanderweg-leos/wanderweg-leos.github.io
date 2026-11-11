@@ -24,6 +24,8 @@ memberships:
     short: CKC
   - name: Leonberger Club of Canada
     short: LCC
+  - name: Leonberger Club of America
+    short: LCA
 
 # Hide the whole site from Google and other search engines.
 # Keep this true while the site is being prepared. Change it to false
@@ -55,13 +57,12 @@ defaults:
     values:
       layout: post
 
-# Old blog posts keep their Wix addresses: /post/<name>/
+# Old blog post addresses: /post/<name>/
 permalink: /post/:title/
 
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-redirect-from
 
 # Files that are for editors and developers, not for the website.
 exclude:
