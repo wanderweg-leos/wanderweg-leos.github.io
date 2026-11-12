@@ -10,8 +10,6 @@
 #    name, registered_name
 #    photo, photo_alt:  the main photo (in media/img/leos/)
 #    story:       the description, one line per paragraph.
-#    lives, loves:  the two short facts under the description.
-#                 Leave one out to hide it.
 #    clearances:  health results, shown as a table. Each has
 #                   test:    e.g. "Hips"
 #                   by:      the smaller line under it, e.g. "OFA"
@@ -47,8 +45,6 @@ title: "Meet the girls"
 intro: "Every one of our Leonbergers lives in the house with us as part of the family. Choose a dog to read about her and see her health clearances."
 
 # Wording on the dog pages. {name} is replaced with the dog's name.
-lives_label: "Lives"
-loves_label: "Loves"
 clearances_title: "Health clearances"
 test_heading: "Test"
 result_heading: "Result"
@@ -63,7 +59,6 @@ granddam_label: "Granddam"
 pedigree_note: "Parents and grandparents as listed on the Leonberger Database"
 pedigree_link: "https://www.leonberger-database.com/search_e.php"
 photos_title: "More photos of {name}"
-apply_button: "Apply for a puppy"
 
 dogs:
   - id: riley
@@ -74,8 +69,6 @@ dogs:
     story:
       - "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
       - "Riley has matured into a true beauty and is an incredible looking Leonberger with her long dark coat and beautiful full black mask. She also has the sweetest, softest expression and loves to say hi to all."
-    lives: "In the house, with us"
-    loves: "Adventures outdoors"
     clearances:
       - test: "Hips"
         by: "OFA"
@@ -125,8 +118,6 @@ dogs:
     story:
       - "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
       - "Priya is very sweet with a laid-back temperament. She likes to just chill with the family and is great at giving lots of kisses. We are very excited about Priya’s future puppies."
-    lives: "In the house, with us"
-    loves: "Relaxing with the family"
     clearances:
       - test: "Hips"
         by: "OFA"
@@ -176,8 +167,6 @@ dogs:
     story:
       - "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
       - "Fiona is truly an amazing Leonberger with her perfect looks and fun, lively temperament. She has the sweetest face you can ever imagine! We are very excited about Fiona’s future puppies."
-    lives: "In the house, with us"
-    loves: "Obedience and new friends"
     clearances:
       - test: "Hips"
         by: "OFA"
