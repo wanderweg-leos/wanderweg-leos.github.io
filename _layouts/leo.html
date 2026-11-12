@@ -38,13 +38,6 @@ layout: default
         {% if d.registered_name %}<p class="reg">{{ d.registered_name }}</p>{% endif %}
         {% for p in d.story %}<p>{{ p }}</p>
         {% endfor %}
-        {% if d.lives or d.loves %}
-        <dl class="facts">
-          {% if d.lives %}<div><dt>{{ leos.lives_label }}</dt><dd>{{ d.lives }}</dd></div>{% endif %}
-          {% if d.loves %}<div><dt>{{ leos.loves_label }}</dt><dd>{{ d.loves }}</dd></div>{% endif %}
-        </dl>
-        {% endif %}
-        <div class="btns"><a class="btn btn-solid" href="{{ '/apply/' | relative_url }}">{{ leos.apply_button }}</a></div>
       </div>
       {% if d.clearances %}
       <div class="dog-health">
