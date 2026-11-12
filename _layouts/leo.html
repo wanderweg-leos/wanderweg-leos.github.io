@@ -59,6 +59,35 @@ layout: default
         {% if leos.clearances_note %}<p class="small-note">{{ leos.clearances_note }}</p>{% endif %}
       </div>
       {% endif %}
+      {% if d.pedigree %}
+      {% comment %}
+        The family tree: one .ped-line per parent (sire, then dam), each
+        with the parent on the left and their sire and dam on the right.
+      {% endcomment %}
+      <div class="dog-pedigree">
+        <h3>{{ leos.pedigree_title }}</h3>
+        <div class="ped">
+          {% assign sides = "sire,dam" | split: "," %}
+          {% for side in sides %}{% assign p = d.pedigree[side] %}{% if p %}
+          <div class="ped-line">
+            <div class="ped-dog ped-parent">
+              <span class="ped-role">{% if side == "sire" %}{{ leos.sire_label }}{% else %}{{ leos.dam_label }}{% endif %}</span>
+              <span class="ped-name">{{ p.name }}</span>
+              {% if p.call_name or p.born %}<span class="ped-meta">{% if p.call_name %}<em>{{ p.call_name }}</em>{% if p.born %} · {% endif %}{% endif %}{{ p.born }}</span>{% endif %}
+            </div>
+            {% for gside in sides %}{% assign g = p[gside] %}
+            <div class="ped-dog">
+              <span class="ped-role">{% if gside == "sire" %}{{ leos.grandsire_label }}{% else %}{{ leos.granddam_label }}{% endif %}</span>
+              {% if g %}<span class="ped-name">{{ g.name }}</span>
+              {% if g.call_name or g.born %}<span class="ped-meta">{% if g.call_name %}<em>{{ g.call_name }}</em>{% if g.born %} · {% endif %}{% endif %}{{ g.born }}</span>{% endif %}{% endif %}
+            </div>
+            {% endfor %}
+          </div>
+          {% endif %}{% endfor %}
+        </div>
+        {% if leos.pedigree_note %}<p class="small-note">{% if leos.pedigree_link and leos.pedigree_link != "" %}<a href="{{ leos.pedigree_link }}" target="_blank" rel="noopener">{{ leos.pedigree_note }}</a>{% else %}{{ leos.pedigree_note }}{% endif %}</p>{% endif %}
+      </div>
+      {% endif %}
     </article>
 
     {% if d.photos.size > 0 %}
