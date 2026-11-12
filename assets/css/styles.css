@@ -219,6 +219,20 @@ a.frame:hover img{opacity:.9}
 .results td{font-family:var(--serif);font-size:21px;text-align:right}
 .results thead th:last-child{text-align:right}
 .small-note{font-size:15px;font-style:italic;color:var(--stone);margin-top:16px}
+/* Pedigree: one .ped-line per parent, the parent on the left and
+   their sire and dam stacked on the right (side by side on phones). */
+.dog-pedigree{grid-column:1 / -1;border-top:1px solid var(--rule);padding-top:40px}
+.dog-pedigree h3{font-size:28px;margin-bottom:14px}
+.ped{border-top:1px solid var(--ink)}
+.ped-line{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.ped-dog{display:flex;flex-direction:column;justify-content:center;padding:14px 0;min-width:0}
+.ped-parent{grid-row:span 2;padding-right:28px;border-right:1px solid var(--rule)}
+.ped-dog:not(.ped-parent){padding-left:28px}
+.ped-parent + .ped-dog{border-bottom:1px solid var(--rule)}
+.ped-role{font-size:12.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--umber)}
+.ped-name{font-family:var(--serif);font-size:21px;line-height:1.25;margin-top:3px}
+.ped-parent .ped-name{font-size:25px}
+.ped-meta{font-size:15.5px;color:var(--stone);margin-top:2px}
 .dog-photos{margin-top:40px}
 .dog-photos h2{font-size:32px}
 
@@ -394,6 +408,14 @@ textarea{min-height:110px;resize:vertical}
   .pick-name{font-size:20px;padding:0 2px}
   .pick-reg{display:none}
   .dog-panel{padding:28px 22px;gap:30px}
+  .dog-pedigree{padding-top:30px}
+  .ped-parent{grid-column:1 / -1;grid-row:auto;padding-right:0;border-right:0;border-bottom:1px solid var(--rule)}
+  .ped-dog:not(.ped-parent){padding-left:0;padding-right:12px}
+  .ped-parent + .ped-dog{border-bottom:0}
+  .ped-dog:last-child{padding-left:12px;padding-right:0;border-left:1px solid var(--rule)}
+  .ped-name{font-size:19px}
+  .ped-parent .ped-name{font-size:22px}
+  .ped-meta{font-size:14.5px}
   .apply-panel{padding:28px 20px 26px;margin-inline:-6px}
   .q-section{grid-template-columns:1fr}
   .q-section > .half,.q-section > .cond:has(> .half){grid-column:1 / -1}

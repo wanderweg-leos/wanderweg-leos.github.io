@@ -3,7 +3,7 @@
 The website for [wanderweg.ca](https://wanderweg.ca): a small family Leonberger kennel in Halifax, Nova Scotia.
 
 - **Home**: a big photo with the next-litter tag, why Wanderweg, a look at our Leos, and links onward
-- **Our Leos**: the breeding dogs, each with their own page and health clearances
+- **Our Leos**: the breeding dogs, each with their own page, health clearances and pedigree
 - **Puppies**: the litter announcement, what comes with a puppy, how it works and common questions
 - **About**: our story, our commitments, "Is a Leonberger right for you?" and the photo gallery
 - **Apply for a puppy**: a four-part application that emails each one to the kennel
@@ -116,7 +116,7 @@ Delete an entry's lines, or move them up or down. You can also delete the photo 
 Upload the new photo to `img/` in the media repository. Then change the matching `photo:` file name and its `photo_alt:` description: in `_data/home.yml` for the Home page, `_data/about.yml` for the About page, or `planning_photos` in `_data/puppies.yml` for the two photos on the litter card.
 
 ### Add, change or remove a dog in Our Leos
-The Our Leos page shows a row of cards, one per dog, with one dog's details below. Each dog also has its own page (for example `/our-leos/riley/`), and the Our Leos page itself shows the first dog in the list. Everything about a dog is in `_data/leos.yml`: the `story`, the two short facts (`lives` and `loves`), the health clearances table, and optional extra `photos`. Upload photos to `img/leos/` in the media repository.
+The Our Leos page shows a row of cards, one per dog, with one dog's details below. Each dog also has its own page (for example `/our-leos/riley/`), and the Our Leos page itself shows the first dog in the list. Everything about a dog is in `_data/leos.yml`: the `story`, the two short facts (`lives` and `loves`), the health clearances table, the `pedigree` (parents and grandparents, with optional call names), and optional extra `photos`. The pedigrees were copied from the [Leonberger Database](https://www.leonberger-database.com/search_e.php) in November 2026. Upload photos to `img/leos/` in the media repository.
 
 To **add** a dog, copy one of the dogs in `_data/leos.yml` and change the details, including a new `id` (a short name with no spaces). Then, in the `our-leos/` folder, copy `riley.html`, name the copy after the new id (e.g. `luna.html`), and change the `dog`, `title` and `permalink` lines inside it. To **remove** a dog, delete its lines in `leos.yml` and its file in `our-leos/`.
 

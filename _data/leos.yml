@@ -16,6 +16,14 @@
 #                   test:    e.g. "Hips"
 #                   by:      the smaller line under it, e.g. "OFA"
 #                   result:  e.g. "Excellent"
+#    pedigree:    the parents and grandparents, shown as a family
+#                 tree under the description. It has a sire (father)
+#                 and a dam (mother), and each of them has their own
+#                 sire and dam (the grandparents). Each dog in it has
+#                   name:       registered name
+#                   call_name:  optional, e.g. "Simba"
+#                   born:       e.g. "Born 2013 in France"
+#                 Leave pedigree out to hide the family tree.
 #    photos:      optional. Extra photos for the dog's own page,
 #                 each with a file (in media/img/leos/) and alt.
 #
@@ -45,6 +53,15 @@ clearances_title: "Health clearances"
 test_heading: "Test"
 result_heading: "Result"
 clearances_note: "Every breeding dog is fully health tested before a litter is planned."
+pedigree_title: "Pedigree"
+sire_label: "Sire"
+dam_label: "Dam"
+grandsire_label: "Grandsire"
+granddam_label: "Granddam"
+# The small line under the family tree, and where it links to.
+# Leave pedigree_link empty ("") to show the line without a link.
+pedigree_note: "Parents and grandparents as listed on the Leonberger Database"
+pedigree_link: "https://www.leonberger-database.com/search_e.php"
 photos_title: "More photos of {name}"
 apply_button: "Apply for a puppy"
 
@@ -75,6 +92,29 @@ dogs:
       - test: "LPN1, LPN2, LPN3"
         by: "DNA test"
         result: "Clear"
+    pedigree:
+      sire:
+        name: "Isaak du Chateau des Lys"
+        call_name: "Simba"
+        born: "Born 2013 in France"
+        sire:
+          name: "Namupalan Don de Finlande"
+          born: "Born 2010 in Finland"
+        dam:
+          name: "Happy Life Zielona Cieszynianka"
+          born: "Born 2010 in Poland"
+      dam:
+        name: "Wanderweg’s Mountains of Love"
+        call_name: "Molly"
+        born: "Born 2015 in Canada"
+        sire:
+          name: "Wanderweg’s Hollywood Blues"
+          call_name: "Teddy"
+          born: "Born 2010 in Canada"
+        dam:
+          name: "Wanderweg’s Just a Gem"
+          call_name: "Ruby"
+          born: "Born 2012 in Canada"
     photos: []
 
   - id: priya
@@ -103,6 +143,29 @@ dogs:
       - test: "LPN1, LPN2, LPN3"
         by: "DNA test"
         result: "Clear"
+    pedigree:
+      sire:
+        name: "Legend de la Conte de la Battrie"
+        call_name: "Viking"
+        born: "Born 2015 in France"
+        sire:
+          name: "Hent’on Herby de la Legende du Chene"
+          born: "Born 2012 in France"
+        dam:
+          name: "Fangorn de la Conte de la Battrie"
+          born: "Born 2010 in France"
+      dam:
+        name: "Wanderweg’s Only You and Me"
+        call_name: "Lexi"
+        born: "Born 2017 in Canada"
+        sire:
+          name: "Isaak du Chateau des Lys"
+          call_name: "Simba"
+          born: "Born 2013 in France"
+        dam:
+          name: "Wanderweg’s Icy Hot"
+          call_name: "Talia"
+          born: "Born 2011 in Canada"
     photos: []
 
   - id: fiona
@@ -131,4 +194,27 @@ dogs:
       - test: "LPN1, LPN2, LPN3"
         by: "DNA test"
         result: "Clear"
+    pedigree:
+      sire:
+        name: "Legend de la Conte de la Battrie"
+        call_name: "Viking"
+        born: "Born 2015 in France"
+        sire:
+          name: "Hent’on Herby de la Legende du Chene"
+          born: "Born 2012 in France"
+        dam:
+          name: "Fangorn de la Conte de la Battrie"
+          born: "Born 2010 in France"
+      dam:
+        name: "Wanderweg’s Lots of Love"
+        call_name: "Pixie"
+        born: "Born 2014 in Canada"
+        sire:
+          name: "Wanderweg’s Hollywood Blues"
+          call_name: "Teddy"
+          born: "Born 2010 in Canada"
+        dam:
+          name: "Wanderweg’s Icy Hot"
+          call_name: "Talia"
+          born: "Born 2011 in Canada"
     photos: []
