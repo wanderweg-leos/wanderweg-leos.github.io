@@ -1,30 +1,28 @@
 # ─────────────────────────────────────────────────────────────
-#  Menu at the top of every page
+#  Menu at the top of every page (also listed in the footer)
 #
 #  Links appear in the order listed here.
 #
-#  label:      the words shown in the menu
-#  url:        where it goes. "/#puppies" jumps to a section of
-#              the home page; "/questionnaire/" is a separate page.
-#  highlight:  optional. true shows the link in the accent colour
-#              (used for the questionnaire)
+#  label:         the words shown in the menu
+#  url:           the page it goes to, e.g. "/puppies/"
+#  footer_label:  optional. Shorter words for the footer link
+#  highlight:     optional. true shows the link as a button on the
+#                 right (used for Apply for a puppy)
 # ─────────────────────────────────────────────────────────────
 
 - label: "Home"
   url: "/"
 
 - label: "Our Leos"
-  url: "/#our-leos"
+  url: "/our-leos/"
 
 - label: "Puppies"
-  url: "/#puppies"
+  url: "/puppies/"
 
-- label: "Photos"
-  url: "/#photos"
+- label: "About"
+  url: "/about/"
 
-- label: "Contact"
-  url: "/#contact"
-
-- label: "Puppy questionnaire"
-  url: "/questionnaire/"
+- label: "Apply for a puppy"
+  footer_label: "Apply"
+  url: "/apply/"
   highlight: true

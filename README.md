@@ -2,8 +2,11 @@
 
 The website for [wanderweg.ca](https://wanderweg.ca): a small family Leonberger kennel in Halifax, Nova Scotia.
 
-- **Home page**: about us, our Leos (the breeding dogs and their health clearances), puppies, the litter announcement, "Is a Leonberger right for you?", photos and contact
-- **Puppy questionnaire**: emails each response to the kennel
+- **Home**: a big photo with the next-litter tag, why Wanderweg, a look at our Leos, and links onward
+- **Our Leos**: the breeding dogs, each with their own page and health clearances
+- **Puppies**: the litter announcement, what comes with a puppy, how it works and common questions
+- **About**: our story, our commitments, "Is a Leonberger right for you?" and the photo gallery
+- **Apply for a puppy**: a four-part application that emails each one to the kennel
 
 It's built with [Jekyll](https://jekyllrb.com) and hosted free on [GitHub Pages](https://pages.github.com). There is no database, no server to maintain and nothing to pay for.
 
@@ -50,12 +53,14 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 
 | To change… | Edit this file |
 |---|---|
-| Any wording or big photo on the home page | `_data/home.yml` |
-| The litter announcement (e.g. "Spring 2027") | `_data/litter.yml` |
-| Gallery photos | `_data/gallery.yml`, and upload photos to `img/gallery/` in the **media** repository |
-| The dogs in the Our Leos section and their own pages | `_data/leos.yml` (and one small file per dog in `our-leos/`), and upload photos to `img/leos/` in the **media** repository |
-| The questionnaire questions, its intro and the thank-you page | `_data/questionnaire.yml` |
-| The menu at the top of every page | `_data/navigation.yml` |
+| Any wording or big photo on the Home page | `_data/home.yml` |
+| Any wording or photo on the About page (including "Is a Leonberger right for you?") | `_data/about.yml` |
+| Any wording or photo on the Puppies page (what comes with a puppy, how it works, common questions) | `_data/puppies.yml` |
+| The litter announcement (e.g. "Spring 2027"), on the Puppies page and the Home page tag | `_data/litter.yml` |
+| Gallery photos (on the About page) | `_data/gallery.yml`, and upload photos to `img/gallery/` in the **media** repository |
+| The dogs on the Our Leos pages | `_data/leos.yml` (and one small file per dog in `our-leos/`), and upload photos to `img/leos/` in the **media** repository |
+| The application questions, its intro, the contact box and the thank-you page | `_data/application.yml` |
+| The menu at the top of every page (also listed in the footer) | `_data/navigation.yml` |
 | Email address, Facebook, Instagram, club memberships | `_config.yml` |
 | Hide the site from Google, or show it again | `hide_from_search` in `_config.yml` |
 | Colours | the top of `assets/css/styles.css` |
@@ -71,9 +76,9 @@ All photos and videos are kept in their own GitHub repository, **`wanderweg-leos
 
 | Folder (in the media repository) | Holds |
 |---|---|
-| `img/` | the big photos on the home page and thank-you page |
-| `img/gallery/` | the "Life with Leos" gallery |
-| `img/leos/` | one photo per dog in the Our Leos section |
+| `img/` | the big photos on the Home, About, Puppies and thank-you pages |
+| `img/gallery/` | the "Life with Leos" gallery on the About page |
+| `img/leos/` | one photo per dog on the Our Leos pages |
 | `img/litter/` | the mother and father of the current litter |
 | `img/blog/` | full-size photos for the old blog posts, one folder per post |
 | `img/blog-thumbs/` | small thumbnails for the blog archive list, one per post |
@@ -86,12 +91,12 @@ All photos and videos are kept in their own GitHub repository, **`wanderweg-leos
 ## Common updates
 
 ### Update the litter announcement
-Open `_data/litter.yml`. The panel has two versions, and both are kept in the file so you never lose your text:
+Open `_data/litter.yml`. It controls the litter card at the top of the Puppies page and the small "Next litter" tag on the Home page photo. It has two versions, and both are kept in the file so you never lose your text:
 
 - `planning`: "We are planning our next litter", with no parents shown
 - `current`: a confirmed litter with the mother, father and due date
 
-Change `show:` to `planning`, `current` or `off` (hides the panel). Then edit the text in that version. For `current`, upload the parents' photos to `img/litter/` in the media repository first.
+Change `show:` to `planning`, `current` or `off` (hides the card and the tag). Then edit the text in that version. Remember to update the answer to "When is your next litter?" in `_data/puppies.yml` too. For `current`, upload the parents' photos to `img/litter/` in the media repository first.
 
 ### Add a gallery photo
 1. Upload the photo to `img/gallery/` in the media repository.
@@ -107,18 +112,18 @@ The grid looks tidiest with a multiple of 3 photos. If a face gets cropped, add 
 ### Remove or reorder gallery photos
 Delete an entry's lines, or move them up or down. You can also delete the photo file, but you don't have to.
 
-### Change a big photo (top of page, About, Puppies)
-Upload the new photo to `img/` in the media repository. Then in `_data/home.yml`, change the matching `photo:` file name and its `photo_alt:` description.
+### Change a big photo (Home, About, Puppies)
+Upload the new photo to `img/` in the media repository. Then change the matching `photo:` file name and its `photo_alt:` description: in `_data/home.yml` for the Home page, `_data/about.yml` for the About page, or `planning_photos` in `_data/puppies.yml` for the two photos on the litter card.
 
 ### Add, change or remove a dog in Our Leos
-Each dog has a card in the Our Leos section of the home page and its own page (for example `/our-leos/riley/`). Everything about a dog is in `_data/leos.yml`: the short `text` for the card, the longer `story` for the dog's page, the clearances, and optional extra `photos`. Upload photos to `img/leos/` in the media repository.
+The Our Leos page shows a row of cards, one per dog, with one dog's details below. Each dog also has its own page (for example `/our-leos/riley/`), and the Our Leos page itself shows the first dog in the list. Everything about a dog is in `_data/leos.yml`: the `story`, the two short facts (`lives` and `loves`), the health clearances table, and optional extra `photos`. Upload photos to `img/leos/` in the media repository.
 
 To **add** a dog, copy one of the dogs in `_data/leos.yml` and change the details, including a new `id` (a short name with no spaces). Then, in the `our-leos/` folder, copy `riley.html`, name the copy after the new id (e.g. `luna.html`), and change the `dog`, `title` and `permalink` lines inside it. To **remove** a dog, delete its lines in `leos.yml` and its file in `our-leos/`.
 
-Dogs appear in the order listed, three across on computers. Keep each dog's `text` to a sentence or two so the cards stay a similar height.
+Dogs appear in the order listed, three across on computers. The two dog photos on the Home page are chosen in `_data/home.yml` (`meet:` → `dogs:`).
 
-### Add or change a questionnaire question
-Open `_data/questionnaire.yml`. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. The emails pick up new questions automatically.
+### Add or change an application question
+Open `_data/application.yml`. The questions are grouped into parts (`sections`), and the form shows one part at a time, then a review screen. The notes at the top explain every option. Copy an existing question that's similar to what you want, then change its `id` and `label`. Each `id` must be different. A question without `required: true` is marked "(optional)". The emails pick up new questions automatically.
 
 Don't remove the `name` question or the question with `id: email`: the emails use them for the subject line and the Reply button.
 
@@ -156,15 +161,15 @@ The site lives in the GitHub repository `wanderweg-leos/wanderweg-leos.github.io
 2. After a minute or two, the site is live at **https://wanderweg-leos.github.io**. Use this address to check everything before switching the real domain over.
 3. Do the same in the **`wanderweg-leos/media`** repository (**Settings → Pages**, branch **main**, folder **/ (root)**). Its photos then appear at **https://wanderweg-leos.github.io/media/**. The media repository must be public, like the site. Once `wanderweg.ca` is connected below, the photos move to `wanderweg.ca/media/` automatically; there's nothing to change in the media repository.
 
-### 2. Connect the questionnaire
-The questionnaire is sent by [Web3Forms](https://web3forms.com), a free service that emails you each response.
+### 2. Connect the application form
+The application form is sent by [Web3Forms](https://web3forms.com), a free service that emails you each response.
 
-1. Go to [web3forms.com](https://web3forms.com), enter **hello@wanderweg.ca** (or whichever address should receive questionnaires) and click **Create Access Key**.
+1. Go to [web3forms.com](https://web3forms.com), enter **hello@wanderweg.ca** (or whichever address should receive applications) and click **Create Access Key**.
 2. Web3Forms emails you an access key (a long code like `a1b2c3d4-…`).
 3. In `_config.yml`, paste it between the quotes on the `web3forms_access_key:` line and commit.
-4. Fill in the questionnaire on the live site to test it. The first email can land in spam: mark it "not spam".
+4. Fill in the application on the live site to test it. The first email can land in spam: mark it "not spam".
 
-Replying to a questionnaire email replies straight to the applicant. To send responses to a different address, create a new key for that address and replace the old one. (The key is visible in the page's code. That's normal for Web3Forms and safe: it can only send email to you.)
+Replying to an application email replies straight to the applicant. To send responses to a different address, create a new key for that address and replace the old one. (The key is visible in the page's code. That's normal for Web3Forms and safe: it can only send email to you.)
 
 ### 3. Point wanderweg.ca at the new site
 Do this last, when you're happy with the site. It replaces the old Wix site.
@@ -188,10 +193,10 @@ Do this last, when you're happy with the site. It replaces the old Wix site.
    **Don't touch any MX or TXT records.** Those control your email.
 4. DNS changes can take up to a day. When GitHub shows the domain as working, tick **Enforce HTTPS**.
 
-Links to the old Wix pages (like `/puppies` or `/riley`) won't work after the switch. They show the "page not found" page, which links to the home page and the questionnaire. `/questionnaire` keeps the same address.
+Links to some old Wix pages (like `/riley`) won't work after the switch. They show the "page not found" page, which links to the home page and the application. `/puppies` happens to match the new Puppies page. The old `/questionnaire` address is now `/apply/`.
 
 #### Launch checklist
-- [ ] Questionnaire tested on the live site, and the email arrived
+- [ ] Application tested on the live site, and the email arrived
 - [ ] Custom domain saved in **Settings → Pages**
 - [ ] `url` and `hide_from_search` updated in `_config.yml`
 - [ ] DNS records changed (MX and TXT left alone)

@@ -1,5 +1,5 @@
 # ─────────────────────────────────────────────────────────────
-#  Puppy questionnaire
+#  Apply for a puppy (wanderweg.ca/apply/)
 #
 #  The form on the website is built from this file, and the
 #  emails you receive list the answers in the same order, so you
@@ -21,7 +21,8 @@
 #                 checkbox  pick any number (needs options)
 #                 name      first + last name boxes (use once)
 #                 address   full address boxes (use once)
-#    required:  true if it must be answered
+#    required:  true if it must be answered. Questions without it
+#               are marked "(optional)" on the form.
 #    options:   the choices, for select / radio / checkbox
 #    other:     true adds an "Other" choice with a text box
 #    half:      true makes the question half width on computers,
@@ -37,34 +38,52 @@
 #               exactly. A hidden question is never required and is
 #               left out of the email.
 #
+#  The form is shown one part (section) at a time, then a review
+#  screen. Each part is checked before moving on, and answers are
+#  saved in the visitor's browser so they can finish later.
+#
 #  Important: keep the "email" question with id "email" and the
 #  "name" question. The email subject and "Reply" use them.
 # ─────────────────────────────────────────────────────────────
 
-# Top of the questionnaire page
-eyebrow: "Puppy questionnaire"
-title: "Tell us about your family"
-submit_button: "Submit questionnaire"
+# Top of the Apply page
+eyebrow: "Apply"
+title: "Apply for a puppy"
+intro:
+  - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, our application asks about your family, your home and what you are looking for in a puppy. It is in four short parts, and you can review your answers before you submit."
+  - "We read every application ourselves and will be in touch by email. Please ask us as many questions as you like in return."
 
-# Shown just above the submit button. Keep it true to how you handle answers.
+# The contact box beside the form
+talk_title: "Prefer to talk first?"
+talk_text: "Interested in a puppy, or just want to talk Leos? We’d love to hear from you. Email is the best way to reach us."
+
+# Buttons and small wording around the form
+next_button: "Next"
+back_button: "Back"
+review_button: "Review answers"
+submit_button: "Submit application"
+review_title: "Review your application"
+review_text: "Please check your answers. You can edit any part before you submit."
+edit_button: "Edit"
+saved_note: "Your answers are saved in this browser as you go, so you can come back and finish later."
+clear_button: "Clear my answers"
+
+# Shown on the review screen, above the submit button. Keep it true to how you handle answers.
 privacy: "We use your answers only to get to know you and to match our puppies with the right families. We never sell or share them. Email us any time if you’d like us to delete yours."
 
-intro:
-  - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, please take some time to answer these questions about your family and what you are looking for in your new puppy."
-  - "We read every questionnaire and will be in touch by email. Please ask us as many questions as you like in return."
-
 # The thank-you page people see after they submit
-# (wanderweg.ca/questionnaire/thank-you/).
+# (wanderweg.ca/apply/thank-you/).
 thank_you:
-  eyebrow: "Questionnaire sent"
-  title: "Thank you!"
+  eyebrow: "Application sent"
+  title: "Application received"
   paragraphs:
-    - "Your questionnaire is on its way to us. We read every one ourselves and will be in touch by email."
+    - "Thank you for applying for a Wanderweg puppy. We read every application ourselves and will be in touch by email."
   photo: puppy-lifejacket.jpg
   photo_alt: "Puppy in an orange life jacket wading in the lake"
   next_title: "While you wait"
   next:
     - "Have a question in the meantime? Just email us. You can also follow along with our Leos on Instagram and Facebook."
+  button: "Meet our Leos"
 
 sections:
 
@@ -86,50 +105,31 @@ sections:
       - type: address
         label: "Address"
         required: true
-      - id: relationship
-        type: radio
-        label: "Relationship status"
-        required: true
-        options: ["Married", "Long term relationship", "Single"]
-      - id: occupation
-        type: text
-        label: "Occupation"
-        required: true
-      - id: partner_occupation
-        type: text
-        label: "Partner’s occupation"
-        required: true
-        show_if: relationship
-        show_when: ["Married", "Long term relationship"]
-      - id: children
-        type: radio
-        label: "Do you have any children?"
-        required: true
-        options: ["Yes", "No"]
-      - id: children_details
+      - id: household
         type: textarea
-        label: "Please tell us about your children, including their ages."
+        label: "Who lives in your home? Please include the adults and the ages of any children."
         required: true
-        show_if: children
-        show_when: ["Yes"]
-
-  - title: "Costs"
-    questions:
-      - id: monthly_costs
+      - id: litter
         type: radio
-        label: "Are you prepared for the financial costs involved with dog ownership, which typically will be between $200 and $300 monthly?"
+        label: "Which litter are you interested in?"
         required: true
-        options: ["Yes", "No"]
-      - id: vet_bills
+        options: ["Spring 2027", "A future litter", "Not sure yet"]
+      - id: timing
+        type: text
+        label: "When would you ideally like to bring a puppy home?"
+      - id: gender
         type: radio
-        label: "Do you have the means to pay for any unexpected vet bills?"
+        label: "Do you have any preference in the gender?"
         required: true
-        options: ["Yes", "No", "Maybe"]
-      - id: pet_insurance
-        type: radio
-        label: "Are you planning on getting pet insurance?"
-        required: true
-        options: ["Yes", "No", "Maybe"]
+        options: ["Male", "Female", "No preference"]
+      - id: opposite_gender
+        type: textarea
+        label: "Would you accept a puppy of the opposite gender? Briefly explain."
+        show_if: gender
+        show_when: ["Male", "Female"]
+      - id: how_heard
+        type: text
+        label: "How did you hear about us?"
 
   - title: "Your home"
     questions:
@@ -146,7 +146,6 @@ sections:
       - id: yard_description
         type: textarea
         label: "Please describe your kennel, dog run or fenced yard."
-        required: true
         show_if: fenced_yard
         show_when: ["Yes"]
       - id: plan_to_build
@@ -160,6 +159,10 @@ sections:
         type: textarea
         label: "Please describe your home and property."
         required: true
+      - id: sleep_alone
+        type: textarea
+        label: "Where will your puppy sleep, and where will they stay when no one is home?"
+        required: true
       - id: other_dogs
         type: radio
         label: "Are there any other dogs in your home?"
@@ -168,53 +171,27 @@ sections:
       - id: other_dogs_details
         type: textarea
         label: "Please describe your other dogs."
-        required: true
         show_if: other_dogs
         show_when: ["Yes"]
 
-  - title: "Why a Leonberger"
+  - title: "Life with your puppy"
     questions:
-      - id: interest
-        type: checkbox
-        label: "Why are you interested in obtaining a Leonberger puppy? Select all that apply."
-        required: true
-        columns: true
-        other: true
-        options: ["Companion", "Obedience", "Agility", "Conformation", "Therapy work", "Tracking", "Breeding", "Drafting"]
-      - id: gender
-        type: radio
-        label: "Do you have any preference in the gender?"
-        required: true
-        options: ["Male", "Female", "No preference"]
-      - id: opposite_gender
+      - id: weekday
         type: textarea
-        label: "Would you accept a puppy of the opposite gender? Briefly explain."
+        label: "What does a typical weekday look like for your household, and how many hours would your puppy be alone?"
         required: true
-        show_if: gender
-        show_when: ["Male", "Female"]
-      - id: research
-        type: textarea
-        label: "Have you researched Leonbergers, and why do you think this is the breed of dog that is best suited for your family? Please explain."
-        required: true
-
-  - title: "Daily life with your puppy"
-    questions:
       - id: daily_time
         type: select
-        label: "What amount of time will you spend daily with your new puppy?"
+        label: "How much time will you spend each day with your new puppy?"
         required: true
         half: true
         options: ["Less than 2 hours", "2 to 4 hours", "4 to 8 hours", "Most of the day"]
       - id: activity_level
         type: select
-        label: "What activity level would you consider yourself and your family?"
+        label: "How active would you say you and your family are?"
         required: true
         half: true
         options: ["Relaxed", "Moderately active", "Very active"]
-      - id: work_plan
-        type: textarea
-        label: "If you work full time, how will you provide for your young puppy during the day?"
-        required: true
       - id: training_plan
         type: textarea
         label: "Describe your plans for training your Leonberger puppy."
@@ -234,66 +211,69 @@ sections:
         label: "Are you willing to travel to pick up your new puppy?"
         required: true
         options: ["Yes", "No"]
+      - id: holidays
+        type: textarea
+        label: "What will you do with your dog when you go on holiday or travel without them?"
+        required: true
+      - id: costs_ack
+        type: checkbox
+        label: "The cost of owning a Leonberger"
+        required: true
+        options: ["I understand that owning a Leonberger typically costs between $200 and $300 a month, plus any unexpected vet bills."]
+      - id: vet_bills
+        type: radio
+        label: "Do you have the means to pay for any unexpected vet bills?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
+      - id: pet_insurance
+        type: radio
+        label: "Are you planning on getting pet insurance?"
+        required: true
+        options: ["Yes", "No", "Maybe"]
 
-  - title: "Pet history"
+  - title: "Experience and final questions"
     questions:
-      - id: rehomed
-        type: radio
-        label: "Have you ever had to rehome a pet?"
-        required: true
-        options: ["Yes", "No"]
-      - id: rehomed_details
+      - id: giant_experience
         type: textarea
-        label: "Please briefly describe the circumstances of rehoming your pet."
+        label: "Do you have experience with large or giant breeds? Please tell us about it."
         required: true
-        show_if: rehomed
-        show_when: ["Yes"]
-      - id: euthanized
-        type: radio
-        label: "Have you ever had to euthanize (put to sleep) a pet?"
-        required: true
-        options: ["Yes", "No"]
-      - id: euthanized_details
+      - id: past_pets
         type: textarea
-        label: "Please briefly describe the circumstances of euthanizing your pet."
+        label: "Tell us about dogs or other pets you’ve had in the past, and what happened to them."
         required: true
-        show_if: euthanized
-        show_when: ["Yes"]
-      - id: spay_neuter
-        type: radio
-        label: "Are you planning to spay or neuter your dog at the appropriate age?"
+      - id: interest
+        type: checkbox
+        label: "Why are you interested in a Leonberger puppy? Select all that apply."
         required: true
-        options: ["Yes", "No"]
-      - id: bred_before
-        type: radio
-        label: "Have you ever bred a litter of puppies?"
-        required: true
-        options: ["Yes", "No"]
-      - id: litters_description
+        columns: true
+        other: true
+        options: ["Companion", "Obedience", "Agility", "Conformation", "Therapy work", "Tracking", "Drafting"]
+      - id: research
         type: textarea
-        label: "Please describe the litter(s)."
+        label: "Have you researched Leonbergers, and why do you think this is the breed best suited to your family?"
         required: true
-        show_if: bred_before
-        show_when: ["Yes"]
-      - id: want_to_breed
+      - id: breeding_intent
         type: radio
-        label: "Would you like to breed your dog?"
+        label: "Do you plan to spay or neuter your dog, or would you like to breed?"
         required: true
-        options: ["Yes", "No"]
+        options: ["Spay or neuter at the appropriate age", "I would like to breed", "Not sure yet"]
       - id: breeding_plans
         type: textarea
-        label: "Please explain your breeding plans."
+        label: "Please explain your breeding plans, including any litters you have bred before."
         required: true
-        show_if: want_to_breed
-        show_when: ["Yes"]
-
-  - title: "Final questions"
-    questions:
+        show_if: breeding_intent
+        show_when: ["I would like to breed"]
+      - id: wait
+        type: radio
+        label: "Are you willing to wait for a Wanderweg Leo puppy?"
+        required: true
+        other: true
+        options: ["No", "3 months", "6 months", "1 year"]
       - id: vet_reference
         type: radio
         label: "May we call your veterinarian for a reference?"
         required: true
-        options: ["Yes", "No"]
+        options: ["Yes", "No", "I don’t have a vet yet"]
       - id: vet_name
         type: text
         label: "Veterinarian’s name"
@@ -308,17 +288,11 @@ sections:
         half: true
         show_if: vet_reference
         show_when: ["Yes"]
-      - id: wait
-        type: radio
-        label: "Are you willing to wait for a Wanderweg Leo puppy?"
-        required: true
-        other: true
-        options: ["No", "3 months", "6 months", "1 year"]
       - id: contract
         type: radio
-        label: "Are you willing to abide by a sales contract that includes such things as registration, health, breeding, and general care requirements?"
+        label: "Are you willing to abide by a sales contract that includes such things as registration, health, breeding and general care requirements?"
         required: true
         options: ["Yes", "No"]
       - id: further_info
         type: textarea
-        label: "Please give us any further information you wish us to consider in placing one of our Leonberger puppies with you and your family."
+        label: "Is there anything else you’d like us to consider in placing a puppy with your family?"

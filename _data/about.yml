@@ -1,0 +1,49 @@
+# ─────────────────────────────────────────────────────────────
+#  About page (wanderweg.ca/about/)
+#  Change the words between the quotes. Keep the indentation.
+#  The memberships in the commitments list come from _config.yml.
+#  The photos in "Life with Leos" are listed in _data/gallery.yml.
+# ─────────────────────────────────────────────────────────────
+
+eyebrow: "About us"
+title: "Our dogs are family first"
+lede: "We’ve been raising Leonbergers in Halifax, Nova Scotia, for over 15 years."
+paragraphs:
+  - "Our Leonbergers are the loves of our lives. Puppies are raised in our home, handled every day and well socialized before they leave. We take time to match each puppy with a family who will include them in everything they do."
+  - "We breed for health, temperament, type and soundness. Every breeding dog is fully health tested before a litter is planned, and every puppy is health checked before going home."
+photo: four-leos.jpg
+photo_alt: "Four Leonbergers sitting side by side on the grass"
+
+# The dark panel. The last line (memberships) is added automatically.
+commitments:
+  eyebrow: "Health & memberships"
+  title: "Our commitments"
+  items:
+    - "Hips and elbows x-rayed and eyes checked on each parent before any litter"
+    - "LPN1, LPN2 and LPN3 tests: clear, or clear by pedigree"
+    - "LEMP test: clear, or clear by pedigree"
+    - "Puppies raised in our home, handled every day and well socialized"
+    - "Every puppy health checked before going home"
+  link: "See each of our Leos’ results →"
+
+# "Is a Leonberger right for you?" (the home page links here)
+fit:
+  eyebrow: "Before you apply"
+  title: "Is a Leonberger right for you?"
+  text: "Leos are exceptional companions, but they are not for everyone. We would rather you know now."
+  thrive_title: "They thrive with"
+  thrive:
+    - "Families who want a dog with them for everything"
+    - "A fully fenced, secure yard, and a place inside the house"
+    - "Lots of time, especially in the first year"
+    - "Puppy and obedience classes from early on"
+  expect_title: "Expect"
+  expect:
+    - "A very large dog with a full coat that sheds all year"
+    - "Digging in the garden and jumping up to say hello"
+    - "A friendly guardian who needs calm guidance from you"
+    - "Fur on everything, and a lot of love"
+
+photos:
+  eyebrow: "Photos"
+  title: "Life with Leos"

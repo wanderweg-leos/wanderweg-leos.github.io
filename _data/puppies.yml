@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────
+#  Puppies page (wanderweg.ca/puppies/)
+#  Change the words between the quotes. Keep the indentation.
+#  The litter card near the top comes from _data/litter.yml.
+# ─────────────────────────────────────────────────────────────
+
+eyebrow: "Puppies"
+title: "Puppies &amp; litters"
+lede: "We place every puppy in a home where they will be a full member of the family. Our puppies are well socialized, handled every day and given lots of love and attention while they are with us."
+
+# The two photos on the litter card while it shows the "planning"
+# version (a confirmed litter shows the parents instead). In media/img/.
+planning_photos:
+  - file: puppy-lifejacket.jpg
+    alt: "Puppy in an orange life jacket wading in the lake"
+    position: "30% 50%"
+  - file: gallery/grey-puppy.jpg
+    alt: "Fluffy Leonberger puppy sitting in the grass"
+
+included:
+  eyebrow: "Every puppy goes home"
+  title: "What comes with your puppy"
+  text: "Every puppy is health checked before going home."
+  items:
+    - "Vet checked"
+    - "Vaccinated"
+    - "Microchipped"
+    - "CKC registered"
+    - "Written contract"
+    - "Health-tested parents"
+
+steps:
+  eyebrow: "How it works"
+  title: "Getting a Wanderweg puppy"
+  # Links can be written as <a href="/about/#fit">words</a>
+  items:
+    - title: "Read about the breed"
+      text: "Start with <a href=\"/about/#fit\">“Is a Leonberger right for you?”</a> We would rather you know now."
+    - title: "Apply for a puppy"
+      text: "Tell us about your family, your home and what you’re looking for in a puppy."
+    - title: "Get to know us"
+      text: "We read every application and will be in touch by email. Ask us as many questions as you like."
+    - title: "Bring your puppy home"
+      text: "Vet checked, vaccinated, microchipped and with a written contract."
+
+questions:
+  eyebrow: "Questions"
+  title: "Common questions"
+  # The first one starts open.
+  items:
+    - q: "When is your next litter?"
+      a: "We are planning our next litter for spring 2027. We’ll share the details here once the breeding is confirmed."
+    - q: "How do I get a puppy from you?"
+      a: "<a href=\"/apply/\">Apply for a puppy</a>. We read every application ourselves and will be in touch by email."
+    - q: "What health testing do the parents have?"
+      a: "Before any litter, each parent has hips and elbows x-rayed and eyes checked, and is clear (or clear by pedigree) for LPN1, LPN2, LPN3 and LEMP. <a href=\"/our-leos/\">See each of our Leos’ results.</a>"
+    - q: "Are your puppies registered?"
+      a: "Yes. Every puppy goes home CKC registered, vet checked, vaccinated and microchipped, with a written contract."

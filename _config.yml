@@ -18,7 +18,7 @@ email: hello@wanderweg.ca
 facebook: https://www.facebook.com/wanderwegleos/
 instagram: https://instagram.com/wanderwegleos
 
-# Shown as tags in the About section and in the footer.
+# Listed on the About page (Our commitments) and in the footer.
 memberships:
   - name: Canadian Kennel Club
     short: CKC
@@ -32,9 +32,9 @@ memberships:
 # when you switch wanderweg.ca over (see README.md, "Point wanderweg.ca at the new site").
 hide_from_search: true
 
-# Paste your Web3Forms access key here (see README.md, "Connect the questionnaire").
-# Responses are emailed to the address you used to get the key.
-# While this is empty, the questionnaire shows a "not connected yet" message.
+# Paste your Web3Forms access key here (see README.md, "Connect the application form").
+# Applications are emailed to the address you used to get the key.
+# While this is empty, the application form shows a "not connected yet" message.
 web3forms_access_key: "f46be6b4-bd42-49f2-826a-2e2ceb548c4a"
 
 # ── Technical settings: you normally don't need to change these ──

@@ -1,7 +1,8 @@
 {% comment %}
-  The frame shared by every page: <head>, header, main content, footer.
+  The frame shared by every page: <head>, header, main content, footer,
+  and assets/js/site.js (phone menu and the photo viewer).
   A page can list extra JavaScript files in its front matter under
-  "scripts:" (see questionnaire.html) and they are loaded at the end.
+  "scripts:" (see apply.html) and they are loaded at the end.
 {% endcomment %}<!doctype html>
 <html lang="{{ site.lang | default: 'en' }}">
 <head>
@@ -14,6 +15,7 @@
     {{ content }}
   </main>
   {% include footer.html %}
+  <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
   {% for script in page.scripts %}
   <script src="{{ script | relative_url }}" defer></script>
   {% endfor %}

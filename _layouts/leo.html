@@ -2,69 +2,76 @@
 layout: default
 ---
 {% comment %}
-  One dog's own page (the files in our-leos/). Everything on it comes
-  from _data/leos.yml: the file only says which dog (dog: <id>).
+  The Our Leos page and each dog's own page (the files in our-leos/).
+  Everything on it comes from _data/leos.yml: a file only says which dog
+  to show (dog: <id>). The row of cards links to every dog's page and
+  marks the one being shown.
 {% endcomment %}{% assign leos = site.data.leos %}
 {% assign d = leos.dogs | where: "id", page.dog | first %}
+{% unless d %}{% assign d = leos.dogs | first %}{% endunless %}
 {% assign name_token = '{name}' %}
-{% if d %}
-<section class="pagehead">
+
+<section class="page-head">
   <div class="wrap">
-    <a class="eyebrow" href="{{ '/#our-leos' | relative_url }}">{{ leos.eyebrow }}</a>
-    <h1>{{ d.name }}</h1>
-    {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
+    <span class="label">{{ leos.eyebrow }}</span>
+    <h1>{{ leos.title }}</h1>
+    <p class="lede">{{ leos.intro }}</p>
   </div>
 </section>
 
-<section class="block">
-  <div class="wrap dog">
-    {% assign src = '/media/img/leos/' | append: d.photo %}
-    {% include photo.html src=src alt=d.photo_alt %}
-    <div class="text">
-      {% if d.story %}{% for p in d.story %}<p>{{ p }}</p>
-      {% endfor %}{% else %}<p>{{ d.text }}</p>{% endif %}
+{% if d %}
+<section class="sec-last">
+  <div class="wrap">
+    <nav class="dog-picks" aria-label="Choose a dog">
+      {% for o in leos.dogs %}
+      <a class="dog-pick" href="{{ '/our-leos/' | append: o.id | append: '/' | relative_url }}"{% if o.id == d.id %} aria-current="page"{% endif %}>
+        <span class="frame"><img src="{{ '/media/img/leos/' | append: o.photo | relative_url }}" alt="{{ o.photo_alt | escape }}"></span>
+        <span class="pick-name">{{ o.name }}</span>
+        {% if o.registered_name %}<span class="pick-reg">{{ o.registered_name }}</span>{% endif %}
+      </a>
+      {% endfor %}
+    </nav>
+
+    <article class="dog-panel" aria-labelledby="dog-name">
+      <div class="dog-info">
+        <h2 id="dog-name">{{ d.name }}</h2>
+        {% if d.registered_name %}<p class="reg">{{ d.registered_name }}</p>{% endif %}
+        {% for p in d.story %}<p>{{ p }}</p>
+        {% endfor %}
+        {% if d.lives or d.loves %}
+        <dl class="facts">
+          {% if d.lives %}<div><dt>{{ leos.lives_label }}</dt><dd>{{ d.lives }}</dd></div>{% endif %}
+          {% if d.loves %}<div><dt>{{ leos.loves_label }}</dt><dd>{{ d.loves }}</dd></div>{% endif %}
+        </dl>
+        {% endif %}
+        <div class="btns"><a class="btn btn-solid" href="{{ '/apply/' | relative_url }}">{{ leos.apply_button }}</a></div>
+      </div>
       {% if d.clearances %}
-      <h2 class="h3">{{ leos.clearances_title }}</h2>
-      <ul class="clearances">
-        {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
-      </ul>
+      <div class="dog-health">
+        <h3>{{ leos.clearances_title }}</h3>
+        <table class="results">
+          <thead><tr><th scope="col">{{ leos.test_heading }}</th><th scope="col">{{ leos.result_heading }}</th></tr></thead>
+          <tbody>
+            {% for c in d.clearances %}<tr><th scope="row">{{ c.test }}{% if c.by %}<span>{{ c.by }}</span>{% endif %}</th><td>{{ c.result }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% if leos.clearances_note %}<p class="small-note">{{ leos.clearances_note }}</p>{% endif %}
+      </div>
       {% endif %}
-      <div class="btns">
-        <a class="btn primary" href="{{ '/questionnaire/' | relative_url }}">{{ leos.questionnaire_button }}</a>
-        <a class="btn" href="{{ '/#contact' | relative_url }}">{{ leos.contact_button }}</a>
+    </article>
+
+    {% if d.photos.size > 0 %}
+    <div class="dog-photos">
+      <h2>{{ leos.photos_title | replace: name_token, d.name }}</h2>
+      <div class="gallery">
+        {% for g in d.photos %}
+        {% assign src = '/media/img/leos/' | append: g.file %}
+        {% include photo.html src=src alt=g.alt position=g.position lazy=true %}
+        {% endfor %}
       </div>
     </div>
+    {% endif %}
   </div>
 </section>
-
-{% if d.photos.size > 0 %}
-<section class="block">
-  <div class="wrap">
-    <div class="head"><h2>{{ leos.photos_title | replace: name_token, d.name }}</h2></div>
-    <div class="gallery">
-      {% for g in d.photos %}
-      {% assign src = '/media/img/leos/' | append: g.file %}
-      {% include photo.html src=src alt=g.alt position=g.position lazy=true %}
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
-
-{% if leos.dogs.size > 1 %}
-<section class="block">
-  <div class="wrap">
-    <div class="head"><h2>{{ leos.others_title }}</h2></div>
-    <div class="leos">
-      {% for o in leos.dogs %}{% if o.id != d.id %}
-      <a class="leo mini" href="{{ '/our-leos/' | append: o.id | append: '/' | relative_url }}">
-        {% assign src = '/media/img/leos/' | append: o.photo %}
-        {% include photo.html src=src alt=o.photo_alt lazy=true %}
-        <h3>{{ o.name }}</h3>
-      </a>
-      {% endif %}{% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
 {% endif %}

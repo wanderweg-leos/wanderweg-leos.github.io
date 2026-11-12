@@ -1,17 +1,21 @@
 # ─────────────────────────────────────────────────────────────
-#  Our Leos: the dog cards on the home page, and each dog's
-#  own page (e.g. wanderweg.ca/our-leos/riley/).
+#  Our Leos: the Our Leos page (wanderweg.ca/our-leos/) and each
+#  dog's own page (e.g. wanderweg.ca/our-leos/riley/). Both show
+#  the row of dog cards at the top, with one dog's details below.
+#  The Our Leos page shows the first dog in the list.
 #
 #  Each dog has:
 #    id:          short name with no spaces, used in the page
 #                 address. Must match the dog's file in our-leos/.
 #    name, registered_name
 #    photo, photo_alt:  the main photo (in media/img/leos/)
-#    text:        a sentence or two for the home-page card. Keep
-#                 it short so the cards stay a similar height.
-#    story:       the longer description on the dog's own page,
-#                 one line per paragraph.
-#    clearances:  health results, shown as tags.
+#    story:       the description, one line per paragraph.
+#    lives, loves:  the two short facts under the description.
+#                 Leave one out to hide it.
+#    clearances:  health results, shown as a table. Each has
+#                   test:    e.g. "Hips"
+#                   by:      the smaller line under it, e.g. "OFA"
+#                   result:  e.g. "Excellent"
 #    photos:      optional. Extra photos for the dog's own page,
 #                 each with a file (in media/img/leos/) and alt.
 #
@@ -26,24 +30,23 @@
 #  To REMOVE a dog: delete its lines here and delete its file
 #  in our-leos/.
 #
-#  Dogs appear in the order listed here; the cards sit three
-#  across on computers, so 3 or 6 dogs look tidiest.
-#  To hide the whole section, delete every dog (keep "dogs:")
-#  and remove "Our Leos" from _data/navigation.yml.
+#  The cards sit three across on computers, so 3 or 6 dogs look
+#  tidiest.
 # ─────────────────────────────────────────────────────────────
 
 eyebrow: "Our Leos"
 title: "Meet the girls"
-intro: "Every one of our Leonbergers lives in the house with us as part of the family."
+intro: "Every one of our Leonbergers lives in the house with us as part of the family. Choose a dog to read about her and see her health clearances."
 
-# Wording on the cards and on each dog's own page.
-# {name} is replaced with the dog's name.
-more_link: "More about {name}"
+# Wording on the dog pages. {name} is replaced with the dog's name.
+lives_label: "Lives"
+loves_label: "Loves"
 clearances_title: "Health clearances"
+test_heading: "Test"
+result_heading: "Result"
+clearances_note: "Every breeding dog is fully health tested before a litter is planned."
 photos_title: "More photos of {name}"
-others_title: "Meet the rest of the family"
-questionnaire_button: "Fill out the questionnaire"
-contact_button: "Contact us"
+apply_button: "Apply for a puppy"
 
 dogs:
   - id: riley
@@ -51,16 +54,27 @@ dogs:
     registered_name: "Wanderweg’s Sugar and Spice"
     photo: riley.jpg
     photo_alt: "Riley standing on a log at the edge of the lake"
-    text: "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
     story:
       - "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
       - "Riley has matured into a true beauty and is an incredible looking Leonberger with her long dark coat and beautiful full black mask. She also has the sweetest, softest expression and loves to say hi to all."
+    lives: "In the house, with us"
+    loves: "Adventures outdoors"
     clearances:
-      - "OFA Excellent hips"
-      - "Normal elbows"
-      - "Eyes normal"
-      - "Clear of LEMP"
-      - "Clear of LPN1, LPN2 and LPN3"
+      - test: "Hips"
+        by: "OFA"
+        result: "Excellent"
+      - test: "Elbows"
+        by: "OFA"
+        result: "Normal"
+      - test: "Eyes"
+        by: "Eye exam"
+        result: "Normal"
+      - test: "LEMP"
+        by: "DNA test"
+        result: "Clear"
+      - test: "LPN1, LPN2, LPN3"
+        by: "DNA test"
+        result: "Clear"
     photos: []
 
   - id: priya
@@ -68,16 +82,27 @@ dogs:
     registered_name: "Wanderweg’s Under the Moonlit Sky"
     photo: priya.jpg
     photo_alt: "Priya standing on the lawn by the lake"
-    text: "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
     story:
       - "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
       - "Priya is very sweet with a laid-back temperament. She likes to just chill with the family and is great at giving lots of kisses. We are very excited about Priya’s future puppies."
+    lives: "In the house, with us"
+    loves: "Relaxing with the family"
     clearances:
-      - "OFA Good hips"
-      - "Normal elbows"
-      - "Eyes normal"
-      - "Clear of LEMP"
-      - "Clear of LPN1, LPN2 and LPN3"
+      - test: "Hips"
+        by: "OFA"
+        result: "Good"
+      - test: "Elbows"
+        by: "OFA"
+        result: "Normal"
+      - test: "Eyes"
+        by: "Eye exam"
+        result: "Normal"
+      - test: "LEMP"
+        by: "DNA test"
+        result: "Clear"
+      - test: "LPN1, LPN2, LPN3"
+        by: "DNA test"
+        result: "Clear"
     photos: []
 
   - id: fiona
@@ -85,14 +110,25 @@ dogs:
     registered_name: "Wanderweg’s the Rhythm of Life"
     photo: fiona.jpg
     photo_alt: "Fiona standing on the rocks in the woods"
-    text: "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
     story:
       - "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
       - "Fiona is truly an amazing Leonberger with her perfect looks and fun, lively temperament. She has the sweetest face you can ever imagine! We are very excited about Fiona’s future puppies."
+    lives: "In the house, with us"
+    loves: "Obedience and new friends"
     clearances:
-      - "OFA Excellent hips"
-      - "Normal elbows"
-      - "Eyes normal"
-      - "Clear of LEMP"
-      - "Clear of LPN1, LPN2 and LPN3"
+      - test: "Hips"
+        by: "OFA"
+        result: "Excellent"
+      - test: "Elbows"
+        by: "OFA"
+        result: "Normal"
+      - test: "Eyes"
+        by: "Eye exam"
+        result: "Normal"
+      - test: "LEMP"
+        by: "DNA test"
+        result: "Clear"
+      - test: "LPN1, LPN2, LPN3"
+        by: "DNA test"
+        result: "Clear"
     photos: []

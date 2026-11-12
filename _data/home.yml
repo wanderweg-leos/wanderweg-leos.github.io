@@ -3,61 +3,50 @@
 #  Change the words between the quotes. Keep the indentation.
 #  Photos live in media/img/. To swap one, upload the new photo
 #  there and change the file name here.
+#
+#  The small "Next litter" tag on the big photo comes from
+#  _data/litter.yml, so it changes when the litter panel does.
 # ─────────────────────────────────────────────────────────────
 
 hero:
-  eyebrow: "Halifax, Nova Scotia"
   # Words inside <em> … </em> appear in the accent colour.
   title: "Gentle giants, raised <em>in our home</em> for yours."
-  text: "We are a small family kennel breeding CKC-registered Leonbergers for health, temperament, type and soundness. Every puppy grows up in the house with us before going to a family who will cherish them."
+  text: "We are a small family kennel in Halifax, Nova Scotia, breeding CKC-registered Leonbergers for health, temperament, type and soundness."
   photo: gallop.jpg
   photo_alt: "Leonberger in full gallop across the lawn"
-  button: "About our puppies"              # jumps to the Puppies section
-  questionnaire_button: "Start the questionnaire"
+  # Which part of the photo to keep when it is cropped ("left-right top-bottom").
+  photo_position: "30% 55%"
+  button: "About our puppies"        # goes to the Puppies page
+  second_button: "Meet our Leos"     # goes to the Our Leos page
 
-about:
-  eyebrow: "About us"
-  title: "Our dogs are family first"
-  paragraphs:
-    - "We’ve been raising Leonbergers in Halifax for over 15 years."
-    - "Our Leonbergers are the loves of our lives. Puppies are raised in our home, handled every day and well socialized before they leave. We take time to match each puppy with a family that will include them in everything they do."
-    - "We breed for health, temperament, type and soundness. Every breeding dog is fully health tested before a litter is planned, and every puppy is health checked before going home."
-  photo: four-leos.jpg
-  photo_alt: "Four Leonbergers sitting side by side on the grass"
+# The three cards under the big photo
+why:
+  eyebrow: "Why Wanderweg"
+  title: "Our dogs are family first, and every puppy is raised that way."
+  # icon: shield, house or heart
+  cards:
+    - icon: shield
+      title: "Health-tested parents"
+      text: "Hips and elbows x-rayed, eyes checked, and LEMP and LPN1–3 DNA tests before any litter is planned."
+    - icon: house
+      title: "Raised in our home"
+      text: "Puppies grow up in the house with us, handled every day and well socialized before they leave."
+    - icon: heart
+      title: "Matched with care"
+      text: "We take time to place each puppy with a family who will include them in everything they do."
 
-puppies:
-  eyebrow: "Puppies"
-  title: "Raised in our house to live in yours"
-  text: "We place every puppy in a home where they will be a full member of the family. Our puppies are well socialized, handled every day and given lots of love and attention while they are with us. Every puppy goes home vet checked, vaccinated, microchipped and with a written contract."
-  photo: puppy-lifejacket.jpg
-  photo_alt: "Puppy in an orange life jacket wading in the lake"
+# The two photos and "Meet the girls"
+meet:
+  eyebrow: "Our Leos"
+  title: "Meet the girls"
+  text: "Riley, Priya and Fiona are family dogs first. Every one of our Leonbergers lives in the house with us. Meet each of them and see their full health results."
+  button: "Our Leos →"
+  # Which two dogs' photos to show (their ids in _data/leos.yml)
+  dogs: [riley, fiona]
 
-fit:
-  eyebrow: "Before you apply"
-  title: "Is a Leonberger right for you?"
-  text: "Leos are exceptional companions, but they are not for everyone. We would rather you know now."
-  thrive_title: "They thrive with"
-  thrive:
-    - "Families who want a dog with them for everything"
-    - "A fully fenced, secure yard, and a place inside the house"
-    - "Lots of time, especially in the first year"
-    - "Puppy and obedience classes from early on"
-  expect_title: "Expect"
-  expect:
-    - "A very large dog with a full coat that sheds all year"
-    - "Digging in the garden and jumping up to say hello"
-    - "A friendly guardian who needs calm guidance from you"
-    - "Fur on everything, and a lot of love"
-
-photos:
-  eyebrow: "Photos"
-  title: "Life with Leos"
-  # The photos themselves are listed in _data/gallery.yml
-
-contact:
-  eyebrow: "Contact"
-  title: "Say hello"
-  text: "Interested in a puppy? Email us, and please fill out the puppy questionnaire too."
-  email_label: "Email"
-  follow_label: "Follow along"
-  questionnaire_link: "Puppy questionnaire"
+# The dark band at the bottom of the page
+cta:
+  title: "Thinking about a Leo?"
+  text: "Start with our honest look at life with a Leonberger, then apply for a puppy."
+  fit_button: "Is a Leo right for you?"   # goes to that section of the About page
+  apply_button: "Apply for a puppy"

@@ -1,0 +1,74 @@
+---
+layout: default
+title: About us
+description: About Wanderweg Leonbergers, a small family kennel in Halifax, Nova Scotia.
+permalink: /about/
+# The words on this page live in _data/about.yml and the photos in _data/gallery.yml.
+---
+{% assign a = site.data.about %}
+
+<section class="page-head">
+  <div class="wrap split">
+    <div>
+      <span class="label">{{ a.eyebrow }}</span>
+      <h1>{{ a.title }}</h1>
+      <p class="lede">{{ a.lede }}</p>
+      {% for p in a.paragraphs %}<p>{{ p }}</p>
+      {% endfor %}
+    </div>
+    {% assign src = '/media/img/' | append: a.photo %}
+    {% include photo.html src=src alt=a.photo_alt class="tall" %}
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="ethics-h">
+  <div class="wrap">
+    <div class="dark-panel">
+      <span class="label">{{ a.commitments.eyebrow }}</span>
+      <h2 id="ethics-h">{{ a.commitments.title }}</h2>
+      <ul class="ticks ticks-dark">
+        {% for item in a.commitments.items %}<li>{{ item }}</li>
+        {% endfor %}
+        {% if site.memberships.size > 0 %}<li>Members of {% for m in site.memberships %}{% if forloop.last and forloop.length > 1 %} and {% elsif forloop.index > 1 %}, {% endif %}the {{ m.name }}{% endfor %}</li>{% endif %}
+      </ul>
+      <p class="dp-link"><a href="{{ '/our-leos/' | relative_url }}">{{ a.commitments.link }}</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="fit" aria-labelledby="fit-h">
+  <div class="wrap">
+    <span class="label">{{ a.fit.eyebrow }}</span>
+    <h2 id="fit-h" class="sec-title">{{ a.fit.title }}</h2>
+    <p class="sec-intro">{{ a.fit.text }}</p>
+    <div class="fit">
+      <div class="card">
+        <h3>{{ a.fit.thrive_title }}</h3>
+        <ul>{% for item in a.fit.thrive %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      <div class="card">
+        <h3>{{ a.fit.expect_title }}</h3>
+        <ul>{% for item in a.fit.expect %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-last" id="photos" aria-labelledby="photos-h">
+  <div class="wrap">
+    <span class="label">{{ a.photos.eyebrow }}</span>
+    <h2 id="photos-h" class="sec-title">{{ a.photos.title }}</h2>
+    <div class="gallery">
+      {% for g in site.data.gallery %}
+      {% assign src = '/media/img/gallery/' | append: g.file %}
+      <button type="button" data-full="{{ src | relative_url }}" aria-label="View larger: {{ g.alt | escape }}"><span class="frame"><img src="{{ src | relative_url }}" alt="{{ g.alt | escape }}" loading="lazy"{% if g.position %} style="object-position:{{ g.position }}"{% endif %}></span></button>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button type="button" class="v-btn v-close">Close</button>
+  <img id="v-img" src="" alt="">
+  <div class="v-nav"><button type="button" class="v-btn v-prev">Previous</button><button type="button" class="v-btn v-next">Next</button></div>
+</div>

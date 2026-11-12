@@ -1,7 +1,25 @@
-<footer>
-  <div class="wrap">
-    <span>{{ site.title }} · {{ site.location }} · {{ site.email }}</span>
-    <a href="{{ '/blog_archive/' | relative_url }}">{{ site.data.blog.footer_link }}</a>
-    <span>{% for m in site.memberships %}{{ m.short }}{% unless forloop.last %} · {% endunless %}{% endfor %} member</span>
+{% comment %}
+  Site footer: name, place, email and memberships on the left; the menu
+  pages, social links and the blog archive on the right.
+  Everything comes from _config.yml, _data/navigation.yml and _data/blog.yml.
+{% endcomment %}
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div>
+      <p class="foot-name">{{ site.title }}</p>
+      <p>{{ site.location }} · <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+      <p class="foot-small">Members of {% for m in site.memberships %}{% if forloop.last and forloop.length > 1 %} and {% elsif forloop.index > 1 %}, {% endif %}the {{ m.name }}{% endfor %}</p>
+    </div>
+    <div class="foot-links">
+      <ul aria-label="Pages">
+        {% for item in site.data.navigation %}{% if item.url != '/' %}<li><a href="{{ item.url | relative_url }}">{{ item.footer_label | default: item.label }}</a></li>{% endif %}
+        {% endfor %}
+      </ul>
+      <ul aria-label="Elsewhere">
+        {% if site.facebook %}<li><a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
+        {% if site.instagram %}<li><a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
+        <li><a href="{{ '/blog_archive/' | relative_url }}">{{ site.data.blog.footer_link }}</a></li>
+      </ul>
+    </div>
   </div>
 </footer>

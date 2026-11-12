@@ -1,177 +1,73 @@
 ---
 layout: default
-# The words on this page live in _data/home.yml,
-# the litter panel in _data/litter.yml and the photos in _data/gallery.yml.
+# The words on this page live in _data/home.yml. The "Next litter" tag
+# comes from _data/litter.yml and the dog photos from _data/leos.yml.
 ---
-{% comment %} Short names for the data files this page reads. {% endcomment %}
 {% assign h = site.data.home %}
 {% assign litter = site.data.litter %}
-{% assign questionnaire = '/questionnaire/' | relative_url %}
 
 <section class="hero">
   <div class="wrap">
-    <div class="copy">
-      <span class="eyebrow">{{ h.hero.eyebrow }}</span>
-      <h1>{{ h.hero.title }}</h1>
-      <p class="lede">{{ h.hero.text }}</p>
-      <div class="btns">
-        <a class="btn primary" href="#puppies">{{ h.hero.button }}</a>
-        <a class="btn" href="{{ questionnaire }}">{{ h.hero.questionnaire_button }}</a>
-      </div>
-    </div>
-    {% assign src = '/media/img/' | append: h.hero.photo %}
-    {% include photo.html src=src alt=h.hero.photo_alt %}
-  </div>
-</section>
-
-<section class="block" id="about">
-  <div class="wrap about">
-    <div class="text">
-      <span class="eyebrow">{{ h.about.eyebrow }}</span>
-      <h2>{{ h.about.title }}</h2>
-      {% for p in h.about.paragraphs %}<p>{{ p }}</p>
-      {% endfor %}
-      <div class="clubs" aria-label="Memberships">
-        {% for m in site.memberships %}<span>{{ m.name }}</span>{% endfor %}
-      </div>
-    </div>
-    <div class="about-photo">
-      {% assign src = '/media/img/' | append: h.about.photo %}
-      {% include photo.html src=src alt=h.about.photo_alt lazy=true %}
-    </div>
-  </div>
-</section>
-
-{% assign leos = site.data.leos %}
-{% if leos.dogs.size > 0 %}
-<section class="block" id="our-leos">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">{{ leos.eyebrow }}</span>
-      <h2>{{ leos.title }}</h2>
-      <p>{{ leos.intro }}</p>
-    </div>
-    <div class="leos">
-      {% for d in leos.dogs %}
-      {% assign dog_url = '/our-leos/' | append: d.id | append: '/' | relative_url %}
-      <article class="leo">
-        {% assign src = '/media/img/leos/' | append: d.photo %}
-        {% include photo.html src=src alt=d.photo_alt lazy=true %}
-        <div>
-          <h3><a href="{{ dog_url }}">{{ d.name }}</a></h3>
-          {% if d.registered_name %}<p class="mono muted">{{ d.registered_name }}</p>{% endif %}
-        </div>
-        <p>{{ d.text }}</p>
-        {% if d.clearances %}
-        <ul class="clearances" aria-label="{{ d.name }}’s health clearances">
-          {% for c in d.clearances %}<li>{{ c }}</li>{% endfor %}
-        </ul>
+    <div class="hero-stage">
+      {% assign src = '/media/img/' | append: h.hero.photo %}
+      {% include photo.html src=src alt=h.hero.photo_alt position=h.hero.photo_position %}
+      <div class="hero-card">
+        {% if litter.show == 'planning' or litter.show == 'current' %}{% assign l = litter[litter.show] %}
+        <a class="pill" href="{{ '/puppies/#litter' | relative_url }}">{{ l.label }} · {{ l.when }}</a>
         {% endif %}
-        {% assign name_token = '{name}' %}
-        <a class="more" href="{{ dog_url }}">{{ leos.more_link | replace: name_token, d.name }} →</a>
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-{% endif %}
-
-<section class="block" id="puppies">
-  <div class="wrap">
-    <div class="pup-intro">
-      <div class="head">
-        <span class="eyebrow">{{ h.puppies.eyebrow }}</span>
-        <h2>{{ h.puppies.title }}</h2>
-        <p>{{ h.puppies.text }}</p>
-      </div>
-      {% assign src = '/media/img/' | append: h.puppies.photo %}
-      {% include photo.html src=src alt=h.puppies.photo_alt lazy=true %}
-    </div>
-    {% if litter.show == 'planning' or litter.show == 'current' %}
-    {% assign l = litter[litter.show] %}
-    <div class="season{% if litter.show == 'current' %} current{% endif %}">
-      <div class="when"><small>{{ l.label }}</small>{{ l.when }}</div>
-      <div class="txt">
-        <h2>{{ l.title }}</h2>
-        {% if l.text %}<p>{{ l.text }}</p>{% endif %}
-        {% for p in l.paragraphs %}<p>{{ p }}</p>
-        {% endfor %}
+        <h1>{{ h.hero.title }}</h1>
+        <p class="lede">{{ h.hero.text }}</p>
         <div class="btns">
-          <a class="btn primary" href="{{ questionnaire }}">{{ litter.questionnaire_button }}</a>
-          <a class="btn" href="#contact">{{ litter.contact_button }}</a>
+          <a class="btn btn-solid" href="{{ '/puppies/' | relative_url }}">{{ h.hero.button }}</a>
+          <a class="btn" href="{{ '/our-leos/' | relative_url }}">{{ h.hero.second_button }}</a>
         </div>
-        {% if site.facebook and site.instagram %}<p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>{% endif %}
-      </div>
-      {% if litter.show == 'current' %}
-      <div class="parents">
-        {% assign roles = 'mother,father' | split: ',' %}
-        {% for role in roles %}{% assign d = l[role] %}{% if d %}
-        <figure class="parent">
-          {% assign src = '/media/img/litter/' | append: d.photo %}
-          {% include photo.html src=src alt=d.photo_alt lazy=true %}
-          <figcaption><small>{% if role == 'mother' %}Mother{% else %}Father{% endif %}</small><b>{{ d.name }}</b><span>{{ d.registered_name }}</span></figcaption>
-        </figure>
-        {% endif %}{% endfor %}
-      </div>
-      {% endif %}
-    </div>
-    {% endif %}
-  </div>
-</section>
-
-<section class="block" id="fit">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">{{ h.fit.eyebrow }}</span>
-      <h2>{{ h.fit.title }}</h2>
-      <p>{{ h.fit.text }}</p>
-    </div>
-    <div class="fit">
-      <div class="yes">
-        <h3>{{ h.fit.thrive_title }}</h3>
-        <ul>{% for item in h.fit.thrive %}<li>{{ item }}</li>{% endfor %}</ul>
-      </div>
-      <div class="heads">
-        <h3>{{ h.fit.expect_title }}</h3>
-        <ul>{% for item in h.fit.expect %}<li>{{ item }}</li>{% endfor %}</ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="block" id="photos">
+<section class="sec" aria-labelledby="why-h">
   <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">{{ h.photos.eyebrow }}</span>
-      <h2>{{ h.photos.title }}</h2>
-    </div>
-    <div class="gallery">
-      {% for g in site.data.gallery %}
-      {% assign src = '/media/img/gallery/' | append: g.file %}
-      {% include photo.html src=src alt=g.alt position=g.position lazy=true %}
+    <span class="label">{{ h.why.eyebrow }}</span>
+    <h2 id="why-h" class="sec-title">{{ h.why.title }}</h2>
+    <div class="cards3">
+      {% for c in h.why.cards %}
+      <div class="card">
+        <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24">{% case c.icon %}{% when 'house' %}<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/>{% when 'heart' %}<path d="M20.8 5.6a5 5 0 00-7.1 0L12 7.3l-1.7-1.7a5 5 0 00-7.1 7.1L12 21.5l8.8-8.8a5 5 0 000-7.1z"/>{% else %}<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>{% endcase %}</svg></span>
+        <h3>{{ c.title }}</h3>
+        <p>{{ c.text }}</p>
+      </div>
       {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="block" id="contact">
-  <div class="wrap">
-    <div class="head">
-      <span class="eyebrow">{{ h.contact.eyebrow }}</span>
-      <h2>{{ h.contact.title }}</h2>
-      <p>{{ h.contact.text }}</p>
+<section class="sec" aria-labelledby="meet-h">
+  <div class="wrap split">
+    <div class="pair">
+      {% for id in h.meet.dogs %}{% assign d = site.data.leos.dogs | where: "id", id | first %}{% if d %}
+      <a class="frame" href="{{ '/our-leos/' | append: d.id | append: '/' | relative_url }}"><img src="{{ '/media/img/leos/' | append: d.photo | relative_url }}" alt="{{ d.photo_alt | escape }}" loading="lazy"></a>
+      {% endif %}{% endfor %}
     </div>
-    <div class="contact">
-      <div class="card">
-        <span class="eyebrow muted">{{ h.contact.email_label }}</span>
-        {% include email.html %}
+    <div>
+      <span class="label">{{ h.meet.eyebrow }}</span>
+      <h2 id="meet-h">{{ h.meet.title }}</h2>
+      <p>{{ h.meet.text }}</p>
+      <div class="btns"><a class="btn btn-solid" href="{{ '/our-leos/' | relative_url }}">{{ h.meet.button }}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec-last" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div class="band">
+      <div>
+        <h2 id="cta-h">{{ h.cta.title }}</h2>
+        <p>{{ h.cta.text }}</p>
       </div>
-      <div class="card">
-        <span class="eyebrow muted">{{ h.contact.follow_label }}</span>
-        <div class="links">
-          {% include social-links.html %}
-          <a href="{{ questionnaire }}">{{ h.contact.questionnaire_link }}</a>
-        </div>
+      <div class="btns">
+        <a class="btn btn-light" href="{{ '/about/#fit' | relative_url }}">{{ h.cta.fit_button }}</a>
+        <a class="btn btn-line-light" href="{{ '/apply/' | relative_url }}">{{ h.cta.apply_button }}</a>
       </div>
     </div>
   </div>

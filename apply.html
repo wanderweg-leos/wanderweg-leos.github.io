@@ -1,0 +1,122 @@
+---
+layout: default
+title: Apply for a puppy
+description: Apply for a Wanderweg Leonberger puppy. Tell us about your family, your home and what you are looking for.
+permalink: /apply/
+scripts:
+  - /assets/js/application.js
+# The questions and wording live in _data/application.yml
+---
+{% comment %}
+  The form is generated from _data/application.yml, one part (section) at
+  a time. Each question "type" below has its own block of HTML. Every
+  answer field carries data-label (the question text), which
+  assets/js/application.js uses to check the answers, build the review
+  screen and build the email. To add a new question type, add a
+  {% when %} block here and see DEVELOPING.md.
+{% endcomment %}
+{% assign qd = site.data.application %}
+{% capture star %} <span class="req" aria-hidden="true">*</span>{% endcapture %}
+{% capture optional %} <span class="opt">(optional)</span>{% endcapture %}
+
+<section class="page-head sec-last">
+  <div class="wrap apply">
+    <div class="apply-intro">
+      <span class="label">{{ qd.eyebrow }}</span>
+      <h1>{{ qd.title }}</h1>
+      {% for p in qd.intro %}<p{% if forloop.first %} class="lede"{% endif %}>{{ p }}</p>
+      {% endfor %}
+      <div class="talk" id="contact">
+        <h2>{{ qd.talk_title }}</h2>
+        <p>{{ qd.talk_text }}</p>
+        <ul class="contact-list">
+          <li><span class="cl-label">Email</span><span class="cl-value"><a href="mailto:{{ site.email }}">{{ site.email }}</a></span></li>
+          {% if site.facebook or site.instagram %}<li><span class="cl-label">Follow along</span><span class="cl-value">{% include social-links.html %}</span></li>{% endif %}
+          <li><span class="cl-label">Where</span><span class="cl-value">{{ site.location }}</span></li>
+        </ul>
+      </div>
+      <p class="req-note"><span class="req" aria-hidden="true">*</span> Required question</p>
+    </div>
+
+    <div class="apply-panel">
+      <form id="q" novalidate data-access-key="{{ site.web3forms_access_key }}" data-thanks="{{ '/apply/thank-you/' | relative_url }}" data-contact-email="{{ site.email }}"
+        data-next="{{ qd.next_button | escape }}" data-review="{{ qd.review_button | escape }}" data-review-title="{{ qd.review_title | escape }}" data-review-text="{{ qd.review_text | escape }}" data-edit="{{ qd.edit_button | escape }}">
+        <div class="q-progress">
+          <div class="q-top"><b></b><span></span></div>
+          <div class="q-bar" aria-hidden="true"><span></span></div>
+        </div>
+
+        {% for section in qd.sections %}
+        <div class="q-section" data-title="{{ section.title | escape }}">
+          <h2>{{ section.title }}</h2>
+          {% for q in section.questions %}
+          {% assign w = '' %}{% if q.half %}{% assign w = ' half' %}{% endif %}
+          {% assign req = '' %}{% assign mark = optional %}{% if q.required %}{% assign req = ' required' %}{% assign mark = star %}{% endif %}
+
+          {% capture field %}
+          {% case q.type %}
+
+          {% when 'name' %}
+          <div class="field{{ w }}">
+            <span class="q">{{ q.label }}{{ mark }}</span>
+            <div class="row">
+              <label class="sub" for="f-first_name">First<input id="f-first_name" name="first_name" data-label="First name" autocomplete="given-name"{{ req }}></label>
+              <label class="sub" for="f-last_name">Last<input id="f-last_name" name="last_name" data-label="Last name" autocomplete="family-name"{{ req }}></label>
+            </div>
+          </div>
+
+          {% when 'address' %}
+          <div class="field{{ w }}">
+            <span class="q">{{ q.label }}{{ mark }}</span>
+            <label class="sub" for="f-address_1">Address line 1<input id="f-address_1" name="address_1" data-label="Address line 1" autocomplete="address-line1"{{ req }}></label>
+            <label class="sub" for="f-address_2">Address line 2<input id="f-address_2" name="address_2" data-label="Address line 2" autocomplete="address-line2"></label>
+            <div class="row3">
+              <label class="sub" for="f-city">City<input id="f-city" name="city" data-label="City" autocomplete="address-level2"{{ req }}></label>
+              <label class="sub" for="f-province">Province / state<input id="f-province" name="province" data-label="Province / state" autocomplete="address-level1"{{ req }}></label>
+              <label class="sub" for="f-postal_code">Postal / zip code<input id="f-postal_code" name="postal_code" data-label="Postal / zip code" autocomplete="postal-code"{{ req }}></label>
+            </div>
+            <label class="sub" for="f-country">Country<select id="f-country" name="country" data-label="Country" autocomplete="country-name"{{ req }}><option value="">Choose…</option><option>Canada</option><option>United States</option><option>Other</option></select></label>
+          </div>
+
+          {% when 'textarea' %}
+          <label class="field{{ w }}" for="f-{{ q.id }}"><span class="q">{{ q.label }}{{ mark }}</span><textarea id="f-{{ q.id }}" name="{{ q.id }}" data-label="{{ q.label | escape }}"{{ req }}></textarea></label>
+
+          {% when 'select' %}
+          <label class="field{{ w }}" for="f-{{ q.id }}"><span class="q">{{ q.label }}{{ mark }}</span><select id="f-{{ q.id }}" name="{{ q.id }}" data-label="{{ q.label | escape }}"{{ req }}><option value="">Choose…</option>{% for o in q.options %}<option>{{ o }}</option>{% endfor %}</select></label>
+
+          {% when 'radio' or 'checkbox' %}
+          <div class="field choices{{ w }}{% if q.columns %} grid3{% endif %}{% if q.options.size == 1 and q.other != true %} single{% endif %}" role="{% if q.type == 'radio' %}radiogroup{% else %}group{% endif %}" aria-labelledby="l-{{ q.id }}" data-group="{{ q.id }}" data-label="{{ q.label | escape }}"{% if q.required %} data-required{% endif %}>
+            <span class="q" id="l-{{ q.id }}">{{ q.label }}{{ mark }}</span>
+            {% for o in q.options %}<label for="f-{{ q.id }}-{{ forloop.index }}"><input id="f-{{ q.id }}-{{ forloop.index }}" type="{{ q.type }}" name="{{ q.id }}" value="{{ o | escape }}"> {{ o }}</label>
+            {% endfor %}
+            {% if q.other %}<label class="other" for="f-{{ q.id }}-other"><input id="f-{{ q.id }}-other" type="{{ q.type }}" name="{{ q.id }}" value="Other"> Other <input class="other-text" id="f-{{ q.id }}-other-text" name="{{ q.id }}_other" aria-label="Other: please describe" placeholder="Please describe"></label>{% endif %}
+          </div>
+
+          {% else %}
+          <label class="field{{ w }}" for="f-{{ q.id }}"><span class="q">{{ q.label }}{{ mark }}</span><input id="f-{{ q.id }}" name="{{ q.id }}" type="{{ q.type | default: 'text' }}" data-label="{{ q.label | escape }}"{% if q.type == 'email' %} autocomplete="email"{% elsif q.type == 'tel' %} autocomplete="tel"{% endif %}{{ req }}></label>
+
+          {% endcase %}
+          {% endcapture %}
+          {% comment %} A follow-up question (show_if in the data file) stays hidden until one of its show_when answers is chosen. {% endcomment %}
+          {% if q.show_if %}<div class="cond" data-show-if="{{ q.show_if }}" data-show-when="{{ q.show_when | join: '|' | escape }}" hidden>{{ field }}</div>{% else %}{{ field }}{% endif %}
+          {% endfor %}
+        </div>
+        {% endfor %}
+
+        <div class="q-review" hidden></div>
+
+        {% comment %} Spam trap: hidden from people, but bots fill it in. See application.js. {% endcomment %}
+        <div class="trap" aria-hidden="true"><label for="f-botcheck">Leave this empty<input id="f-botcheck" name="botcheck" tabindex="-1" autocomplete="off"></label></div>
+
+        {% if qd.privacy %}<p class="privacy" hidden>{{ qd.privacy }}</p>{% endif %}
+        <p class="form-msg" id="q-err" role="alert" hidden></p>
+        <div class="q-nav">
+          <button type="button" class="btn" id="q-back">{{ qd.back_button }}</button>
+          <button type="button" class="btn btn-solid" id="q-next">{{ qd.next_button }}</button>
+          <button type="submit" class="btn btn-solid" id="q-submit" hidden>{{ qd.submit_button }}</button>
+        </div>
+        <p class="q-saved">{{ qd.saved_note }} <button type="button" class="q-clear" id="q-clear">{{ qd.clear_button }}</button></p>
+      </form>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,7 @@
 # ─────────────────────────────────────────────────────────────
-#  Litter panel (the dark panel in the Puppies section of the
-#  home page). It shows ONE of two versions:
+#  Litter card at the top of the Puppies page, and the small
+#  "Next litter" tag on the home page photo. It shows ONE of
+#  two versions:
 #
 #    planning   "We are planning our next litter"  (no parents yet)
 #    current    a confirmed litter, with the mother, the father,
@@ -11,22 +12,23 @@
 #  never loses your text.
 # ─────────────────────────────────────────────────────────────
 
-# planning, current, or off (off hides the panel completely)
+# planning, current, or off (off hides the card and the tag completely)
 show: planning
 
-# Buttons shown on the panel (both versions)
-questionnaire_button: "Fill out the questionnaire"
+# Buttons shown on the card (both versions). "Contact us" goes to the
+# contact box on the Apply page.
+apply_button: "Apply for a puppy"
 contact_button: "Contact us"
 
 
 # ── Planning version ─────────────────────────────────────────
 planning:
-  label: "Next litter"        # small text above the big date
-  when: "Spring 2027"         # the big highlighted text
+  label: "Next litter"        # the tag on the card and the home page photo
+  when: "Spring 2027"         #   shows these two together: "Next litter · Spring 2027"
   title: "We are currently planning our next litter"
   paragraphs:
     - "We expect our next Leonberger litter in spring 2027. Both parents will be fully health tested before breeding, and we’ll share details here once the breeding is confirmed."
-    - "If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can start getting to know you."
+    - "If you’re hoping for a puppy from this litter, please apply so we can start getting to know you."
 
 
 # ── Current litter version ───────────────────────────────────
@@ -37,10 +39,10 @@ planning:
 #  Change mother.jpg and father.jpg below to the names of the
 #  photos you uploaded.
 current:
-  label: "Puppies due"        # small text above the big date
+  label: "Puppies due"        # shown with "when" in the tags
   when: "[Month Day, Year]"   # the expected date (or "Born May 3, 2027" once they arrive)
   title: "[Mother] and [Father] are expecting!"
-  text: "We are very excited to announce our litter between [mother’s registered name] ([Mother]) and [father’s registered name] ([Father]). Both parents are fully health tested and clear of LPN1, LPN2, LPN3 and LEMP. If you’re hoping for a puppy from this litter, please fill out the questionnaire so we can get to know you."
+  text: "We are very excited to announce our litter between [mother’s registered name] ([Mother]) and [father’s registered name] ([Father]). Both parents are fully health tested and clear of LPN1, LPN2, LPN3 and LEMP. If you’re hoping for a puppy from this litter, please apply so we can get to know you."
 
   mother:
     name: "[Mother]"
