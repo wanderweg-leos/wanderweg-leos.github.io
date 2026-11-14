@@ -93,7 +93,8 @@ permalink: /puppies/
     {% if past.text %}<p class="intro">{{ past.text }}</p>{% endif %}
     <ol class="past-litters">
       {% for l in past.litters %}
-      <li><span class="pl-date">{{ l.date }}</span><span class="pl-pair"><b>{{ l.title }}</b>{% if l.names %}<i>{{ l.names }}</i>{% endif %}</span><span class="pl-count">{{ l.puppies }}</span></li>
+      {% assign pn = l.title | split: ' × ' %}
+      <li><span class="pl-photos">{% if l.mother_photo != "" and l.mother_photo %}<img src="{{ '/media/img/parents/' | append: l.mother_photo | relative_url }}" alt="{{ pn[0] }}" loading="lazy">{% else %}<span class="pl-nophoto"></span>{% endif %}{% if l.father_photo != "" and l.father_photo %}<img src="{{ '/media/img/parents/' | append: l.father_photo | relative_url }}" alt="{{ pn[1] }}" loading="lazy">{% else %}<span class="pl-nophoto"></span>{% endif %}</span><span class="pl-date">{{ l.date }}</span><span class="pl-pair"><b>{{ l.title }}</b>{% if l.names %}<i>{{ l.names }}</i>{% endif %}</span><span class="pl-count">{{ l.puppies }}</span></li>
       {% endfor %}
     </ol>
   </div>
