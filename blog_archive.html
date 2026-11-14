@@ -30,7 +30,7 @@ permalink: /blog_archive/
       <h2>{{ y.name }}</h2>
       <ul class="post-list">
         {% for post in y.items %}
-        <li><a href="{{ post.url | relative_url }}">{% if post.thumb %}<img src="{{ post.thumb | relative_url }}" alt="" loading="lazy">{% else %}<span class="nothumb"></span>{% endif %}<span class="pt"><b>{{ post.title }}</b><small>{{ post.date | date: "%B %-d, %Y" }}</small></span></a></li>
+        <li><a href="{{ post.url | relative_url }}">{% if post.thumb %}<img src="{{ post.thumb | relative_url }}" alt="" loading="lazy">{% else %}<span class="nothumb"></span>{% endif %}<span class="pt"><b>{{ post.title }}</b><small>{{ post.date | date: "%B %-d" }}</small></span></a></li>
         {% endfor %}
       </ul>
     </section>
