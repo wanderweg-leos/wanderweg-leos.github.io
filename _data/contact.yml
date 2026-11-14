@@ -1,0 +1,44 @@
+# ─────────────────────────────────────────────────────────────
+#  Contact page (wanderweg.ca/contact/)
+#  Change the words between the quotes. Keep the indentation.
+#  The email address, social links and place come from _config.yml.
+#  Messages from the form are emailed to you by Web3Forms, using
+#  web3forms_access_key in _config.yml (the same as the application).
+# ─────────────────────────────────────────────────────────────
+
+eyebrow: "Say hello"
+title: "Contact"
+lede: "Interested in a puppy, or just want to talk Leos? We’d love to hear from you. Email is the best way to reach us."
+
+# The box on the left
+email_label: "Email"
+follow_label: "Follow along"
+where_label: "Where we are"
+visits_label: "Visits"
+visits: "By appointment."
+photo: gallery/lying-grass.jpg
+photo_alt: "Young Leonberger lying in the grass with a stick"
+
+# The form
+form_title: "Send us a note"
+name_label: "Name"
+email_field_label: "Email"
+topic_label: "What’s it about?"
+topics:
+  - "A question about the breed"
+  - "Upcoming litters"
+  - "Booking a visit"
+  - "I have a Wanderweg dog"
+  - "Something else"
+message_label: "Message"
+send_button: "Send message"
+# The subject line of the email you receive
+email_subject: "New message from the Wanderweg website"
+
+# The page people see after sending (wanderweg.ca/contact/thank-you/)
+thank_you:
+  eyebrow: "Message sent"
+  title: "Thank you for getting in touch"
+  text: "We read every message ourselves and will reply by email."
+  button: "Meet our Leos"
+  home_button: "Back to the home page"

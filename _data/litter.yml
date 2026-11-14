@@ -16,7 +16,7 @@
 show: planning
 
 # Buttons shown on the card (both versions). "Contact us" goes to the
-# contact box on the Apply page.
+# Contact page.
 apply_button: "Apply for a puppy"
 contact_button: "Contact us"
 

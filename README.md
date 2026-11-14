@@ -54,7 +54,8 @@ Most content lives in `.yml` files. They are easy to read, but fussy about layou
 | To change… | Edit this file |
 |---|---|
 | Any wording or big photo on the Home page | `_data/home.yml` |
-| Any wording or photo on the About page (including "Is a Leonberger right for you?") | `_data/about.yml` |
+| Any wording or photo on The Breed page (including "Is a Leonberger right for you?") | `_data/breed.yml` |
+| The Contact page, its form and the page after sending | `_data/contact.yml` |
 | Any wording or photo on the Puppies page (what comes with a puppy, how it works, common questions) | `_data/puppies.yml` |
 | The litter announcement (e.g. "Spring 2027"), on the Puppies page and the Home page tag | `_data/litter.yml` |
 | Gallery photos (on the About page) | `_data/gallery.yml`, and upload photos to `img/gallery/` in the **media** repository |
@@ -113,12 +114,12 @@ The grid looks tidiest with a multiple of 3 photos. If a face gets cropped, add 
 Delete an entry's lines, or move them up or down. You can also delete the photo file, but you don't have to.
 
 ### Change a big photo (Home, About, Puppies)
-Upload the new photo to `img/` in the media repository. Then change the matching `photo:` file name and its `photo_alt:` description: in `_data/home.yml` for the Home page, `_data/about.yml` for the About page, or `planning_photos` in `_data/puppies.yml` for the two photos on the litter card.
+Upload the new photo to `img/` in the media repository. Then change the matching `photo:` file name and its `photo_alt:` description: in `_data/home.yml` for the Home page, `_data/breed.yml` for The Breed page, or `planning_photos` in `_data/puppies.yml` for the two photos on the litter card.
 
 ### Add, change or remove a dog in Our Leos
-The Our Leos page shows a row of cards, one per dog, with one dog's details below. Each dog also has its own page (for example `/our-leos/riley/`), and the Our Leos page itself shows the first dog in the list. Everything about a dog is in `_data/leos.yml`: the `story`, the two short facts (`lives` and `loves`), the health clearances table, and optional extra `photos`. Upload photos to `img/leos/` in the media repository.
+The Our Leos page shows a row of cards, one per dog, with one dog's details below. Each dog also has its own page (for example `/our-leos/ava/`), and the Our Leos page itself shows the first dog in the list. Everything about a dog is in `_data/leos.yml`: the `story`, the pedigree (`pedigree`) and the health clearances table. Upload photos to `img/leos/` in the media repository.
 
-To **add** a dog, copy one of the dogs in `_data/leos.yml` and change the details, including a new `id` (a short name with no spaces). Then, in the `our-leos/` folder, copy `riley.html`, name the copy after the new id (e.g. `luna.html`), and change the `dog`, `title` and `permalink` lines inside it. To **remove** a dog, delete its lines in `leos.yml` and its file in `our-leos/`.
+To **add** a dog, copy one of the dogs in `_data/leos.yml` and change the details, including a new `id` (a short name with no spaces). Then, in the `our-leos/` folder, copy `ava.html`, name the copy after the new id (e.g. `luna.html`), and change the `dog`, `title` and `permalink` lines inside it. To **remove** a dog, delete its lines in `leos.yml` and its file in `our-leos/`.
 
 Dogs appear in the order listed, three across on computers. The two dog photos on the Home page are chosen in `_data/home.yml` (`meet:` → `dogs:`).
 

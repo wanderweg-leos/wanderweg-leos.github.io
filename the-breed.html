@@ -1,0 +1,121 @@
+---
+layout: default
+title: The Breed
+description: What every family should know about the Leonberger before they fall in love, from Wanderweg Leonbergers in Halifax, Nova Scotia.
+permalink: /the-breed/
+# The words on this page live in _data/breed.yml.
+---
+{% assign b = site.data.breed %}
+
+<section class="pagehead tall">
+  <div class="wrap row">
+    <div class="col" style="flex-basis:520px">
+      <span class="eyebrow">{{ b.eyebrow }}</span>
+      <h1 class="h1">{{ b.title }}</h1>
+      <p class="lede">{{ b.lede }}</p>
+    </div>
+    <div class="col" style="flex-basis:340px;max-width:440px">
+      {% assign src = '/media/img/' | append: b.photo %}
+      {% include photo.html src=src alt=b.photo_alt position=b.photo_position class="r45" %}
+    </div>
+  </div>
+</section>
+
+<section class="sec paper tight" aria-labelledby="glance-h">
+  <div class="wrap">
+    <h2 id="glance-h" style="font-size:40px;margin-bottom:32px">{{ b.glance.title }}</h2>
+    <dl class="glance">
+      {% for g in b.glance.items %}<div><dt class="label">{{ g.label }}</dt><dd>{{ g.value }}</dd></div>
+      {% endfor %}
+    </dl>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="history-h">
+  <div class="wrap row top g64">
+    <div class="col">
+      <span class="eyebrow">{{ b.history.eyebrow }}</span>
+      <h2 id="history-h" class="h2">{{ b.history.title }}</h2>
+      {% for p in b.history.paragraphs %}<p class="body" style="margin-top:{% if forloop.first %}22{% else %}16{% endif %}px">{{ p }}</p>
+      {% endfor %}
+    </div>
+    <ol class="vtrail col" style="flex-basis:380px">
+      {% for t in b.history.timeline %}<li><strong>{{ t.when }}</strong><span>{{ t.what }}</span></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="sec paper" aria-labelledby="living-h">
+  <div class="wrap">
+    <h2 id="living-h" class="h2" style="margin-bottom:40px">{{ b.living.title }}</h2>
+    <div class="boxrow">
+      {% for c in b.living.cards %}
+      <div><span class="marker n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="sec dark slate" aria-labelledby="winter-h">
+  <div class="wrap row top">
+    <div class="col">
+      <span class="eyebrow">{{ b.winter.eyebrow }}</span>
+      <h2 id="winter-h" class="big">{{ b.winter.title }}</h2>
+      <p style="margin-top:22px">{{ b.winter.text }}</p>
+      <ul class="bullets" style="margin-top:24px;font-size:17px">
+        {% for item in b.winter.tips %}<li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col">
+      {% assign src = '/media/img/' | append: b.winter.photo %}
+      {% include photo.html src=src alt=b.winter.photo_alt class="r43" lazy=true %}
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-bottom:72px" aria-labelledby="walks-h">
+  <div class="wrap row top">
+    <div class="col">
+      <h2 id="walks-h" style="font-size:36px;margin-bottom:16px">{{ b.walks.title }}</h2>
+      <p class="body" style="font-size:17px;margin-bottom:20px">{{ b.walks.text }}</p>
+      <div class="table-box">
+        <table style="min-width:300px;font-size:16px">
+          <thead><tr><th scope="col">{{ b.walks.age_heading }}</th><th scope="col">{{ b.walks.walk_heading }}</th></tr></thead>
+          <tbody>
+            {% for r in b.walks.rows %}<tr><td>{{ r.age }}</td><td>{{ r.walk }}</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <p class="small" style="margin-top:12px">{{ b.walks.note }}</p>
+    </div>
+    <div class="col">
+      {% assign src = '/media/img/' | append: b.walks.photo %}
+      {% include photo.html src=src alt=b.walks.photo_alt class="r43" lazy=true %}
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="fit" aria-labelledby="fit-h">
+  <div class="wrap">
+    <span class="eyebrow">{{ b.fit.eyebrow }}</span>
+    <h2 id="fit-h" class="h2" style="margin-bottom:12px">{{ b.fit.title }}</h2>
+    <p class="body" style="margin-bottom:36px;max-width:42rem">{{ b.fit.text }}</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+      <div class="card fit-card">
+        <h3>{{ b.fit.thrive_title }}</h3>
+        <ul class="bullets">{% for item in b.fit.thrive %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+      <div class="fit-card plain">
+        <h3>{{ b.fit.expect_title }}</h3>
+        <ul class="bullets">{% for item in b.fit.expect %}<li>{{ item }}</li>{% endfor %}</ul>
+      </div>
+    </div>
+    <div class="btns" style="margin-top:40px">
+      <a class="btn" href="{{ '/apply/' | relative_url }}">{{ b.fit.apply_button }}</a>
+      <a class="btn ghost" href="{{ '/contact/' | relative_url }}">{{ b.fit.visit_button }}</a>
+    </div>
+  </div>
+</section>

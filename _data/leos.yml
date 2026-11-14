@@ -1,92 +1,109 @@
 # ─────────────────────────────────────────────────────────────
-#  Our Leos: the Our Leos page (wanderweg.ca/our-leos/) and each
-#  dog's own page (e.g. wanderweg.ca/our-leos/riley/). Both show
-#  the row of dog cards at the top, with one dog's details below.
-#  The Our Leos page shows the first dog in the list.
+#  Our Leos: the Our Leos page (wanderweg.ca/our-leos/), each
+#  dog's own page (e.g. wanderweg.ca/our-leos/ava/) and the dog
+#  cards on the home page. The Our Leos page shows the first dog.
 #
 #  Each dog has:
 #    id:          short name with no spaces, used in the page
 #                 address. Must match the dog's file in our-leos/.
 #    name, registered_name
 #    photo, photo_alt:  the main photo (in media/img/leos/)
-#    story:       the description, one line per paragraph.
-#    lives, loves:  the two short facts under the description.
-#                 Leave one out to hide it.
-#    clearances:  health results, shown as a table. Each has
+#    photo_position:    optional, which part of the photo to keep
+#                 when it is cropped, e.g. "50% 20%"
+#    story:       the About tab, one line per paragraph.
+#    clearances:  the Health tab, shown as a table. Each has
 #                   test:    e.g. "Hips"
 #                   by:      the smaller line under it, e.g. "OFA"
-#                   result:  e.g. "Excellent"
-#    photos:      optional. Extra photos for the dog's own page,
-#                 each with a file (in media/img/leos/) and alt.
+#                   result:  e.g. "Good"
+#                 Leave it as [] if there are no results yet.
+#                 Hips and Elbows also appear beside the photo.
+#    pedigree:    the Pedigree tab: sire and dam (each with name,
+#                 call_name, and their own sire and dam with name).
 #
 #  To ADD a dog:
 #    1. Upload a photo to media/img/leos/ (about 1200 pixels
 #       wide, no spaces in the file name).
 #    2. Copy one of the dogs below and change the details,
 #       including a new id.
-#    3. In the our-leos/ folder, copy riley.html, name the copy
+#    3. In the our-leos/ folder, copy ava.html, name the copy
 #       after the new id (e.g. luna.html) and change the three
 #       lines inside it (see the notes in that file).
 #  To REMOVE a dog: delete its lines here and delete its file
 #  in our-leos/.
-#
-#  The cards sit three across on computers, so 3 or 6 dogs look
-#  tidiest.
 # ─────────────────────────────────────────────────────────────
 
 eyebrow: "Our Leos"
 title: "Meet the girls"
-intro: "Every one of our Leonbergers lives in the house with us as part of the family. Choose a dog to read about her and see her health clearances."
+intro: "Every one of our Leonbergers lives in the house with us as part of the family. Choose a dog to read about her and see her pedigree and health clearances."
 
-# Wording on the dog pages. {name} is replaced with the dog's name.
-lives_label: "Lives"
-loves_label: "Loves"
-clearances_title: "Health clearances"
+# Tab names, and the small labels in the card
+about_tab: "About"
+pedigree_tab: "Pedigree"
+health_tab: "Health"
+sire_label: "Sire"
+dam_label: "Dam"
+grandsire_label: "Grandsire"
+granddam_label: "Granddam"
 test_heading: "Test"
 result_heading: "Result"
 clearances_note: "Every breeding dog is fully health tested before a litter is planned."
-photos_title: "More photos of {name}"
-apply_button: "Apply for a puppy"
+# Shown on the Health tab when a dog has no results yet. {name} is replaced with her name.
+no_clearances: "Health results for {name} will be posted here."
+pedigree_note: "Parents and grandparents as listed on the Leonberger Database"
+pedigree_link: "https://www.leonberger-database.com/search_e.php"
+
+# The family tree under the dog card, on every Our Leos page.
+# The dogs in it come from assets/data/family-tree.md (how to edit
+# it is explained at the top of that file). Delete these three lines
+# to hide the tree.
+tree:
+  eyebrow: "Our Leos"
+  title: "Family tree"
 
 dogs:
-  - id: riley
-    name: "Riley"
-    registered_name: "Wanderweg’s Sugar and Spice"
-    photo: riley.jpg
-    photo_alt: "Riley standing on a log at the edge of the lake"
+
+  - id: ava
+    name: "Ava"
+    registered_name: "Wanderweg’s XOXO to the Moon and Back"
+    photo: ava.jpg
+    photo_alt: "Ava standing in the snow"
     story:
-      - "Riley is a truly delightful Leonberger. She is so beautiful and sweet with lovely structure and movement. Riley is a very fun and happy dog, always ready to go out for an adventure."
-      - "Riley has matured into a true beauty and is an incredible looking Leonberger with her long dark coat and beautiful full black mask. She also has the sweetest, softest expression and loves to say hi to all."
-    lives: "In the house, with us"
-    loves: "Adventures outdoors"
+      - "Ava is Riley’s daughter, born in March 2022 in her litter with Titan."
     clearances:
       - test: "Hips"
-        by: "OFA"
-        result: "Excellent"
+        by: "Hip score"
+        result: "Good"
       - test: "Elbows"
-        by: "OFA"
+        by: "Elbow score"
         result: "Normal"
-      - test: "Eyes"
-        by: "Eye exam"
+      - test: "Thyroid"
+        by: "Thyroid test"
         result: "Normal"
-      - test: "LEMP"
-        by: "DNA test"
+      - test: "Heart"
+        by: "Cardiologist exam"
+        result: "Normal"
+      - test: "LEMP, LPN1, LPN2, LPN3"
+        by: "DNA, both parents tested"
         result: "Clear"
-      - test: "LPN1, LPN2, LPN3"
-        by: "DNA test"
-        result: "Clear"
-    photos: []
+    pedigree:
+      sire:
+        name: "Owajila Titan Aiga Marina du Temple d’Artemis"
+        call_name: "Titan"
+        sire: "Lasco des Plaines d’Epona"
+        dam: "Jolliffeite Vingt Ans’za du Temple d’Artemis"
+      dam:
+        name: "Wanderweg’s Sugar and Spice"
+        call_name: "Riley"
+        sire: "Isaak du Chateau des Lys"
+        dam: "Wanderweg’s Mountains of Love"
 
-  - id: priya
-    name: "Priya"
-    registered_name: "Wanderweg’s Under the Moonlit Sky"
-    photo: priya.jpg
-    photo_alt: "Priya standing on the lawn by the lake"
+  - id: marley
+    name: "Marley"
+    registered_name: "Wanderweg’s Under the Paper Moon"
+    photo: marley.jpg
+    photo_alt: "Marley standing with a show ribbon"
     story:
-      - "Priya is a picture-perfect female Leonberger with the most amazing conformation, bone, head and coat. She is truly a special beautiful girl, and combined with her sweet and soft temperament, she is quite a special Leo."
-      - "Priya is very sweet with a laid-back temperament. She likes to just chill with the family and is great at giving lots of kisses. We are very excited about Priya’s future puppies."
-    lives: "In the house, with us"
-    loves: "Relaxing with the family"
+      - "Marley was born in March 2021 in Lexi’s litter with Viking. Her daughter Heidi was born in April 2026."
     clearances:
       - test: "Hips"
         by: "OFA"
@@ -94,41 +111,66 @@ dogs:
       - test: "Elbows"
         by: "OFA"
         result: "Normal"
-      - test: "Eyes"
-        by: "Eye exam"
+      - test: "Thyroid"
+        by: "Thyroid test"
         result: "Normal"
-      - test: "LEMP"
-        by: "DNA test"
+      - test: "LEMP, LPN1, LPN2, LPN3"
+        by: "DNA, both parents tested"
         result: "Clear"
-      - test: "LPN1, LPN2, LPN3"
-        by: "DNA test"
-        result: "Clear"
-    photos: []
+    pedigree:
+      sire:
+        name: "Legend de la Conte de la Battrie"
+        call_name: "Viking"
+        sire: "Hent’on Herby de la Legende du Chene"
+        dam: "Fangorn de la Conte de la Battrie"
+      dam:
+        name: "Wanderweg’s Only You and Me"
+        call_name: "Lexi"
+        sire: "Isaak du Chateau des Lys"
+        dam: "Wanderweg’s Icy Hot"
 
-  - id: fiona
-    name: "Fiona"
-    registered_name: "Wanderweg’s the Rhythm of Life"
-    photo: fiona.jpg
-    photo_alt: "Fiona standing on the rocks in the woods"
+  - id: lottie
+    name: "Lottie"
+    registered_name: "Wanderweg’s Zigzagging Stars Twinkle Bright"
+    photo: lottie.jpg
+    photo_alt: "Lottie standing with a show ribbon"
     story:
-      - "Fiona is an amazing female Leonberger who is always ready to have some fun. She is a very social and friendly Leo, who loves everyone. Fiona has a great deal of zest and excels in obedience with her great attitude for life."
-      - "Fiona is truly an amazing Leonberger with her perfect looks and fun, lively temperament. She has the sweetest face you can ever imagine! We are very excited about Fiona’s future puppies."
-    lives: "In the house, with us"
-    loves: "Obedience and new friends"
+      - "Lottie is Fiona’s daughter, born in June 2024 in her litter with Hatchi."
     clearances:
-      - test: "Hips"
-        by: "OFA"
-        result: "Excellent"
-      - test: "Elbows"
-        by: "OFA"
-        result: "Normal"
-      - test: "Eyes"
-        by: "Eye exam"
-        result: "Normal"
-      - test: "LEMP"
-        by: "DNA test"
+      - test: "LPN1, LPN2, LEMP"
+        by: "DNA, ancestors tested"
         result: "Clear"
-      - test: "LPN1, LPN2, LPN3"
-        by: "DNA test"
+      - test: "LPN3"
+        by: "DNA, both parents tested"
         result: "Clear"
-    photos: []
+    pedigree:
+      sire:
+        name: "Corleone Iron Man"
+        call_name: "Hatchi"
+        sire: "Wanderweg’s P S I Love You"
+        dam: "Bronzeleon e Chelsea"
+      dam:
+        name: "Wanderweg’s the Rhythm of Life"
+        call_name: "Fiona"
+        sire: "Legend de la Conte de la Battrie"
+        dam: "Wanderweg’s Lots of Love"
+
+  - id: hazel
+    name: "Hazel"
+    registered_name: ""
+    photo: hazel.jpg
+    photo_alt: "Hazel lying in the grass"
+    story:
+      - "Hazel is Priya’s daughter, born in January 2025 in her litter with Radja."
+    clearances: []
+    pedigree:
+      sire:
+        name: "Ukulele Oku Cavis Leonis"
+        call_name: "Radja"
+        sire: "Ann’s Lions Dream Lover"
+        dam: "Semiramida Ager Trifolium"
+      dam:
+        name: "Wanderweg’s Under the Moonlit Sky"
+        call_name: "Priya"
+        sire: "Legend de la Conte de la Battrie"
+        dam: "Wanderweg’s Only You and Me"

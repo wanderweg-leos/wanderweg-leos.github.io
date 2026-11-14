@@ -12,13 +12,19 @@ description: >-
   Family-raised, CKC-registered Leonberger puppies in Halifax, Nova Scotia.
   Fully health tested parents, puppies raised in our home.
 location: Halifax, Nova Scotia
+# Shorter version of the place, used in the footer's contact list.
+location_short: Halifax, NS
+# The line on the right of the thin navy bar at the very top of every page.
+topbar: "CKC registered · Health-tested parents · Raised in our home"
+# The short description under the name in the footer.
+footer_text: "Family-raised, CKC-registered Leonberger puppies in Halifax, Nova Scotia. Visits by appointment."
 email: hello@wanderweg.ca
 
 # Leave a link empty ("") to remove it from the site.
 facebook: https://www.facebook.com/wanderwegleos/
 instagram: https://instagram.com/wanderwegleos
 
-# Listed on the About page (Our commitments) and in the footer.
+# Listed in the footer and in the About section of the home page.
 memberships:
   - name: Canadian Kennel Club
     short: CKC

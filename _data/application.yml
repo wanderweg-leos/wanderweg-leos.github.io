@@ -51,9 +51,20 @@ eyebrow: "Apply"
 title: "Apply for a puppy"
 intro:
   - "Thank you for your interest in a Wanderweg Leonberger puppy. To make sure one of our puppies suits your lifestyle, our application asks about your family, your home and what you are looking for in a puppy. It is in four short parts, and you can review your answers before you submit."
-  - "We read every application ourselves and will be in touch by email. Please ask us as many questions as you like in return."
 
-# The contact box beside the form
+# The dark box beside the form
+next_title: "What happens next"
+next_steps:
+  - title: "We read it"
+    text: "Every application, personally."
+  - title: "We get in touch"
+    text: "By email, so we can get to know each other."
+  - title: "A visit, if possible"
+    text: "Meeting the girls in person is ideal when it works for everyone."
+  - title: "Your puppy"
+    text: "If it feels like a good fit, we’ll talk about a puppy for your family."
+
+# The contact box under it
 talk_title: "Prefer to talk first?"
 talk_text: "Interested in a puppy, or just want to talk Leos? We’d love to hear from you. Email is the best way to reach us."
 

@@ -1,5 +1,6 @@
 # ─────────────────────────────────────────────────────────────
-#  Menu at the top of every page (also listed in the footer)
+#  Menu at the top of every page (also listed in the footer,
+#  where the blog archive link is added after these)
 #
 #  Links appear in the order listed here.
 #
@@ -16,11 +17,14 @@
 - label: "Our Leos"
   url: "/our-leos/"
 
-- label: "Puppies"
+- label: "Litters"
   url: "/puppies/"
 
-- label: "About"
-  url: "/about/"
+- label: "The Breed"
+  url: "/the-breed/"
+
+- label: "Contact"
+  url: "/contact/"
 
 - label: "Apply for a puppy"
   footer_label: "Apply"

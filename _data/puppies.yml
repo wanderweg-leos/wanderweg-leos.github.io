@@ -1,7 +1,8 @@
 # ─────────────────────────────────────────────────────────────
-#  Puppies page (wanderweg.ca/puppies/)
+#  Litters page (wanderweg.ca/puppies/)
 #  Change the words between the quotes. Keep the indentation.
-#  The litter card near the top comes from _data/litter.yml.
+#  The litter card near the top comes from _data/litter.yml and
+#  the list of past litters from _data/past_litters.yml.
 # ─────────────────────────────────────────────────────────────
 
 eyebrow: "Puppies"
@@ -17,6 +18,21 @@ planning_photos:
   - file: gallery/grey-puppy.jpg
     alt: "Fluffy Leonberger puppy sitting in the grass"
 
+# The four numbered steps on the dark band
+steps:
+  eyebrow: "How it works"
+  title: "Getting a Wanderweg puppy"
+  # Links can be written as <a href="/the-breed/#fit">words</a>
+  items:
+    - title: "Read about the breed"
+      text: "Start with <a href=\"/the-breed/#fit\">“Is a Leonberger right for you?”</a> We would rather you know now."
+    - title: "Apply for a puppy"
+      text: "Tell us about your family, your home and what you’re looking for in a puppy."
+    - title: "Get to know us"
+      text: "We read every application and will be in touch by email. Ask us as many questions as you like."
+    - title: "Bring your puppy home"
+      text: "Vet checked, vaccinated, microchipped and with a written contract."
+
 included:
   eyebrow: "Every puppy goes home"
   title: "What comes with your puppy"
@@ -28,31 +44,6 @@ included:
     - "CKC registered"
     - "Written contract"
     - "Health-tested parents"
-
-steps:
-  eyebrow: "How it works"
-  title: "Getting a Wanderweg puppy"
-  # Links can be written as <a href="/about/#fit">words</a>
-  items:
-    - title: "Read about the breed"
-      text: "Start with <a href=\"/about/#fit\">“Is a Leonberger right for you?”</a> We would rather you know now."
-    - title: "Apply for a puppy"
-      text: "Tell us about your family, your home and what you’re looking for in a puppy."
-    - title: "Get to know us"
-      text: "We read every application and will be in touch by email. Ask us as many questions as you like."
-    - title: "Bring your puppy home"
-      text: "Vet checked, vaccinated, microchipped and with a written contract."
-
-questions:
-  eyebrow: "Questions"
-  title: "Common questions"
-  # The first one starts open.
-  items:
-    - q: "When is your next litter?"
-      a: "We are planning our next litter for spring 2027. We’ll share the details here once the breeding is confirmed."
-    - q: "How do I get a puppy from you?"
-      a: "<a href=\"/apply/\">Apply for a puppy</a>. We read every application ourselves and will be in touch by email."
-    - q: "What health testing do the parents have?"
-      a: "Before any litter, each parent has hips and elbows x-rayed and eyes checked, and is clear (or clear by pedigree) for LPN1, LPN2, LPN3 and LEMP. <a href=\"/our-leos/\">See each of our Leos’ results.</a>"
-    - q: "Are your puppies registered?"
-      a: "Yes. Every puppy goes home CKC registered, vet checked, vaccinated and microchipped, with a written contract."
+  photo: gallery/puppy-rock.jpg
+  photo_alt: "Leonberger puppy sitting on a big rock in the yard"
+  photo_position: "50% 65%"

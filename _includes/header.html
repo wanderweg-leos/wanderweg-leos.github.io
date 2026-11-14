@@ -1,21 +1,24 @@
 {% comment %}
-  Site header: brand name and main menu.
-  The menu links are listed in _data/navigation.yml. A link is marked as
-  the current page when the page's address starts with the link's address
-  (so the dog pages under /our-leos/ mark "Our Leos").
-  On phones the menu folds behind a Menu button (assets/js/site.js).
+  Site header: the thin navy bar (place and topbar line from _config.yml),
+  then the brand and main menu. The menu links are listed in
+  _data/navigation.yml. A link is marked as the current page when the
+  page's address starts with the link's address (so the dog pages under
+  /our-leos/ mark "Our Leos"). On phones the menu folds behind a Menu
+  button (assets/js/site.js).
 {% endcomment %}
 <header class="site-header">
-  <div class="wrap bar">
-    <a class="wordmark" href="{{ '/' | relative_url }}">{{ site.short_title }} <span>{{ site.tagline }}</span></a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-close-label="Close">Menu</button>
-    <nav class="site-nav" id="site-nav" aria-label="Main">
-      <ul>
-        {% for item in site.data.navigation %}
-        {% assign current = false %}{% if page.url == item.url %}{% assign current = true %}{% elsif item.url != '/' and page.url contains item.url %}{% assign current = true %}{% endif %}
-        <li{% if item.highlight %} class="nav-q"{% endif %}><a href="{{ item.url | relative_url }}"{% if current %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
-        {% endfor %}
-      </ul>
+  <div class="topbar"><div class="wrap"><span>{{ site.location | replace: ', ', ' · ' }}</span>{% if site.topbar %}<span>{{ site.topbar }}</span>{% endif %}</div></div>
+  <div class="wrap">
+    <nav class="main-nav" aria-label="Main">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <svg width="46" height="46" viewBox="0 0 44 44" aria-hidden="true"><rect x="1" y="1" width="42" height="42" fill="#1F2E3D"/><path d="M22 7 L31 22 H26 L33 31 H11 L18 22 H13 Z" fill="#E8DDCB"/><path d="M6 37 L12 37 M16 37 L22 37 M26 37 L32 37 M36 37 L38 37" stroke="#D9A15A" stroke-width="2"/></svg>
+        <span><b>{{ site.short_title }}</b><i>{{ site.tagline }}</i></span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" data-close-label="Close">Menu</button>
+      <div class="links" id="site-nav">
+        {% for item in site.data.navigation %}{% assign current = false %}{% if page.url == item.url %}{% assign current = true %}{% elsif item.url != '/' and page.url contains item.url %}{% assign current = true %}{% endif %}
+        <a href="{{ item.url | relative_url }}"{% if item.highlight %} class="cta"{% endif %}{% if current %} aria-current="page"{% endif %}>{{ item.label }}</a>{% endfor %}
+      </div>
     </nav>
   </div>
 </header>

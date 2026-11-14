@@ -1,0 +1,21 @@
+---
+layout: default
+title: Message sent
+description: Your message has been sent to Wanderweg Leonbergers.
+permalink: /contact/thank-you/
+sitemap: false
+noindex: true
+# The wording lives in _data/contact.yml (thank_you)
+---
+{% assign t = site.data.contact.thank_you %}
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">{{ t.eyebrow }}</span>
+    <h1 class="h1">{{ t.title }}</h1>
+    <p class="lede">{{ t.text }}</p>
+    <div class="btns">
+      <a class="btn navy" href="{{ '/our-leos/' | relative_url }}">{{ t.button }}</a>
+      <a class="btn ghost" href="{{ '/' | relative_url }}">{{ t.home_button }}</a>
+    </div>
+  </div>
+</section>

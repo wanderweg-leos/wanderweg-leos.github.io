@@ -1,0 +1,50 @@
+---
+layout: default
+title: Contact
+description: Get in touch with Wanderweg Leonbergers in Halifax, Nova Scotia.
+permalink: /contact/
+# The words on this page live in _data/contact.yml. The form sends
+# messages through Web3Forms with the same access key as the
+# application (web3forms_access_key in _config.yml).
+---
+{% assign c = site.data.contact %}
+
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">{{ c.eyebrow }}</span>
+    <h1 class="h1">{{ c.title }}</h1>
+    <p class="lede">{{ c.lede }}</p>
+  </div>
+</section>
+
+<section class="page-body">
+  <div class="wrap row top g48">
+    <div class="col contact-side">
+      <div class="card contact-card">
+        <div><p class="label">{{ c.email_label }}</p><p class="big"><a href="mailto:{{ site.email }}">{{ site.email }}</a></p></div>
+        {% if site.facebook or site.instagram %}<div><p class="label">{{ c.follow_label }}</p><p>{% if site.facebook %}<a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a>{% endif %}{% if site.facebook and site.instagram %} · {% endif %}{% if site.instagram %}<a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a>{% endif %}</p></div>{% endif %}
+        <div><p class="label">{{ c.where_label }}</p><p class="big">{{ site.location }}</p></div>
+        <div><p class="label">{{ c.visits_label }}</p><p>{{ c.visits }}</p></div>
+      </div>
+      {% assign src = '/media/img/' | append: c.photo %}
+      {% include photo.html src=src alt=c.photo_alt class="r32" lazy=true %}
+    </div>
+    <div class="col wide">
+      <form action="https://api.web3forms.com/submit" method="POST" aria-labelledby="form-h">
+        <h2 id="form-h" class="form-title">{{ c.form_title }}</h2>
+        <input type="hidden" name="access_key" value="{{ site.web3forms_access_key }}">
+        <input type="hidden" name="subject" value="{{ c.email_subject }}">
+        <input type="hidden" name="from_name" value="{{ site.title }} website">
+        <input type="hidden" name="redirect" value="{{ '/contact/thank-you/' | absolute_url }}">
+        <div class="trap" aria-hidden="true"><label>Leave this empty<input type="checkbox" name="botcheck" tabindex="-1"></label></div>
+        <div class="two">
+          <label class="field"><span class="q">{{ c.name_label }} <span class="req" aria-hidden="true">*</span></span><input name="name" autocomplete="name" required></label>
+          <label class="field"><span class="q">{{ c.email_field_label }} <span class="req" aria-hidden="true">*</span></span><input name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <label class="field"><span class="q">{{ c.topic_label }}</span><select name="topic">{% for t in c.topics %}<option>{{ t }}</option>{% endfor %}</select></label>
+        <label class="field"><span class="q">{{ c.message_label }} <span class="req" aria-hidden="true">*</span></span><textarea name="message" rows="6" required></textarea></label>
+        <button type="submit" class="btn navy big">{{ c.send_button }}</button>
+      </form>
+    </div>
+  </div>
+</section>

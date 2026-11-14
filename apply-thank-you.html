@@ -8,29 +8,28 @@ noindex: true
 # The wording lives in _data/application.yml (thank_you)
 ---
 {% assign t = site.data.application.thank_you %}
-<section class="page-head">
+<section class="pagehead">
   <div class="wrap">
-    <span class="label">{{ t.eyebrow }}</span>
-    <h1>{{ t.title }}</h1>
+    <span class="eyebrow">{{ t.eyebrow }}</span>
+    <h1 class="h1">{{ t.title }}</h1>
     {% for p in t.paragraphs %}<p class="lede">{{ p }}</p>
     {% endfor %}
   </div>
 </section>
 
-<section class="sec-last">
-  <div class="wrap thanks">
-    {% assign src = '/media/img/' | append: t.photo %}
-    {% include photo.html src=src alt=t.photo_alt %}
-    <div>
+<section class="page-body">
+  <div class="wrap row thanks">
+    <div class="col">
+      {% assign src = '/media/img/' | append: t.photo %}
+      {% include photo.html src=src alt=t.photo_alt %}
+    </div>
+    <div class="col">
       <h2>{{ t.next_title }}</h2>
       {% for p in t.next %}<p>{{ p }}</p>
       {% endfor %}
-      <p class="links">
-        {% include social-links.html %}
-        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
-      </p>
+      <p class="social">{% include social-links.html %}<a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
       <div class="btns">
-        <a class="btn btn-solid" href="{{ '/our-leos/' | relative_url }}">{{ t.button }}</a>
+        <a class="btn navy" href="{{ '/our-leos/' | relative_url }}">{{ t.button }}</a>
       </div>
     </div>
   </div>

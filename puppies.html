@@ -1,26 +1,28 @@
 ---
 layout: default
-title: Puppies
-description: Leonberger puppies raised in our home in Halifax, Nova Scotia.
+title: Puppies & litters
+description: Leonberger puppies raised in our home in Halifax, Nova Scotia, and our past litters.
 permalink: /puppies/
-# The words on this page live in _data/puppies.yml and the litter card in _data/litter.yml.
+# The words on this page live in _data/puppies.yml, the litter card in
+# _data/litter.yml and the list of past litters in _data/past_litters.yml.
 ---
 {% assign p = site.data.puppies %}
 {% assign litter = site.data.litter %}
+{% assign past = site.data.past_litters %}
 
-<section class="page-head">
+<section class="pagehead">
   <div class="wrap">
-    <span class="label">{{ p.eyebrow }}</span>
-    <h1>{{ p.title }}</h1>
+    <span class="eyebrow">{{ p.eyebrow }}</span>
+    <h1 class="h1">{{ p.title }}</h1>
     <p class="lede">{{ p.lede }}</p>
   </div>
 </section>
 
 {% if litter.show == 'planning' or litter.show == 'current' %}
 {% assign l = litter[litter.show] %}
-<section aria-label="Litters">
+<section class="sec" aria-label="Next litter">
   <div class="wrap">
-    <article class="litter-card" id="litter">
+    <article class="card litter-card" id="litter">
       <div class="lc-photos">
         {% if litter.show == 'current' %}
         {% assign roles = 'mother,father' | split: ',' %}
@@ -28,7 +30,7 @@ permalink: /puppies/
         <figure class="parent">
           {% assign src = '/media/img/litter/' | append: d.photo %}
           {% include photo.html src=src alt=d.photo_alt %}
-          <figcaption><small>{% if role == 'mother' %}Mother{% else %}Father{% endif %}</small><b>{{ d.name }}</b><span>{{ d.registered_name }}</span></figcaption>
+          <figcaption><small class="label">{% if role == 'mother' %}Mother{% else %}Father{% endif %}</small><b>{{ d.name }}</b><span>{{ d.registered_name }}</span></figcaption>
         </figure>
         {% endif %}{% endfor %}
         {% else %}
@@ -39,57 +41,61 @@ permalink: /puppies/
         {% endif %}
       </div>
       <div class="lc-text">
-        <span class="pill">{{ l.label }} · {{ l.when }}</span>
-        <h2>{{ l.title }}</h2>
+        <span class="tag">{{ l.label }} · {{ l.when }}</span>
+        <h2 class="h3">{{ l.title }}</h2>
         {% if l.text %}<p>{{ l.text }}</p>{% endif %}
         {% for para in l.paragraphs %}<p>{{ para }}</p>
         {% endfor %}
         <div class="btns">
-          <a class="btn btn-solid" href="{{ '/apply/' | relative_url }}">{{ litter.apply_button }}</a>
-          <a class="btn" href="{{ '/apply/#contact' | relative_url }}">{{ litter.contact_button }}</a>
+          <a class="btn" href="{{ '/apply/' | relative_url }}">{{ litter.apply_button }}</a>
+          <a class="btn ghost" href="{{ '/contact/' | relative_url }}">{{ litter.contact_button }}</a>
         </div>
-        {% if site.facebook and site.instagram %}<p class="social-line">Follow along on <a href="{{ site.facebook }}" target="_blank" rel="noopener">Facebook</a> and <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram</a> for updates and puppy photos.</p>{% endif %}
       </div>
     </article>
   </div>
 </section>
 {% endif %}
 
-<section class="sec" aria-labelledby="inc-h">
-  <div class="wrap split split-top">
-    <div>
-      <span class="label">{{ p.included.eyebrow }}</span>
-      <h2 id="inc-h">{{ p.included.title }}</h2>
-      <p>{{ p.included.text }}</p>
-    </div>
-    <ul class="ticks">
-      {% for item in p.included.items %}<li>{{ item }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-</section>
-
-<section class="sec" aria-labelledby="steps-h">
+<section class="sec dark" aria-labelledby="steps-h">
   <div class="wrap">
-    <span class="label">{{ p.steps.eyebrow }}</span>
-    <h2 id="steps-h" class="sec-title">{{ p.steps.title }}</h2>
-    {% assign numerals = 'I,II,III,IV,V,VI,VII,VIII' | split: ',' %}
-    <ol class="step-cards">
+    <span class="eyebrow">{{ p.steps.eyebrow }}</span>
+    <h2 id="steps-h" class="h2">{{ p.steps.title }}</h2>
+    <ol class="trail">
       {% for s in p.steps.items %}
-      <li><span class="num" aria-hidden="true">{{ numerals[forloop.index0] }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>
+      <li><span class="marker">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></li>
       {% endfor %}
     </ol>
   </div>
 </section>
 
-<section class="sec sec-last" aria-labelledby="faq-h">
-  <div class="wrap faq-wrap">
-    <span class="label">{{ p.questions.eyebrow }}</span>
-    <h2 id="faq-h" class="sec-title">{{ p.questions.title }}</h2>
-    <div class="faq">
-      {% for f in p.questions.items %}
-      <details{% if forloop.first %} open{% endif %}><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>
-      {% endfor %}
+<section class="sec" aria-labelledby="inc-h">
+  <div class="wrap row top g48">
+    <div class="col wide">
+      <span class="eyebrow">{{ p.included.eyebrow }}</span>
+      <h2 id="inc-h" class="h2" style="margin-bottom:12px">{{ p.included.title }}</h2>
+      <p class="body" style="margin-bottom:24px">{{ p.included.text }}</p>
+      <ul class="bullets cols">
+        {% for item in p.included.items %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </div>
+    <div class="col narrow">
+      {% assign src = '/media/img/' | append: p.included.photo %}
+      {% include photo.html src=src alt=p.included.photo_alt position=p.included.photo_position class="r11" lazy=true %}
     </div>
   </div>
 </section>
+
+{% if past.litters.size > 0 %}
+<section class="sec paper" id="past" aria-labelledby="past-h">
+  <div class="wrap">
+    <span class="eyebrow">{{ past.eyebrow }}</span>
+    <h2 id="past-h" class="h2" style="margin-bottom:12px">{{ past.title }}</h2>
+    {% if past.text %}<p class="intro">{{ past.text }}</p>{% endif %}
+    <ol class="past-litters">
+      {% for l in past.litters %}
+      <li><span class="pl-date">{{ l.date }}</span><span class="pl-pair"><b>{{ l.title }}</b>{% if l.names %}<i>{{ l.names }}</i>{% endif %}</span><span class="pl-count">{{ l.puppies }}</span></li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{% endif %}

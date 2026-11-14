@@ -1,5 +1,7 @@
 {% comment %}
-  A photo in a frame. The frame's shape is set by where it is used (see
-  "Photos" in assets/css/styles.css), and the photo is cropped to fill it.
-  Usage: {% include photo.html src="/media/img/gallop.jpg" alt="…" position="50% 30%" lazy=true class="tall" %}
+  A photo in a frame. The frame's shape is set by "class" or by where it
+  is used (see "Photos" in assets/css/styles.css), and the photo is
+  cropped to fill it.
+  Usage: {% include photo.html src="/media/img/gallop.jpg" alt="…" position="50% 30%" lazy=true class="r43" %}
+  Shapes: r43 (4:3), r32 (3:2), r11 (square), r45 (tall 4:5).
 {% endcomment %}<figure class="frame{% if include.class %} {{ include.class }}{% endif %}"><img src="{{ include.src | relative_url }}" alt="{{ include.alt | escape }}"{% if include.lazy %} loading="lazy"{% endif %}{% if include.position %} style="object-position:{{ include.position }}"{% endif %}></figure>

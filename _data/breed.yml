@@ -1,0 +1,107 @@
+# ─────────────────────────────────────────────────────────────
+#  The Breed page (wanderweg.ca/the-breed/)
+#  Change the words between the quotes. Keep the indentation.
+#  Photos are file names in media/img/ (gallery photos start
+#  with "gallery/").
+#  "Is a Leonberger right for you?" at the bottom is linked from
+#  the home page and the Litters page (/the-breed/#fit).
+# ─────────────────────────────────────────────────────────────
+
+eyebrow: "The breed"
+title: "The Leonberger: a lion’s mane and a lamb’s heart"
+lede: "A giant, water-loving family dog bred to be a companion first. Here is what we want every family to know before they fall in love."
+photo: gallery/adult-portrait.jpg
+photo_alt: "Close-up of an adult Leonberger"
+photo_position: "50% 30%"
+
+glance:
+  title: "At a glance"
+  items:
+    - label: "Origin"
+      value: "Leonberg, Germany · 1840s"
+    - label: "Height at shoulder"
+      value: "Males 72–80 cm · Females 65–75 cm"
+    - label: "Weight"
+      value: "Roughly 40–77 kg"
+    - label: "Lifespan"
+      value: "Around 7–9 years"
+    - label: "Colours"
+      value: "Lion-yellow, red, red-brown, sand, with a black mask"
+    - label: "Coat"
+      value: "Water-resistant double coat, heavy shedding"
+
+history:
+  eyebrow: "History"
+  title: "A dog bred to look like the lion on a town crest"
+  paragraphs:
+    - "The story goes that Heinrich Essig, a councillor in the town of Leonberg, set out to breed a dog resembling the lion on its coat of arms. His dogs became prized companions across Europe and worked as farm, draft and watch dogs."
+    - "The breed came close to vanishing during both World Wars, and every Leonberger today descends from the few dogs that survived. That small foundation is why careful, health-focused breeding matters so much."
+  timeline:
+    - when: "1840s"
+      what: "The first Leonbergers are bred in Leonberg."
+    - when: "Early 1900s"
+      what: "Canada imports Leonbergers as water rescue dogs."
+    - when: "1914 – 1945"
+      what: "Two wars bring the breed to the edge of extinction."
+    - when: "Post-war"
+      what: "Dedicated breeders rebuild from a handful of dogs."
+    - when: "Today"
+      what: "Still uncommon, and loved for a steady, gentle family temperament."
+
+living:
+  title: "Living with a Leonberger"
+  cards:
+    - title: "Temperament"
+      text: "Calm, affectionate and deeply attached to their people. They want to be wherever you are, usually leaning on you."
+    - title: "Grooming"
+      text: "A thorough brush once or twice a week, more during seasonal coat blows. Expect fur on everything, and keep a towel by the door."
+    - title: "Health"
+      text: "Giant breeds have shorter lives and specific risks: hip and elbow dysplasia, bloat, some cancers, and inherited nerve conditions (LPN, LEMP). Tested parents lower the odds."
+
+winter:
+  eyebrow: "In every season"
+  title: "Made for a Canadian winter"
+  text: "That double coat shrugs off sleet, fog and a February nor’easter. Most Leonbergers would rather be out in the snow than by the fire, and most love the water, cold or not."
+  tips:
+    - "Rinse paws after salted roads and check between pads for ice."
+    - "Check that thick coat for ticks after spring and summer walks."
+    - "Summer heat is harder on them than winter. Walk early and find shade."
+  photo: gallery/snow.jpg
+  photo_alt: "Leonberger leaping through deep snow in the woods"
+
+walks:
+  title: "Walks for a growing puppy"
+  text: "Giant-breed joints keep growing until about 18–24 months. Free play on soft ground is fine; keep structured walks short."
+  age_heading: "Age"
+  walk_heading: "Structured walk"
+  rows:
+    - age: "2–4 months"
+      walk: "10–20 min"
+    - age: "4–8 months"
+      walk: "20–40 min"
+    - age: "8–18 months"
+      walk: "40–60 min, no forced running"
+    - age: "2 years +"
+      walk: "As long as you both like"
+  note: "A general guideline. Follow your own vet’s advice."
+  photo: gallery/lake-walk.jpg
+  photo_alt: "Leonberger trotting through the fenced yard by the lake"
+
+fit:
+  eyebrow: "Before you apply"
+  title: "Is a Leonberger right for you?"
+  text: "Leos are exceptional companions, but they are not for everyone. We would rather you know now."
+  thrive_title: "They thrive with"
+  thrive:
+    - "Families who want a dog with them for everything"
+    - "A fully fenced, secure yard, and a place inside the house"
+    - "Lots of time, especially in the first year"
+    - "Puppy and obedience classes from early on"
+  expect_title: "Expect"
+  expect:
+    - "A very large dog with a full coat that sheds all year"
+    - "Digging in the garden and jumping up to say hello"
+    - "A friendly guardian who needs calm guidance from you"
+    - "Fur on everything, and a lot of love"
+  apply_button: "Apply for a puppy"
+  visit_button: "Book a visit"      # goes to the Contact page

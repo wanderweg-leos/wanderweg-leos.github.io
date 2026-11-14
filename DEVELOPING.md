@@ -16,11 +16,13 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 ├── _config.yml               Site settings: name, email, social links, feature switches
 ├── _data/                    All page content (one file per area)
 │   ├── home.yml              Home page wording and big photo
-│   ├── about.yml             About page: story, commitments, "Is a Leo right for you?"
+│   ├── breed.yml             The Breed page: at a glance, history, living with, winter, walks, "Is a Leo right for you?"
+│   ├── contact.yml           Contact page and its thank-you page
 │   ├── puppies.yml           Puppies page: included, steps, common questions
 │   ├── litter.yml            Litter card: "planning" and "current" versions
 │   ├── gallery.yml           Gallery photo list (About page)
 │   ├── leos.yml              Our Leos page and dog pages
+│   ├── past_litters.yml      Past litters list on the Puppies page
 │   ├── application.yml       Application: questions, intro, wording, thank-you page
 │   ├── blog.yml              Blog archive wording (archive page, post notes, footer link)
 │   └── navigation.yml        Main menu (also the footer's page links)
@@ -37,7 +39,9 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── email.html            The large email link
 │   └── social-links.html     Facebook / Instagram links, skipped when empty
 ├── index.html                Home page
-├── about.html                /about/
+├── the-breed.html            /the-breed/
+├── contact.html              /contact/ (form posts to Web3Forms)
+├── contact-thank-you.html    /contact/thank-you/
 ├── puppies.html              /puppies/
 ├── apply.html                /apply/ (form generated from application.yml)
 ├── apply-thank-you.html      /apply/thank-you/
@@ -49,6 +53,8 @@ Technical notes for anyone changing how the site works or looks. To edit the wor
 │   ├── css/styles.css
 │   ├── js/site.js
 │   ├── js/application.js
+│   ├── js/family-tree.js     Draws the family tree on the Our Leos pages
+│   ├── data/family-tree.md   The family tree data (format explained at its top)
 │   └── img/favicon.svg       The only image kept here; every photo is in the media repo
 ├── Gemfile                   Only for local previews
 └── .editorconfig             Spaces not tabs, LF line endings
@@ -84,13 +90,19 @@ Always render photos through the include, never with a bare `<img>`:
 It wraps the image in a `<figure class="frame">` with `object-fit: cover`. The frame has no shape of its own: the surrounding CSS sets it (`aspect-ratio` or a fixed height), so the same include works for the hero, the tall About photo and the square gallery tiles. `class` adds extra classes (e.g. `tall`), `position` controls the crop and `lazy` adds `loading="lazy"` (use it for anything below the fold). Data files store only the file name; the template adds the folder. Inside a link or button, write the `<span class="frame"><img …></span>` by hand instead, since a `<figure>` isn't allowed there.
 
 ### Menu
-`header.html` loops over `_data/navigation.yml` and sets `aria-current="page"` when the page's URL equals an item's `url`, or starts with it (so `/our-leos/riley/` marks "Our Leos"; "Home" only matches `/`). `highlight: true` makes the item the button on the right (`.nav-q`). Below 860px the menu folds behind the Menu button, handled by `site.js`. The footer lists the same items (except Home), using `footer_label` when set.
+`header.html` loops over `_data/navigation.yml` and sets `aria-current="page"` when the page's URL equals an item's `url`, or starts with it (so `/our-leos/ava/` marks "Our Leos"; "Home" only matches `/`). `highlight: true` makes the item the button on the right (`.cta`). Below 860px the menu folds behind the Menu button, handled by `site.js`. The footer lists the same items (except Home), using `footer_label` when set.
 
 ### Litter card
 `litter.yml` keeps both versions side by side; `show` picks one (`planning`, `current`, or `off`). `puppies.html` reads `litter[litter.show]` for the card (`#litter`); the `current` version shows the `mother` and `father` photos, and the `planning` version shows `planning_photos` from `puppies.yml`. `index.html` reads the same `label` and `when` for the tag on the hero photo. Note that YAML reads `off` as `false`, which works because the templates only match the two strings.
 
 ### Our Leos pages
 `_layouts/leo.html` renders the whole Our Leos page: the page head, a row of `.dog-pick` cards linking to every dog's page, then one `.dog-panel` (story, `lives`/`loves` facts, and the `clearances` table of `test`/`by`/`result`). Each dog's page is a tiny file in `our-leos/<id>.html` whose front matter sets `dog: <id>`, `title`, `permalink` and `layout: leo`; the layout looks the dog up with `where: "id", page.dog` and marks its card with `aria-current="page"`. `our-leos/index.html` has no `dog`, so the layout falls back to the first dog. GitHub Pages can't generate pages from data in safe mode, which is why each dog needs its stub file. No JavaScript is involved.
+
+### Family tree
+`_layouts/leo.html` adds a "Family tree" section under the dog panel when `tree:` is set in `leos.yml`. The dogs aren't in `_data`: they're in `assets/data/family-tree.md` (`## ` = a generation/row, `### ` = a dog's call name, `- key: value` lines for `registered`, `dam`, `photo`, `photo focus`). It has no front matter, so Jekyll copies it as a plain file. `assets/js/family-tree.js` fetches it, builds a row of cards per generation and draws an SVG line from each mother (when her `dam` is another dog in the file) to her daughters. Photos are in `img/tree/` in the media repo. If the file can't be loaded, the empty tree container is removed.
+
+### Past litters
+`puppies.html` lists `site.data.past_litters.litters` (date, call names, registered names, puppy count) in a section before the common questions. Styles are under "Past litters" in `styles.css`.
 
 ### Search engines
 `hide_from_search` in `_config.yml` makes `robots.txt` disallow everything. Turn it off at launch.

@@ -4,8 +4,8 @@
 #  Photos live in media/img/. To swap one, upload the new photo
 #  there and change the file name here.
 #
-#  The small "Next litter" tag on the big photo comes from
-#  _data/litter.yml, so it changes when the litter panel does.
+#  The dog cards in "Meet the girls" come from _data/leos.yml and
+#  the "Life with Leos" photos from _data/gallery.yml.
 # ─────────────────────────────────────────────────────────────
 
 hero:
@@ -16,37 +16,65 @@ hero:
   photo_alt: "Leonberger in full gallop across the lawn"
   # Which part of the photo to keep when it is cropped ("left-right top-bottom").
   photo_position: "30% 55%"
-  button: "About our puppies"        # goes to the Puppies page
+  button: "About our puppies"        # goes to the Litters page
   second_button: "Meet our Leos"     # goes to the Our Leos page
+  # The three short facts under the buttons
+  stats:
+    - big: "20+ years"
+      small: "raising Leonbergers"
+    - big: "Health-tested"
+      small: "hips, elbows, eyes, DNA"
+    - big: "CKC"
+      small: "registered puppies"
 
-# The three cards under the big photo
+# The three numbered boxes
 why:
   eyebrow: "Why Wanderweg"
   title: "Our dogs are family first, and every puppy is raised that way."
-  # icon: shield, house or heart
   cards:
-    - icon: shield
-      title: "Health-tested parents"
-      text: "Hips and elbows x-rayed, eyes checked, and LEMP and LPN1–3 DNA tests before any litter is planned."
-    - icon: house
-      title: "Raised in our home"
+    - title: "Health-tested parents"
+      text: "Hips and elbows X-rayed, eyes checked, and LEMP and LPN1–3 DNA tests before any litter is planned."
+    - title: "Raised in our home"
       text: "Puppies grow up in the house with us, handled every day and well socialized before they leave."
-    - icon: heart
-      title: "Matched with care"
+    - title: "Matched with care"
       text: "We take time to place each puppy with a family who will include them in everything they do."
 
-# The two photos and "Meet the girls"
+# About us. The memberships line under it comes from _config.yml.
+about:
+  eyebrow: "About us"
+  title: "Our dogs are family first"
+  lede: "We’ve been raising Leonbergers in Halifax, Nova Scotia, for over 20 years."
+  paragraphs:
+    - "Our Leonbergers are the loves of our lives. Puppies are raised in our home, handled every day and well socialized before they leave. We take time to match each puppy with a family who will include them in everything they do."
+    - "We breed for health, temperament, type and soundness. Every breeding dog is fully health tested before a litter is planned, and every puppy is health checked before going home."
+  photo: four-leos.jpg
+  photo_alt: "Four Leonbergers sitting side by side on the grass"
+
+# "Meet the girls". The cards show every dog in _data/leos.yml.
 meet:
   eyebrow: "Our Leos"
   title: "Meet the girls"
-  text: "Riley, Priya and Fiona are family dogs first. Every one of our Leonbergers lives in the house with us. Meet each of them and see their full health results."
-  button: "Our Leos →"
-  # Which two dogs' photos to show (their ids in _data/leos.yml)
-  dogs: [riley, fiona]
+  text: "Ava, Marley, Lottie and Hazel are family dogs first. Every one of our Leonbergers lives in the house with us."
+  link: "Pedigrees & health results →"
+
+# The dark band with the beach photo
+outdoors:
+  eyebrow: "Out and about"
+  title: "Made for the long way round."
+  paragraphs:
+    - "Leos are happiest outdoors with their people: a swim in the lake, a trot along the beach, a romp through deep snow in a Canadian winter."
+    - "Our puppies grow up underfoot, meeting family life, new sounds, new surfaces and new friends, so they head home confident and ready for adventures of their own."
+  photo: gallery/beach-trot.jpg
+  photo_alt: "Leonberger trotting along the beach by the ocean"
+
+# The photo grid (photos listed in _data/gallery.yml)
+photos:
+  eyebrow: "Photos"
+  title: "Life with Leos"
 
 # The dark band at the bottom of the page
 cta:
   title: "Thinking about a Leo?"
   text: "Start with our honest look at life with a Leonberger, then apply for a puppy."
-  fit_button: "Is a Leo right for you?"   # goes to that section of the About page
+  fit_button: "Is a Leo right for you?"   # goes to that section of The Breed page
   apply_button: "Apply for a puppy"

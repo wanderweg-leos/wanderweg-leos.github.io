@@ -8,23 +8,25 @@ layout: default
     thumbnail), missing_photos (count of lost photos), lost_video,
     title_only (post had no text or photos on the old blog).
 {% endcomment %}{% assign b = site.data.blog %}
-<section class="page-head">
-  <div class="wrap">
-    <a class="label" href="{{ '/blog_archive/' | relative_url }}">{{ b.title }}</a>
+<section class="pagehead post-head">
+  <div class="wrap post-wrap">
+    <a class="eyebrow" href="{{ '/blog_archive/' | relative_url }}">← {{ b.title }}</a>
     <h1>{{ page.title }}</h1>
-    <p class="post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
+    <p class="label post-date"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
   </div>
 </section>
-<div class="wrap">
-  <article class="post">
-    {{ content }}
-    {% if page.missing_photos == 1 %}<p class="post-note">{{ b.missing_photo }}</p>
-    {% elsif page.missing_photos %}{% assign n_token = '{n}' %}<p class="post-note">{{ b.missing_photos | replace: n_token, page.missing_photos }}</p>{% endif %}
-    {% if page.lost_video %}<p class="post-note">{{ b.lost_video }}</p>{% endif %}
-    {% if page.title_only %}<p class="post-note">{{ b.title_only }}</p>{% endif %}
-  </article>
-  <nav class="post-nav" aria-label="More posts">
-    {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>{{ b.older }}</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
-    {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><small>{{ b.newer }}</small>{{ page.next.title }}</a>{% endif %}
-  </nav>
-</div>
+<section class="page-body">
+  <div class="wrap post-wrap">
+    <article class="post">
+      {{ content }}
+      {% if page.missing_photos == 1 %}<p class="post-note">{{ b.missing_photo }}</p>
+      {% elsif page.missing_photos %}{% assign n_token = '{n}' %}<p class="post-note">{{ b.missing_photos | replace: n_token, page.missing_photos }}</p>{% endif %}
+      {% if page.lost_video %}<p class="post-note">{{ b.lost_video }}</p>{% endif %}
+      {% if page.title_only %}<p class="post-note">{{ b.title_only }}</p>{% endif %}
+    </article>
+    <nav class="post-nav" aria-label="More posts">
+      {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>{{ b.older }}</small>{{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+      {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><small>{{ b.newer }}</small>{{ page.next.title }}</a>{% endif %}
+    </nav>
+  </div>
+</section>
