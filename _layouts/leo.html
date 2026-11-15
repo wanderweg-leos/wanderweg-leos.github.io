@@ -2,110 +2,92 @@
 layout: default
 ---
 {% comment %}
-  The Our Leos page and each dog's own page (the files in our-leos/).
-  Everything on it comes from _data/leos.yml: a file only says which dog
-  to show (dog: <id>). The row of cards links to every dog's page and
-  marks the one being shown. The About / Pedigree / Health tabs are
-  switched by assets/js/site.js; without JavaScript all three show,
-  one under the other. The family tree at the bottom is drawn by
-  assets/js/family-tree.js from assets/data/family-tree.md.
+  One dog's own page (the files in our-leos/ other than index.html).
+  Everything on it comes from _data/leos.yml: the page's file only says
+  which dog to show (dog: <id>). The links at the bottom go to the
+  previous and next dog in the order they are listed in leos.yml.
 {% endcomment %}{% assign leos = site.data.leos %}
 {% assign d = leos.dogs | where: "id", page.dog | first %}
 {% unless d %}{% assign d = leos.dogs | first %}{% endunless %}
 {% assign name_token = '{name}' %}
+{% assign count = leos.dogs | size %}
+{% for o in leos.dogs %}{% if o.id == d.id %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign pi = i | minus: 1 %}{% if pi < 0 %}{% assign pi = count | minus: 1 %}{% endif %}
+{% assign ni = i | plus: 1 %}{% if ni >= count %}{% assign ni = 0 %}{% endif %}
+{% assign prev = leos.dogs[pi] %}{% assign next = leos.dogs[ni] %}
 
 <section class="pagehead">
   <div class="wrap">
-    <span class="eyebrow">{{ leos.eyebrow }}</span>
-    <h1 class="h1">{{ leos.title }}</h1>
-    <p class="lede">{{ leos.intro }}</p>
+    <a class="eyebrow" href="{{ '/our-leos/' | relative_url }}">← {{ leos.eyebrow }}</a>
+    <h1 class="h1">{{ d.name }}</h1>
+    {% if d.registered_name != "" %}<p class="lede dog-reg">{{ d.registered_name }}</p>{% endif %}
   </div>
 </section>
 
-{% if d %}
-<section class="page-body">
+<section class="sec" aria-labelledby="about-h">
+  <div class="wrap row top g64">
+    <div class="col">
+      {% assign src = '/media/img/leos/' | append: d.photo %}
+      {% include photo.html src=src alt=d.photo_alt position=d.photo_position class="r54" %}
+    </div>
+    <div class="col">
+      <h2 id="about-h" class="eyebrow">{{ leos.about_heading }}</h2>
+      <div class="story">
+        {% for p in d.story %}<p>{{ p }}</p>
+        {% endfor %}
+      </div>
+      <dl class="glance dog-facts">
+        {% if d.pedigree.sire %}<div><dt class="label">{{ leos.sire_label }}</dt><dd>{{ d.pedigree.sire.call_name | default: d.pedigree.sire.name }}</dd></div>{% endif %}
+        {% if d.pedigree.dam %}<div><dt class="label">{{ leos.dam_label }}</dt><dd>{{ d.pedigree.dam.call_name | default: d.pedigree.dam.name }}</dd></div>{% endif %}
+        {% for c in d.clearances %}{% if c.test == 'Hips' or c.test == 'Elbows' %}<div><dt class="label">{{ c.test }}</dt><dd>{{ c.result }} <span class="by">{{ c.by }}</span></dd></div>{% endif %}{% endfor %}
+      </dl>
+    </div>
+  </div>
+</section>
+
+{% assign p = d.pedigree %}
+{% if p.sire or p.dam %}
+<section class="sec paper" aria-labelledby="ped-h">
   <div class="wrap">
-    <nav class="picker" aria-label="Choose a dog">
-      {% for o in leos.dogs %}
-      <a class="pick" href="{{ '/our-leos/' | append: o.id | append: '/' | relative_url }}"{% if o.id == d.id %} aria-current="page"{% endif %}>
-        <span class="frame"><img src="{{ '/media/img/leos/' | append: o.photo | relative_url }}" alt=""{% if o.photo_position %} style="object-position:{{ o.photo_position }}"{% endif %}></span>
-        <span class="t"><span class="pick-name">{{ o.name }}</span>{% if o.registered_name != "" %}<span class="pick-reg">{{ o.registered_name }}</span>{% endif %}</span>
-      </a>
-      {% endfor %}
-    </nav>
-
-    <article class="card dog-card" aria-labelledby="dog-name">
-      <div class="dog-side">
-        {% assign src = '/media/img/leos/' | append: d.photo %}
-        {% include photo.html src=src alt=d.photo_alt position=d.photo_position %}
-        <dl class="facts">
-          {% if d.pedigree.sire %}<div><dt class="label">{{ leos.sire_label }}</dt><dd>{{ d.pedigree.sire.call_name | default: d.pedigree.sire.name }}</dd></div>{% endif %}
-          {% if d.pedigree.dam %}<div><dt class="label">{{ leos.dam_label }}</dt><dd>{{ d.pedigree.dam.call_name | default: d.pedigree.dam.name }}</dd></div>{% endif %}
-          {% for c in d.clearances %}{% if c.test == 'Hips' or c.test == 'Elbows' %}<div><dt class="label">{{ c.test }}</dt><dd>{{ c.by }} {{ c.result }}</dd></div>{% endif %}{% endfor %}
-        </dl>
-      </div>
-      <div class="dog-main" data-tabs>
-        <h2 id="dog-name">{{ d.name }}</h2>
-        {% if d.registered_name != "" %}<p class="reg">{{ d.registered_name }}</p>{% endif %}
-        <div class="tabs" role="tablist" aria-label="{{ d.name }}" hidden>
-          <button role="tab" type="button" id="tab-about" aria-controls="panel-about" aria-selected="true">{{ leos.about_tab }}</button>
-          <button role="tab" type="button" id="tab-pedigree" aria-controls="panel-pedigree" aria-selected="false" tabindex="-1">{{ leos.pedigree_tab }}</button>
-          <button role="tab" type="button" id="tab-health" aria-controls="panel-health" aria-selected="false" tabindex="-1">{{ leos.health_tab }}</button>
-        </div>
-
-        <div class="tab-panel story" id="panel-about" role="tabpanel" aria-labelledby="tab-about">
-          <h3>{{ leos.about_tab }}</h3>
-          {% for p in d.story %}<p>{{ p }}</p>
-          {% endfor %}
-        </div>
-
-        <div class="tab-panel" id="panel-pedigree" role="tabpanel" aria-labelledby="tab-pedigree">
-          <h3>{{ leos.pedigree_tab }}</h3>
-          {% assign p = d.pedigree %}
-          <div class="ped">
-            <div class="subj"><span class="label">{{ d.name }}</span><span class="nm">{{ d.registered_name | default: d.name }}</span></div>
-            {% if p.sire %}<div class="s"><span class="label">{{ leos.sire_label }}</span><span class="nm">{{ p.sire.name }}</span>{% if p.sire.call_name %}<span class="cn">“{{ p.sire.call_name }}”</span>{% endif %}</div>{% endif %}
-            {% if p.dam %}<div class="d"><span class="label">{{ leos.dam_label }}</span><span class="nm">{{ p.dam.name }}</span>{% if p.dam.call_name %}<span class="cn">“{{ p.dam.call_name }}”</span>{% endif %}</div>{% endif %}
-            {% if p.sire.sire %}<div class="g g1"><span class="label">{{ leos.grandsire_label }}</span><span class="nm">{{ p.sire.sire }}</span></div>{% endif %}
-            {% if p.sire.dam %}<div class="g g2"><span class="label">{{ leos.granddam_label }}</span><span class="nm">{{ p.sire.dam }}</span></div>{% endif %}
-            {% if p.dam.sire %}<div class="g g3"><span class="label">{{ leos.grandsire_label }}</span><span class="nm">{{ p.dam.sire }}</span></div>{% endif %}
-            {% if p.dam.dam %}<div class="g g4"><span class="label">{{ leos.granddam_label }}</span><span class="nm">{{ p.dam.dam }}</span></div>{% endif %}
-          </div>
-          <p class="small" style="margin-top:16px">{{ leos.pedigree_note }}{% if leos.pedigree_link %} · <a href="{{ leos.pedigree_link }}" target="_blank" rel="noopener">Leonberger Database</a>{% endif %}</p>
-        </div>
-
-        <div class="tab-panel" id="panel-health" role="tabpanel" aria-labelledby="tab-health">
-          <h3>{{ leos.health_tab }}</h3>
-          {% if d.clearances.size > 0 %}
-          <div class="table-box">
-            <table class="results">
-              <thead><tr><th scope="col">{{ leos.test_heading }}</th><th scope="col">{{ leos.result_heading }}</th></tr></thead>
-              <tbody>
-                {% for c in d.clearances %}<tr><td>{{ c.test }}{% if c.by %}<span>{{ c.by }}</span>{% endif %}</td><td><span class="badge">{{ c.result }}</span></td></tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          <p class="small" style="margin-top:14px">{{ leos.clearances_note }}</p>
-          {% else %}
-          <p class="empty-note">{{ leos.no_clearances | replace: name_token, d.name }}</p>
-          {% endif %}
-        </div>
-      </div>
-    </article>
+    <h2 id="ped-h" class="h2" style="margin-bottom:28px">{{ leos.pedigree_heading }}</h2>
+    <div class="ped">
+      <div class="subj"><span class="label">{{ d.name }}</span><span class="nm">{{ d.registered_name | default: d.name }}</span></div>
+      {% if p.sire %}<div class="s"><span class="label">{{ leos.sire_label }}</span><span class="nm">{{ p.sire.name }}</span>{% if p.sire.call_name %}<span class="cn">“{{ p.sire.call_name }}”</span>{% endif %}</div>{% endif %}
+      {% if p.dam %}<div class="d"><span class="label">{{ leos.dam_label }}</span><span class="nm">{{ p.dam.name }}</span>{% if p.dam.call_name %}<span class="cn">“{{ p.dam.call_name }}”</span>{% endif %}</div>{% endif %}
+      {% if p.sire.sire %}<div class="g g1"><span class="label">{{ leos.grandsire_label }}</span><span class="nm">{{ p.sire.sire }}</span></div>{% endif %}
+      {% if p.sire.dam %}<div class="g g2"><span class="label">{{ leos.granddam_label }}</span><span class="nm">{{ p.sire.dam }}</span></div>{% endif %}
+      {% if p.dam.sire %}<div class="g g3"><span class="label">{{ leos.grandsire_label }}</span><span class="nm">{{ p.dam.sire }}</span></div>{% endif %}
+      {% if p.dam.dam %}<div class="g g4"><span class="label">{{ leos.granddam_label }}</span><span class="nm">{{ p.dam.dam }}</span></div>{% endif %}
+    </div>
+    <p class="small" style="margin-top:16px">{{ leos.pedigree_note }}{% if leos.pedigree_link %} · <a href="{{ leos.pedigree_link }}" target="_blank" rel="noopener">Leonberger Database</a>{% endif %}</p>
   </div>
 </section>
 {% endif %}
 
-{% if leos.tree %}
-<section class="sec plain" style="border-top:1px solid var(--line)" aria-labelledby="tree-h">
+<section class="sec" aria-labelledby="health-h">
   <div class="wrap">
-    {% if leos.tree.eyebrow %}<span class="eyebrow">{{ leos.tree.eyebrow }}</span>{% endif %}
-    <h2 id="tree-h" class="h2">{{ leos.tree.title }}</h2>
-    <div class="ft-scroll">
-      <div class="family-tree" id="family-tree" data-src="{{ '/assets/data/family-tree.md' | relative_url }}" data-photos="{{ '/media/img/tree/' | relative_url }}"></div>
+    <h2 id="health-h" class="h2" style="margin-bottom:28px">{{ leos.health_heading }}</h2>
+    {% if d.clearances.size > 0 %}
+    <div class="table-box dog-health">
+      <table class="results">
+        <thead><tr><th scope="col">{{ leos.test_heading }}</th><th scope="col">{{ leos.result_heading }}</th></tr></thead>
+        <tbody>
+          {% for c in d.clearances %}<tr><td>{{ c.test }}{% if c.by %}<span>{{ c.by }}</span>{% endif %}</td><td><span class="badge">{{ c.result }}</span></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+    <p class="small" style="margin-top:14px">{{ leos.clearances_note }}</p>
+    {% else %}
+    <p class="empty-note">{{ leos.no_clearances | replace: name_token, d.name }}</p>
+    {% endif %}
   </div>
 </section>
-<script src="{{ '/assets/js/family-tree.js' | relative_url }}" defer></script>
+
+{% if count > 1 %}
+<nav class="wrap dog-nav" aria-label="Our other Leos">
+  <a class="prev" href="{{ '/our-leos/' | append: prev.id | append: '/' | relative_url }}"><small>← {{ leos.previous_label }}</small>{{ prev.name }}</a>
+  <a class="all" href="{{ '/our-leos/' | relative_url }}">{{ leos.all_link }}</a>
+  <a class="next" href="{{ '/our-leos/' | append: next.id | append: '/' | relative_url }}"><small>{{ leos.next_label }} →</small>{{ next.name }}</a>
+</nav>
 {% endif %}

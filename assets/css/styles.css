@@ -3,7 +3,7 @@
 
    Order: design tokens · Base · Type and labels · Buttons · Photos ·
    Sections and layout · Building blocks (boxes, bullets, trails,
-   tables) · Header · Footer · Home · Our Leos (dog cards, tabs,
+   tables) · Header · Footer · Home · Our Leos (list, dog pages,
    pedigree, health, family tree) · Litters (litter card, past
    litters) · The Breed · Forms (contact and application) ·
    Thank-you and 404 · Blog archive and posts · Photo viewer ·
@@ -31,7 +31,7 @@
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;scroll-padding-top:130px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-wrap:break-word;background:var(--cream);color:var(--ink);font-family:var(--text);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:var(--rust)} a:hover{color:var(--rust-dk)}
 h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;line-height:1.1;text-wrap:balance}
@@ -65,7 +65,7 @@ button,input,select,textarea{font-family:inherit;font-size:17px;color:var(--ink)
 .btn.ghost{background:transparent;color:var(--navy);border-color:var(--navy)} .btn.ghost:hover{background:var(--navy);color:var(--cream)}
 .dark .btn.ghost{color:var(--cream);border-color:var(--cream)} .dark .btn.ghost:hover{background:var(--cream);color:var(--navy)}
 .text-link{color:var(--navy);font-size:17px;padding:12px 0}
-.linkbtn{background:none;border:none;color:var(--rust);text-decoration:underline;cursor:pointer;font-size:15px;padding:4px}
+.linkbtn{background:none;border:none;color:var(--rust);text-decoration:underline;cursor:pointer;font-size:15px;padding:4px 0}
 
 /* ── Photos ───────────────────────────────────────────────── */
 /* Every photo goes through _includes/photo.html: a .frame with the
@@ -73,7 +73,7 @@ button,input,select,textarea{font-family:inherit;font-size:17px;color:var(--ink)
 .frame{display:block;margin:0;overflow:hidden;background:var(--photo-bg);border:1px solid var(--line)}
 .frame img{width:100%;height:100%;object-fit:cover}
 .dark .frame{border-color:var(--navy-line)}
-.r43{aspect-ratio:4/3}.r32{aspect-ratio:3/2}.r11{aspect-ratio:1/1}.r45{aspect-ratio:4/5}
+.r43{aspect-ratio:4/3}.r54{aspect-ratio:5/4}.r32{aspect-ratio:3/2}.r11{aspect-ratio:1/1}.r45{aspect-ratio:4/5}
 
 /* ── Sections and layout ──────────────────────────────────── */
 .sec{padding:88px 0;border-bottom:1px solid var(--line)}
@@ -102,9 +102,10 @@ button,input,select,textarea{font-family:inherit;font-size:17px;color:var(--ink)
 .marker{display:inline-flex;width:46px;height:46px;align-items:center;justify-content:center;background:var(--rust);color:var(--paper);font-family:var(--display);font-size:21px;font-weight:700;flex-shrink:0}
 .marker.n{background:var(--navy)}
 .marker.s{background:var(--slate)}
-.boxrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));border:1px solid var(--line)}
-.boxrow>div{padding:36px 32px;border-right:1px solid var(--line)}
-.boxrow>div:last-child{border-right:none}
+.boxrow{display:grid;grid-template-columns:1fr;border:1px solid var(--line)}
+.boxrow>div{padding:36px 32px}
+.boxrow>div+div{border-top:1px solid var(--line)}
+@media (min-width:900px){.boxrow{grid-template-columns:repeat(3,minmax(0,1fr))}.boxrow>div+div{border-top:none;border-left:1px solid var(--line)}}
 .boxrow h3{font-size:30px;margin:22px 0 10px}
 .boxrow p{color:var(--body);font-size:17px}
 .card{background:var(--paper);border:1px solid var(--line)}
@@ -130,6 +131,7 @@ table{width:100%;border-collapse:collapse}
 th{background:var(--navy);color:var(--cream);text-align:left;padding:12px 16px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
 td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 .table-box{overflow-x:auto;border:1px solid var(--line)}
+.table-box td:first-child{white-space:nowrap}
 .badge{display:inline-block;padding:3px 10px;font-size:14px;background:var(--badge-bg);color:var(--navy);border:1px solid var(--badge-line)}
 .notice{border:1px solid var(--line);border-top:6px solid var(--navy);background:var(--paper);padding:44px 40px}
 
@@ -164,7 +166,8 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 
 /* ── Home ─────────────────────────────────────────────────── */
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero-lines{position:absolute;inset:0;width:100%;height:100%}
+.hero-lines{position:absolute;left:0;right:0;bottom:0;width:100%;height:64px}
+.hero-lines path{vector-effect:non-scaling-stroke}
 .hero-lines g{fill:none;stroke:var(--line-soft);stroke-width:1.2}
 .hero-lines .path{fill:none;stroke:var(--gold-dk);stroke-width:2;stroke-dasharray:2 9}
 .hero .row{position:relative;padding-top:80px;padding-bottom:96px}
@@ -172,8 +175,8 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 .stats{display:flex;flex-wrap:wrap;gap:32px;margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;color:var(--body)}
 .stats strong{display:block;font-family:var(--display);font-size:28px;color:var(--ink);line-height:1.15}
 .home-dog{display:block;text-decoration:none;color:var(--ink)}
-.home-dog .frame{aspect-ratio:3/2;border:0;border-bottom:1px solid var(--line)}
-.home-dog .t{padding:22px 24px 26px}
+.home-dog .frame{aspect-ratio:5/4;border:0;border-bottom:1px solid var(--line)}
+.home-dog .t{display:block;padding:22px 24px 26px}
 .home-dog h3{font-size:32px;margin-bottom:4px}
 .home-dog p{font-style:italic;font-size:15px;color:var(--body)}
 .home-dog:hover h3{color:var(--rust)}
@@ -186,36 +189,42 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 .dark .col p+p,.dark .col h2+p{margin-top:18px}
 
 /* Gallery (home page) */
-.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (min-width:900px){.gallery{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .gallery button{padding:0;border:none;background:none;cursor:zoom-in;aspect-ratio:4/3;overflow:hidden}
 .gallery .frame{height:100%;border:0}
 .gallery img{transition:transform .4s ease}
 .gallery button:hover img{transform:scale(1.04)}
 
 /* ── Our Leos ─────────────────────────────────────────────── */
-.picker{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-.pick{display:flex;flex-direction:column;justify-content:flex-start;background:var(--cream);border:1px solid var(--line);color:var(--ink);text-decoration:none}
-.pick .frame{aspect-ratio:3/2;border:0;border-bottom:1px solid var(--line)}
-.pick .t{display:block;padding:14px 18px 16px}
-.pick-name{display:block;font-family:var(--display);font-size:28px;font-weight:600;line-height:1.15}
-.pick-reg{display:block;font-size:14px;font-style:italic;color:var(--muted)}
-.pick:hover{border-color:var(--muted)}
-.pick[aria-current="page"]{background:var(--paper);border-color:var(--rust);box-shadow:inset 0 0 0 2px var(--rust)}
-.dog-card{margin-top:36px;display:flex;flex-wrap:wrap}
-.dog-side{flex:1 1 360px;min-width:0;border-right:1px solid var(--line)}
-.dog-side .frame{aspect-ratio:4/3;border:0;border-bottom:1px solid var(--line)}
-.facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px;padding:24px 26px 28px}
-.facts dd{margin:2px 0 0;font-size:17px}
-.dog-main{flex:999 1 520px;min-width:0;padding:40px 44px 48px}
-.dog-main h2{font-size:60px;line-height:1}
-.dog-main .reg{margin-top:8px;font-style:italic;color:var(--body);font-size:18px}
-.tabs{display:flex;flex-wrap:wrap;margin-top:28px;border-bottom:1px solid var(--navy)}
-.tabs button{min-height:48px;padding:10px 28px;font-size:17px;cursor:pointer;border:1px solid var(--navy);border-bottom:none;margin-right:-1px;background:transparent;color:var(--navy)}
-.tabs button[aria-selected="true"]{background:var(--navy);color:var(--cream)}
-.tab-panel{padding-top:28px}
-.tab-panel>h3{font-size:28px;margin-bottom:14px}
-.tabs-ready .tab-panel>h3{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .story p{font-size:19px;color:var(--body);margin-bottom:16px}
+/* Our Leos list (our-leos/index.html) */
+.leo-list{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--line)}
+.leo-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:56px;align-items:center;padding:48px 0;border-top:1px solid var(--line)}
+.leo-row:first-child{border-top:none;padding-top:8px}
+.leo-photo{display:block}
+.leo-photo:hover img{transform:scale(1.03)}
+.leo-photo img{transition:transform .4s ease}
+.leo-text h2{font-size:clamp(2.4rem,4vw,3.4rem);line-height:1}
+.leo-text h2 a{color:var(--ink);text-decoration:none}
+.leo-text h2 a:hover{color:var(--rust)}
+.leo-text .reg{margin-top:8px;font-style:italic;color:var(--body)}
+.leo-text .body{margin-top:18px}
+.leo-parents{margin-top:16px;font-size:16px;color:var(--body)}
+.leo-parents .label{display:block;margin-bottom:2px}
+.leo-text .more{display:inline-block;margin-top:20px;padding:8px 0;color:var(--navy)}
+/* One dog's page (_layouts/leo.html) */
+.dog-reg{font-style:italic;margin-top:12px}
+.story p{font-size:19px;color:var(--body);margin-bottom:16px}
+.dog-facts{margin-top:28px}
+.dog-facts .by{color:var(--muted);font-size:15px}
+.dog-health{max-width:720px}
+.dog-nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:20px;padding-top:32px;padding-bottom:72px}
+.dog-nav a{text-decoration:none;color:var(--ink);font-family:var(--display);font-size:28px;font-weight:600;line-height:1.1}
+.dog-nav a small{display:block;font-family:var(--text);font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:400;color:var(--rust);margin-bottom:6px}
+.dog-nav a.all{font-family:var(--text);font-size:16px;font-weight:400;color:var(--navy);text-decoration:underline;padding:8px 0}
+.dog-nav a.next{text-align:right}
+.dog-nav a:hover{color:var(--rust)}
 .ped{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(4,minmax(70px,auto));gap:10px;font-size:15px;line-height:1.35}
 .ped>div{border:1px solid var(--line);padding:10px 14px;display:flex;flex-direction:column;justify-content:center;gap:2px}
 .ped .subj{grid-column:1;grid-row:1/5;background:var(--navy);color:var(--cream);border:none}
@@ -236,6 +245,9 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 /* Family tree (assets/js/family-tree.js): one row per generation,
    lines from each mother to her daughters drawn in the svg behind */
 .ft-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:36px}
+.ft-hint{display:none;margin:20px 0 0;font-size:15px;font-style:italic;color:var(--muted)}
+.ft-hint.show{display:block}
+.ft-hint.show+.ft-scroll{margin-top:12px}
 .family-tree{position:relative;min-width:min-content;padding:8px 0 16px}
 .family-tree svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 .family-tree path{fill:none;stroke:var(--rust);stroke-width:1.6}
@@ -359,7 +371,7 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
 .notice-dark a{color:var(--cream);margin-right:14px}
 .archive-count{margin-top:28px;color:var(--body)}
 .year-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
-.year-links a{display:inline-block;padding:4px 12px;border:1px solid var(--line);background:var(--paper);color:var(--navy);text-decoration:none;font-size:15px}
+.year-links a{display:inline-flex;align-items:center;min-height:40px;padding:4px 14px;border:1px solid var(--line);background:var(--paper);color:var(--navy);text-decoration:none;font-size:15px}
 .year-links a:hover{border-color:var(--navy)}
 .archive-year{padding-top:40px}
 .archive-year>h2{font-size:32px;margin-bottom:12px}
@@ -405,7 +417,6 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
   .links a{padding:12px 0;border-bottom:1px solid var(--line)}
   .links a.cta{margin-top:10px;text-align:center}
   .topbar .wrap span:last-child{display:none}
-  .dog-side{border-right:none;border-bottom:1px solid var(--line)}
 }
 @media (max-width:700px){
   .past-litters li{grid-template-columns:1fr;gap:4px}
@@ -418,16 +429,27 @@ td{padding:12px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
   .wrap{padding:0 20px}
   .sec{padding:64px 0}
   .pagehead{padding:48px 0 40px}
-  .hero .row{padding-top:48px;padding-bottom:64px}
+  .hero .row{padding-top:48px;padding-bottom:72px}
+  .hero-lines{height:44px}
   .ped{grid-template-columns:1fr;grid-template-rows:none}
   .ped>div{grid-column:auto!important;grid-row:auto!important}
   .notice{padding:32px 24px}
-  .boxrow>div{border-right:none;border-bottom:1px solid var(--line)}
-  .boxrow>div:last-child{border-bottom:none}
-  .dog-main{padding:28px 22px 32px}
-  .dog-main h2{font-size:44px}
   .lc-text{padding:28px 24px}
   .post-nav{grid-template-columns:1fr}
   .post-nav a.next{text-align:left}
+  .leo-row{grid-template-columns:1fr;gap:20px;padding:36px 0}
+  .dog-nav{grid-template-columns:1fr 1fr}
+  .dog-nav a.all{grid-column:1/-1;grid-row:2;justify-self:center}
   .cta-band h2{font-size:36px}
+  .gallery{gap:8px}
+  .stack{gap:0}
+  .stack a{display:inline-block;padding:7px 0}
+  .trail{grid-template-columns:1fr;gap:30px;border-top:none;border-left:2px dashed var(--gold);margin-left:23px;padding-top:4px}
+  .trail li{position:relative;padding:0 0 0 38px}
+  .trail .marker{position:absolute;left:-24px;top:0;margin:0}
+  .trail h3{margin-top:6px}
+}
+@media (max-width:520px){
+  .btns .btn{flex:1 1 100%}
+  .stats{flex-direction:column;gap:16px}
 }

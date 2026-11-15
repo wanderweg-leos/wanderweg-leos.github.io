@@ -6,13 +6,12 @@ layout: default
 {% assign h = site.data.home %}
 
 <section class="hero">
-  <svg class="hero-lines" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <svg class="hero-lines" viewBox="-40 620 1520 190" preserveAspectRatio="none" aria-hidden="true">
     <g><path d="M-40 640 C200 580 380 700 620 660 C860 620 1000 720 1480 640"/><path d="M-40 680 C210 620 390 740 630 700 C870 660 1010 760 1480 680"/><path d="M-40 720 C220 660 400 780 640 740 C880 700 1020 800 1480 720"/></g>
     <path class="path" d="M-20 745 C160 735 300 700 420 712 C520 722 600 690 700 680"/>
   </svg>
   <div class="wrap row">
     <div class="col">
-      <span class="eyebrow">{{ site.location | replace: ', ', ' · ' }}</span>
       <h1 class="display">{{ h.hero.title }}</h1>
       <p class="lede">{{ h.hero.text }}</p>
       <div class="btns">
@@ -35,9 +34,8 @@ layout: default
   <div class="wrap">
     <div class="sec-head"><div><span class="eyebrow">{{ h.why.eyebrow }}</span><h2 id="why-h" class="h2">{{ h.why.title }}</h2></div></div>
     <div class="boxrow">
-      {% assign markers = ',n,s' | split: ',' %}
       {% for c in h.why.cards %}
-      <div><span class="marker {{ markers[forloop.index0] }}">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div>
+      <div><span class="marker n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ c.title }}</h3><p>{{ c.text }}</p></div>
       {% endfor %}
     </div>
   </div>
@@ -120,6 +118,6 @@ layout: default
 
 <div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button type="button" class="v-btn v-close">Close</button>
-  <img id="v-img" src="" alt="">
+  <img id="v-img" alt="">
   <button type="button" class="v-btn v-prev" aria-label="Previous photo">←</button><button type="button" class="v-btn v-next" aria-label="Next photo">→</button>
 </div>

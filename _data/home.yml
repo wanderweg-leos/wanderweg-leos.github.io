@@ -30,14 +30,14 @@ hero:
 # The three numbered boxes
 why:
   eyebrow: "Why Wanderweg"
-  title: "Our dogs are family first, and every puppy is raised that way."
+  title: "More than twenty years of Leonbergers, one litter at a time."
   cards:
-    - title: "Health-tested parents"
-      text: "Hips and elbows X-rayed, eyes checked, and LEMP and LPN1–3 DNA tests before any litter is planned."
-    - title: "Raised in our home"
-      text: "Puppies grow up in the house with us, handled every day and well socialized before they leave."
-    - title: "Matched with care"
-      text: "We take time to place each puppy with a family who will include them in everything they do."
+    - title: "Health comes first"
+      text: "Every parent has hips and elbows X-rayed, eyes examined and DNA tests for LEMP and LPN1–3 before we plan a litter. The results are on each dog’s page."
+    - title: "Lines we know well"
+      text: "Our first litter was born in 2002. Every one of our girls comes from a mother we raised ourselves, so we know the temperament and health behind each puppy."
+    - title: "Ready for home"
+      text: "Every puppy goes home vet checked, vaccinated, microchipped and CKC registered, with a written contract."
 
 # About us. The memberships line under it comes from _config.yml.
 about:

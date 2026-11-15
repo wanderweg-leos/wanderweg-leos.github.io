@@ -1,8 +1,54 @@
 ---
-# The Our Leos page. It shows the first dog listed in _data/leos.yml;
-# each dog also has its own page (the other files in this folder).
+# The Our Leos page: every dog in _data/leos.yml, each linking to her
+# own page (the other files in this folder), then the family tree.
 title: Our Leos
-description: Meet Ava, Marley, Lottie and Hazel, the Leonbergers of Wanderweg, and see their health clearances.
+description: Meet Ava, Marley, Lottie and Hazel, the Leonbergers of Wanderweg, and see their pedigrees and health clearances.
 permalink: /our-leos/
-layout: leo
 ---
+{% assign leos = site.data.leos %}
+{% assign name_token = '{name}' %}
+
+<section class="pagehead">
+  <div class="wrap">
+    <span class="eyebrow">{{ leos.eyebrow }}</span>
+    <h1 class="h1">{{ leos.title }}</h1>
+    <p class="lede">{{ leos.intro }}</p>
+  </div>
+</section>
+
+<section class="page-body">
+  <div class="wrap">
+    <ol class="leo-list">
+      {% for d in leos.dogs %}
+      {% assign url = '/our-leos/' | append: d.id | append: '/' | relative_url %}
+      <li class="leo-row">
+        <a class="leo-photo" href="{{ url }}" tabindex="-1" aria-hidden="true">
+          {% assign src = '/media/img/leos/' | append: d.photo %}
+          {% include photo.html src=src alt="" position=d.photo_position class="r54" lazy=true %}
+        </a>
+        <div class="leo-text">
+          <h2><a href="{{ url }}">{{ d.name }}</a></h2>
+          {% if d.registered_name != "" %}<p class="reg">{{ d.registered_name }}</p>{% endif %}
+          {% if d.story.first %}<p class="body">{{ d.story.first }}</p>{% endif %}
+          {% if d.pedigree.sire and d.pedigree.dam %}<p class="leo-parents"><span class="label">{{ leos.sire_label }} × {{ leos.dam_label }}</span>{{ d.pedigree.sire.call_name | default: d.pedigree.sire.name }} × {{ d.pedigree.dam.call_name | default: d.pedigree.dam.name }}</p>{% endif %}
+          <a class="more" href="{{ url }}">{{ leos.more_link | replace: name_token, d.name }} →</a>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+{% if leos.tree %}
+<section class="sec plain" style="border-top:1px solid var(--line)" aria-labelledby="tree-h">
+  <div class="wrap">
+    {% if leos.tree.eyebrow %}<span class="eyebrow">{{ leos.tree.eyebrow }}</span>{% endif %}
+    <h2 id="tree-h" class="h2">{{ leos.tree.title }}</h2>
+    <p class="ft-hint">Swipe sideways to see the whole tree.</p>
+    <div class="ft-scroll">
+      <div class="family-tree" id="family-tree" data-src="{{ '/assets/data/family-tree.md' | relative_url }}" data-photos="{{ '/media/img/tree/' | relative_url }}"></div>
+    </div>
+  </div>
+</section>
+<script src="{{ '/assets/js/family-tree.js' | relative_url }}" defer></script>
+{% endif %}

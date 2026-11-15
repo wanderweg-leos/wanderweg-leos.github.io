@@ -35,6 +35,8 @@
   }
 
   function build(gens) {
+    // Once the visitor scrolls the tree themselves, stop re-centring it.
+    box.parentNode.addEventListener('pointerdown', function () { box.parentNode.dataset.moved = '1'; }, { passive: true });
     var svg = document.createElementNS(svgNS, 'svg');
     svg.setAttribute('aria-hidden', 'true');
     box.appendChild(svg);
@@ -70,7 +72,17 @@
     return null;
   }
 
+  // On narrow screens the tree is wider than the page: start it scrolled
+  // to the middle and show the "swipe" hint above it.
+  function fit() {
+    var sc = box.parentNode, hint = sc.previousElementSibling;
+    var wide = sc.scrollWidth > sc.clientWidth + 4;
+    if (hint && hint.classList.contains('ft-hint')) hint.classList.toggle('show', wide);
+    if (wide && !sc.dataset.moved) sc.scrollLeft = (sc.scrollWidth - sc.clientWidth) / 2;
+  }
+
   function draw() {
+    fit();
     var svg = box.querySelector('svg');
     if (!svg) return;
     var r = box.getBoundingClientRect(), d = '';

@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────
-#  Our Leos: the Our Leos page (wanderweg.ca/our-leos/), each
-#  dog's own page (e.g. wanderweg.ca/our-leos/ava/) and the dog
-#  cards on the home page. The Our Leos page shows the first dog.
+#  Our Leos: the Our Leos page (wanderweg.ca/our-leos/), which
+#  lists every dog, each dog's own page (e.g. wanderweg.ca/our-leos/ava/)
+#  and the dog cards on the home page. Dogs appear in the order below.
 #
 #  Each dog has:
 #    id:          short name with no spaces, used in the page
@@ -10,14 +10,15 @@
 #    photo, photo_alt:  the main photo (in media/img/leos/)
 #    photo_position:    optional, which part of the photo to keep
 #                 when it is cropped, e.g. "50% 20%"
-#    story:       the About tab, one line per paragraph.
-#    clearances:  the Health tab, shown as a table. Each has
+#    story:       the About section, one line per paragraph. The
+#                 first paragraph is also shown on the Our Leos page.
+#    clearances:  the Health results, shown as a table. Each has
 #                   test:    e.g. "Hips"
 #                   by:      the smaller line under it, e.g. "OFA"
 #                   result:  e.g. "Good"
 #                 Leave it as [] if there are no results yet.
 #                 Hips and Elbows also appear beside the photo.
-#    pedigree:    the Pedigree tab: sire and dam (each with name,
+#    pedigree:    the Pedigree section: sire and dam (each with name,
 #                 call_name, and their own sire and dam with name).
 #
 #  To ADD a dog:
@@ -34,12 +35,17 @@
 
 eyebrow: "Our Leos"
 title: "Meet the girls"
-intro: "Every one of our Leonbergers lives in the house with us as part of the family. Choose a dog to read about her and see her pedigree and health clearances."
+intro: "Every one of our Leonbergers lives in the house with us as part of the family. Each has her own page with her story, pedigree and health clearances."
 
-# Tab names, and the small labels in the card
-about_tab: "About"
-pedigree_tab: "Pedigree"
-health_tab: "Health"
+# Headings and links on each dog's page and the Our Leos page.
+# {name} is replaced with the dog's name.
+about_heading: "About"
+pedigree_heading: "Pedigree"
+health_heading: "Health clearances"
+more_link: "More about {name}"
+previous_label: "Previous"
+next_label: "Next"
+all_link: "All our Leos"
 sire_label: "Sire"
 dam_label: "Dam"
 grandsire_label: "Grandsire"
@@ -47,12 +53,12 @@ granddam_label: "Granddam"
 test_heading: "Test"
 result_heading: "Result"
 clearances_note: "Every breeding dog is fully health tested before a litter is planned."
-# Shown on the Health tab when a dog has no results yet. {name} is replaced with her name.
+# Shown in the Health section when a dog has no results yet. {name} is replaced with her name.
 no_clearances: "Health results for {name} will be posted here."
 pedigree_note: "Parents and grandparents as listed on the Leonberger Database"
 pedigree_link: "https://www.leonberger-database.com/search_e.php"
 
-# The family tree under the dog card, on every Our Leos page.
+# The family tree at the bottom of the Our Leos page.
 # The dogs in it come from assets/data/family-tree.md (how to edit
 # it is explained at the top of that file). Delete these three lines
 # to hide the tree.
@@ -160,6 +166,7 @@ dogs:
     registered_name: ""
     photo: hazel.jpg
     photo_alt: "Hazel lying in the grass"
+    photo_position: "12% 50%"
     story:
       - "Hazel is Priya’s daughter, born in January 2025 in her litter with Radja."
     clearances: []
